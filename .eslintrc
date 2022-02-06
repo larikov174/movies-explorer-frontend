@@ -1,9 +1,11 @@
 {
-  "parser": "babel-eslint",
+  "parser": "@babel/eslint-parser",
   "parserOptions": {
     "sourceType": "module",
     "allowImportExportEverywhere": false,
-    "codeFrame": false
+    "codeFrame": false,
+    "requireConfigFile": false,
+    "ecmaVersion": 8
   },
   "extends": ["airbnb", "prettier"],
   "env": {
