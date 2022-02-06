@@ -5,9 +5,17 @@
     "allowImportExportEverywhere": false,
     "codeFrame": false,
     "requireConfigFile": false,
-    "ecmaVersion": 8
+    "ecmaVersion": 8,
+    "babelOptions": {
+      "presets": ["@babel/preset-react"]
+    }
   },
   "extends": ["airbnb", "prettier"],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
   "env": {
     "browser": true,
     "jest": true
