@@ -19,6 +19,7 @@
   color: #fff;
   font: normal 500 13px/16px Inter, serif;
   cursor: pointer;
+  user-select: none;
 }
 
 .nav-tab__link:hover {
