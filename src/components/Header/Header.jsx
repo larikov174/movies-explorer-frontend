@@ -5,10 +5,10 @@ import './Header.css';
 function Header() {
   return (
     <header className="header">
-      <Link className="header__logo" to="/" />
+      <Link className="header__link header__link_logo" to="/" />
       <div className="header__menu">
-        <Link className="header__signup-btn" to="/signup">Регистрация</Link>
-        <Link className="header__signin-btn" to="/signin">Войти</Link>
+        <Link className="header__link header__link_signup" to="/signup">Регистрация</Link>
+        <Link className="header__link header__link_signin" to="/signin">Войти</Link>
       </div>
     </header>
   );
