@@ -5,6 +5,7 @@
   color: #ffffff;
   background-color: #073042;
   padding: 0 70px;
+  box-sizing: border-box;
   display: flex;
   flex-direction: row;
   align-items: center;
