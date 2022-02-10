@@ -13,22 +13,20 @@ function Footer() {
 
   const getLink = () =>
     links.map((link) => (
-      <Link key={link.name} className="footer__link" to={link.url}>
+      <Link key={link.name} className="footer__text footer__text_link" to={link.url}>
         {link.name}
       </Link>
     ));
 
   return (
     <footer className="footer">
-      <p className="footer__credits">Учебный проект Яндекс.Практикум х BeatFilm.</p>
+      <p className="footer__text footer__text_credits">Учебный проект Яндекс.Практикум х BeatFilm.</p>
       <div className="footer__menu">
-        <p className="footer__copyright">&copy; {currentDate.getFullYear()}</p>
-        <nav className="footer__nav">
-          {getLink()}
-        </nav>
+        <p className="footer__text footer__text_copyright">&copy; {currentDate.getFullYear()}</p>
+        <nav className="footer__nav">{getLink()}</nav>
       </div>
     </footer>
-  )
+  );
 }
 
 export default Footer;
