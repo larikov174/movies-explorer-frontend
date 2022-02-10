@@ -10,7 +10,7 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 function App() {
   return (
-    <div className="main">
+    <div className="page">
       <Header />
       <Routes>
         <Route path="/" element={<Main />} />
