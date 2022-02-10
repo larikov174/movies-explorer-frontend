@@ -11,7 +11,7 @@ function NavTab() {
 
   const getTitle = () =>
     titles.map((title) => (
-      <Link className="nav-tab__link" to={title.id}>
+      <Link key={title.name} className="nav-tab__link" to={title.id}>
         {title.name}
       </Link>
     ));

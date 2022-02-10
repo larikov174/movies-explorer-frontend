@@ -3,24 +3,26 @@ import { Link } from 'react-router-dom';
 import './Footer.css';
 
 function Footer() {
+  const currentDate = new Date();
+
   const links = [
-    { link: 'https://practicum.yandex.ru/', name: 'Яндекс.Практикум' },
-    { link: 'https://github.com/larikov174', name: 'Github' },
-    { link: 'https://www.facebook.com/profile.php?id=100009863322069', name: 'Facebook' },
+    { url: 'https://practicum.yandex.ru/', name: 'Яндекс.Практикум' },
+    { url: 'https://github.com/larikov174', name: 'Github' },
+    { url: 'https://www.facebook.com/profile.php?id=100009863322069', name: 'Facebook' },
   ];
 
   const getLink = () =>
     links.map((link) => (
-      <Link key={link.name} className="footer__link" to={link.id}>
+      <Link key={link.name} className="footer__link" to={link.url}>
         {link.name}
       </Link>
     ));
 
   return (
     <footer className="footer">
-      <div className="footer__credits">Учебный проект Яндекс.Практикум х BeatFilm.</div>
+      <p className="footer__credits">Учебный проект Яндекс.Практикум х BeatFilm.</p>
       <div className="footer__menu">
-        <p className="footer__copyright">c2022</p>
+        <p className="footer__copyright">&copy; {currentDate.getFullYear()}</p>
         <nav className="footer__nav">
           {getLink()}
         </nav>
