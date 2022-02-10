@@ -45,7 +45,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="js.linters.configure.manually.selectedeslint" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components/ProtectedRoute" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components/Promo" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -60,6 +60,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="H:\repo\movies-explorer-frontend\src\components\Promo" />
       <recent name="H:\repo\movies-explorer-frontend\src\components\ProtectedRoute" />
       <recent name="H:\repo\movies-explorer-frontend\src\components\Main" />
       <recent name="H:\repo\movies-explorer-frontend\src\components\Register" />
@@ -84,6 +85,7 @@
       <workItem from="1644352802310" duration="26000" />
       <workItem from="1644416436633" duration="5285000" />
       <workItem from="1644430841317" duration="875000" />
+      <workItem from="1644483626960" duration="811000" />
     </task>
     <task id="LOCAL-00001" summary="tuneUp eslint configuration">
       <created>1644171155290</created>

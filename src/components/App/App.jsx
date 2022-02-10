@@ -10,9 +10,10 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 function App() {
   return (
-    <>
+    <div className="main">
       <Header />
       <Routes>
+        <Route path="/" element={<Main />} />
         <Route path="/signin" element={<Login />} />
         <Route path="/signup" element={<Register />} />
         <Route
@@ -25,7 +26,7 @@ function App() {
         />
       </Routes>
       <Footer />
-    </>
+    </div>
   );
 }
 
