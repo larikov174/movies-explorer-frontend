@@ -22,7 +22,7 @@ function Footer() {
     <footer className="footer">
       <p className="footer__text footer__text_credits">Учебный проект Яндекс.Практикум х BeatFilm.</p>
       <div className="footer__menu">
-        <p className="footer__text footer__text_copyright">&copy; {currentDate.getFullYear()}</p>
+        <p className="footer__text">&copy; {currentDate.getFullYear()}</p>
         <nav className="footer__nav">{getLink()}</nav>
       </div>
     </footer>
