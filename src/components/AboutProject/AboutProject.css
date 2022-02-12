@@ -9,6 +9,13 @@
   color: #000000;
   margin: 0;
   padding: 0;
+  user-select: none;
+}
+
+.about-project__text_centered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .about-project__text_title {
@@ -36,7 +43,10 @@
 
 .about-project__column_backend {
   width: 20%;
-  text-align: center;
+}
+
+.about-project__column_frontend {
+  width: 100%;
 }
 
 .about-project__text_green-background {
@@ -49,7 +59,9 @@
   background-color: #f2f2f2;
 }
 
-.about-project__column_frontend {
-  width: 100%;
-  text-align: center;
+
+.about-project__text_grey {
+  color: #a0a0a0;
+  font-weight: 500;
+  margin-top: 14px;
 }
