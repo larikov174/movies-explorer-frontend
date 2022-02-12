@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import './NavTab.css';
 
 function NavTab() {
@@ -11,9 +10,9 @@ function NavTab() {
 
   const getTitle = () =>
     titles.map((title) => (
-      <Link key={title.name} className="nav-tab__link" to={title.id}>
+      <a key={title.name} className="nav-tab__link" href={title.id}>
         {title.name}
-      </Link>
+      </a>
     ));
 
   return (
