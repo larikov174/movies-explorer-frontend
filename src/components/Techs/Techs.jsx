@@ -2,7 +2,24 @@ import React from 'react';
 import './Techs.css';
 
 function Techs() {
-  return <div>Techs</div>;
+  const techNames = ['HTML', 'CSS', 'JS', 'React', 'Git', 'Express.js', 'mongoDB'];
+  const showTechs = () =>
+    techNames.map((name) => (
+      <p key={name} className="techs__text techs__cell">
+        {name}
+      </p>
+    ));
+
+  return (
+    <section className="techs" id="techs">
+      <h2 className="techs__text techs__text_title">Технологии</h2>
+      <p className="techs__text techs__text_subtitle">7 технологий</p>
+      <p className="techs__text techs__text_article">
+        На курсе веб-разработки мы освоили технологии, которые применили в дипломном проекте.
+      </p>
+      <div className="techs__display">{showTechs()}</div>
+    </section>
+  );
 }
 
-export default Techs ;
+export default Techs;
