@@ -5,9 +5,9 @@ function Techs() {
   const techNames = ['HTML', 'CSS', 'JS', 'React', 'Git', 'Express.js', 'mongoDB'];
   const showTechs = () =>
     techNames.map((name) => (
-      <p key={name} className="techs__text techs__cell">
-        {name}
-      </p>
+      <li key={name} className="techs__text techs__cell">
+          {name}
+      </li>
     ));
 
   return (
@@ -17,7 +17,7 @@ function Techs() {
       <p className="techs__text techs__text_article">
         На курсе веб-разработки мы освоили технологии, которые применили в дипломном проекте.
       </p>
-      <div className="techs__display">{showTechs()}</div>
+      <ul className="techs__display">{showTechs()}</ul>
     </section>
   );
 }

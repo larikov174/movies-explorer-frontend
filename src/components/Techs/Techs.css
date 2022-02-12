@@ -37,6 +37,7 @@
 
 .techs__display {
   display: flex;
+  list-style-type: none;
   justify-content: space-between;
   align-items: center;
   max-width: 690px;
