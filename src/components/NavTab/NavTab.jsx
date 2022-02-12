@@ -5,7 +5,7 @@ function NavTab() {
   const titles = [
     { id: '#aboutProject', name: 'О проекте' },
     { id: '#techs', name: 'Технологии' },
-    { id: '#student', name: 'Студент' },
+    { id: '#aboutMe', name: 'Студент' },
   ];
 
   const getTitle = () =>
