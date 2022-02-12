@@ -26,3 +26,9 @@
   opacity: .7;
   transition: opacity .15s ease-in;
 }
+
+@media screen and (max-width: 480px) {
+  .nav-tab__link {
+    font-size: 11px;
+  }
+}

@@ -44,5 +44,28 @@
 @media screen and (max-width: 768px) {
   .footer {
     margin: 170px 0 0;
+    padding: 0 30px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .footer {
+    margin: 149px 0 0;
+    padding: 0 14px;
+  }
+
+  .footer__menu {
+    flex-direction: column-reverse;
+    margin: 30px 0 0;
+    gap: 12px;
+  }
+
+  .footer__text {
+    font-size: 12px;
+  }
+
+  .footer__nav {
+    flex-direction: column;
+    gap: 12px;
   }
 }

@@ -48,13 +48,17 @@
 .techs__cell {
   background-color: #e8e8e8;
   border-radius: 10px;
-  width: 90px;
-  height: 60px;
+  width: 84px;
+  height: 57px;
 }
 
 @media screen and (max-width: 768px) {
   .techs {
     margin: 180px 0 0 0;
+  }
+
+  .techs__text {
+    text-align: center;
   }
 
   .techs__text_subtitle {
@@ -64,9 +68,48 @@
   .techs__display {
     margin: 80px auto 0;
   }
+}
+
+@media screen and (max-width: 740px) {
+  .techs__display {
+    flex-wrap: wrap;
+    max-width: 450px;
+    gap: 10px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .techs {
+    margin: 140px 0 0 0;
+  }
+
+  .techs__text {
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .techs__text_subtitle {
+    font-size: 30px;
+    line-height: 36px;
+    margin: 60px 0 0 0;
+  }
+
+  .techs__display {
+    margin: 80px auto 0;
+  }
 
   .techs__cell {
     width: 84px;
     height: 57px;
+  }
+
+  .techs__display {
+    width: 178px;
+    margin: 50px auto 0;
+  }
+
+  .techs__text_title {
+    font-size: 18px;
+    line-height: 22px;
   }
 }

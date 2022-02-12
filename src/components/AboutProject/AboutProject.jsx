@@ -19,7 +19,7 @@ function AboutProject() {
           </p>
         </div>
       </div>
-      <div className="about-project__columns">
+      <div className="about-project__schedule">
         <div className="about-project__column_backend">
           <p className="about-project__text about-project__text_centered about-project__text_green-background">1 неделя</p>
           <p className="about-project__text about-project__text_centered about-project__text_grey">Back-end</p>
