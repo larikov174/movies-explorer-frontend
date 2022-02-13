@@ -6,6 +6,7 @@ import Footer from '../Footer/Footer';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
 import Main from '../Main/Main';
+import PageNotFound from '../PageNotFound/PageNotFound';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 function App() {
@@ -16,8 +17,9 @@ function App() {
         <Route path="/" element={<Main />} />
         <Route path="/signin" element={<Login />} />
         <Route path="/signup" element={<Register />} />
+        <Route path="*" element={<PageNotFound />} />
         <Route
-          path="/*"
+          path="/main"
           element={
             <ProtectedRoute>
               <Main />
