@@ -97,10 +97,40 @@ div .active {
   background-color: #fff;
   border: none;
   padding: 0;
+  z-index: 999;
+}
+
+.burger__button_type_close {
+  background-image: url(../../images/close-icon.svg);
 }
 
 .burger-menu {
   display: none;
+}
+
+.burger-menu__container {
+  z-index: 2;
+  width: 60vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: white;
+}
+
+.burger-menu__overlay {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  opacity: 0.5;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.visible {
+  display: flex;
 }
 
 @media screen and (max-width: 768px) {

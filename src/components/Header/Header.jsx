@@ -7,15 +7,19 @@ function Header() {
   const [isMenuVisible, setIsMenuVisible] = useState(false);
 
   const burgerMenu = () => (
-    <div className="burger-menu">
-      <div className="burger-menu">menu1</div>
-      <div className="burger-menu">menu2</div>
+    <div className={`burger-menu ${isMenuVisible ? 'visible' : ''}`}>
+      <div className="burger-menu__overlay" />
+      <div className="burger-menu__container">menu1</div>
     </div>
   );
 
   const burgerButton = () => (
     <>
-      <button type="button" className="burger__button" onClick={()=>setIsMenuVisible(!isMenuVisible)} />
+      <button
+        type="button"
+        className={`burger__button ${isMenuVisible ? 'burger__button_type_close' : ''}`}
+        onClick={() => setIsMenuVisible(!isMenuVisible)}
+      />
       {burgerMenu()}
     </>
   );
