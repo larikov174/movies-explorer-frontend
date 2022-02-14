@@ -164,4 +164,8 @@ div .active {
   .header__menu_theme_light {
     display: none;
   }
+
+  .burger-menu__container {
+    width: 100vw;
+  }
 }
