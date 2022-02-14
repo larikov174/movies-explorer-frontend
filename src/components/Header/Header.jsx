@@ -1,9 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom';
 import './Header.css';
 
 function Header() {
   const location = useLocation().pathname;
+  const [isMenuVisible, setIsMenuVisible] = useState(false);
+
+  const burgerMenu = () => (
+    <div className="burger-menu">
+      <div className="burger-menu">menu1</div>
+      <div className="burger-menu">menu2</div>
+    </div>
+  );
+
+  const burgerButton = () => (
+    <>
+      <button type="button" className="burger__button" onClick={()=>setIsMenuVisible(!isMenuVisible)} />
+      {burgerMenu()}
+    </>
+  );
 
   const mainPageHeader = () => (
     <header className="header">
@@ -34,6 +49,7 @@ function Header() {
         Аккаунт
         <span className="header__profile_decor" />
       </NavLink>
+      {burgerButton()}
     </header>
   );
 

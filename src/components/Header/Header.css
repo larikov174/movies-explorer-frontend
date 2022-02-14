@@ -86,9 +86,34 @@ div .active {
   justify-content: center;
 }
 
+.burger__button {
+  display: none;
+  margin-left: auto;
+  width: 44px;
+  height: 44px;
+  background-image: url(../../images/burger-icon.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #fff;
+  border: none;
+  padding: 0;
+}
+
+.burger-menu {
+  display: none;
+}
+
 @media screen and (max-width: 768px) {
   .header {
     padding: 0 30px;
+  }
+
+  .header__link_profile {
+    display: none;
+  }
+
+  .burger__button {
+    display: flex;
   }
 }
 
@@ -99,5 +124,14 @@ div .active {
 
   .header__link {
     font-size: 10px;
+  }
+
+  .burger__button {
+    width: 40px;
+    height: 40px;
+  }
+
+  .header__menu_theme_light {
+    display: none;
   }
 }
