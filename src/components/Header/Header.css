@@ -102,6 +102,8 @@ div .active {
 
 .burger__button_type_close {
   background-image: url(../../images/close-icon.svg);
+  position: fixed;
+  right: 10px;
 }
 
 .burger-menu {
@@ -114,7 +116,7 @@ div .active {
   height: 100vh;
   position: absolute;
   top: 0;
-  right: 0;
+  left: 40vw;
   background-color: white;
 }
 
@@ -131,6 +133,9 @@ div .active {
 
 .visible {
   display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 
 @media screen and (max-width: 768px) {
@@ -167,5 +172,6 @@ div .active {
 
   .burger-menu__container {
     width: 100vw;
+    left: 0;
   }
 }
