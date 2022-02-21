@@ -34,6 +34,7 @@
   margin: 0;
   padding: 0;
   border-radius: 30px;
+  border: none;
   position: absolute;
   top: 14px;
   right: 14px;
@@ -46,8 +47,8 @@
 }
 
 .movies-card__button:active {
-  background-color: #f6f6f6;
-  box-shadow: inset 0px 0px 5px #e8e8e8;
+  background-color: #f5f5f5;
+  box-shadow: inset 0px 0px 5px #bbbbbb;
 }
 
 .movies-card__info {
