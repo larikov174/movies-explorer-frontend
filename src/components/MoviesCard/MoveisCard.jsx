@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import './MoviesCard.css';
 import React from 'react';
 import image from '../../images/default-picture.png';
@@ -5,7 +6,7 @@ import image from '../../images/default-picture.png';
 function MoviesCard() {
   return (
     <article className="movies-card">
-      <div className="movies-card__poster">
+      <div className="movies-card__poster" onMouseEnter={()=>console.log("enter")}>
         <img className="movies-card__image" alt="Обложка фильма" src={image} />
         <button className="movies-card__button" type="submit">
           Сохранить
