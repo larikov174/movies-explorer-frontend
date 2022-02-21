@@ -49,3 +49,17 @@
   background-color: #f6f6f6;
   box-shadow: inset 0px 0px 5px #e8e8e8;
 }
+
+@media screen and (max-width: 1220px) {
+  .movies-card-list {
+    max-width: 710px;
+    margin: 80px auto 0;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .movies-card-list {
+    max-width: 300px;
+    margin: 40px auto 0;
+  }
+}
