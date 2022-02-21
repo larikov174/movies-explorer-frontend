@@ -1,7 +1,7 @@
 .footer {
   width: 100%;
   min-height: 172px;
-  margin: 205px 0 0;
+  margin: 80px 0 0;
   padding: 0 70px;
   box-sizing: border-box;
 }
@@ -43,14 +43,12 @@
 
 @media screen and (max-width: 768px) {
   .footer {
-    margin: 170px 0 0;
     padding: 0 30px;
   }
 }
 
 @media screen and (max-width: 480px) {
   .footer {
-    margin: 149px 0 0;
     padding: 0 14px;
   }
 
