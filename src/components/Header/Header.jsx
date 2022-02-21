@@ -34,7 +34,7 @@ function Header() {
         <NavLink
           className="burger__link"
           style={({ isActive }) => (isActive ? activeStyle : undefined)}
-          to="/savedMovies"
+          to="/saved-movies"
         >
           Сохраненные фильмы
         </NavLink>
@@ -94,7 +94,7 @@ function Header() {
         <NavLink
           className="header__link header__link_nav"
           style={({ isActive }) => (isActive ? activeStyle : undefined)}
-          to="/savedMovies"
+          to="/saved-movies"
         >
           Сохраненные фильмы
         </NavLink>
