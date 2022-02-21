@@ -11,7 +11,7 @@
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  gap: 30px;
+  gap: 60px 30px;
   margin: 0;
   padding: 0;
 }
@@ -61,5 +61,14 @@
   .movies-card-list {
     max-width: 300px;
     margin: 40px auto 0;
+  }
+  .movies-card-list__content {
+    gap: 47px 30px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .movies-card-list__content {
+    gap: 39px 30px;
   }
 }

@@ -20,6 +20,7 @@
   height: 190px;
   object-fit: cover;
   object-position: center;
+  border-radius: 6px;
 }
 
 .movies-card__button {
@@ -52,7 +53,7 @@
 }
 
 .movies-card__info {
-  padding: 25px 0 0 0;
+  padding: 14px 14px 0;
   display: flex;
   width: 100%;
   justify-content: space-between;
@@ -65,6 +66,8 @@
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  margin: 0;
+  padding: 0;
 }
 
 .movies-card__duration {
@@ -76,10 +79,17 @@
   font: normal 400 11px/10px Inter, serif;
   color: #a0a0a0;
   background-color: #f9f9f9;
+  margin: 0;
   padding: 0 4px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+
+@media screen and (max-width: 768px) {
+  .movies-card__info {
+    padding: 25px 0 0 0;
+  }
 }
 
 @media screen and (max-width: 480px) {
