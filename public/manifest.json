@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "MoviesExplorer",
+  "name": "Приложение для поиска фильмов в базе BeatFilm",
   "icons": [
     {
       "src": "favicon.ico",
