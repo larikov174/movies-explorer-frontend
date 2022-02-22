@@ -1,14 +1,16 @@
 /* eslint-disable no-console */
 import './MoviesCard.css';
-import React from 'react';
+import './SFX.css';
+import React, { useState } from 'react';
 import image from '../../images/default-picture.png';
 
 function MoviesCard() {
+  const [isVisible, setIsVisible] = useState(false);
   return (
     <article className="movies-card">
-      <div className="movies-card__poster" onMouseEnter={()=>console.log("enter")}>
+      <div className="movies-card__poster" onMouseEnter={() => setIsVisible(true)} onMouseLeave={() => setIsVisible(false)}>
         <img className="movies-card__image" alt="Обложка фильма" src={image} />
-        <button className="movies-card__button" type="submit">
+        <button className={`movies-card__button ${isVisible ? 'visible slide' : ''}`} type="submit">
           Сохранить
         </button>
       </div>
