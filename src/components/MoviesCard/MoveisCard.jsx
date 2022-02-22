@@ -8,7 +8,7 @@ function MoviesCard({duration, description, image}) {
     <article className="movies-card">
       <div className="movies-card__poster" onMouseEnter={() => setIsVisible(true)} onMouseLeave={() => setIsVisible(false)}>
         <img className="movies-card__image" alt="Обложка фильма" src={image} />
-        <button className={`movies-card__button ${isVisible ? 'visible slide' : ''}`} type="submit">
+        <button className={`movies-card__button ${isVisible ? 'movies-card__button_visible slide' : ''}`} type="submit">
           Сохранить
         </button>
       </div>

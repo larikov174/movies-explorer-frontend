@@ -42,7 +42,7 @@
   position: absolute;
 }
 
-.visible{
+.movies-card__button_visible {
   top: 14px;
   right: 14px;
   left: auto;
