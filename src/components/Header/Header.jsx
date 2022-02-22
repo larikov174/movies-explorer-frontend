@@ -1,54 +1,47 @@
-/* eslint-disable no-console */
 import React, { useState } from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom';
 import './Header.css';
 
 function Header() {
   const location = useLocation().pathname;
+  const allowedPages = ['/', '/movies', '/saved-movies', '/profile'];
   const [isMenuVisible, setIsMenuVisible] = useState(false);
 
   const burgerMenu = () => {
     const activeStyle = {
-      borderBottom: "1px solid #000",
-      paddingBottom: "4px"
+      borderBottom: '1px solid #000',
+      paddingBottom: '4px',
     };
 
     return (
-    <div className={`burger-menu ${isMenuVisible ? 'visible' : ''}`}>
-      <div className="burger-menu__overlay" />
-      <div className="burger-menu__container">
-      <NavLink
-          className="burger__link"
-          style={({ isActive }) => (isActive ? activeStyle : undefined)}
-          to="/"
-        >
-          Главная
-        </NavLink>
-        <NavLink
-          className="burger__link"
-          style={({ isActive }) => (isActive ? activeStyle : undefined)}
-          to="/movies"
-        >
-          Фильмы
-        </NavLink>
-        <NavLink
-          className="burger__link"
-          style={({ isActive }) => (isActive ? activeStyle : undefined)}
-          to="/saved-movies"
-        >
-          Сохраненные фильмы
-        </NavLink>
-        <NavLink
-        className="burger__link burger__link_profile"
-        style={({ isActive }) => (isActive ? activeStyle : undefined)}
-        to="/profile"
-      >
-        Аккаунт
-        <span className="header__profile_decor" />
-      </NavLink>
+      <div className={`burger-menu ${isMenuVisible ? 'visible' : ''}`}>
+        <div className="burger-menu__overlay" />
+        <div className="burger-menu__container">
+          <NavLink className="burger__link" style={({ isActive }) => (isActive ? activeStyle : undefined)} to="/">
+            Главная
+          </NavLink>
+          <NavLink className="burger__link" style={({ isActive }) => (isActive ? activeStyle : undefined)} to="/movies">
+            Фильмы
+          </NavLink>
+          <NavLink
+            className="burger__link"
+            style={({ isActive }) => (isActive ? activeStyle : undefined)}
+            to="/saved-movies"
+          >
+            Сохраненные фильмы
+          </NavLink>
+          <NavLink
+            className="burger__link burger__link_profile"
+            style={({ isActive }) => (isActive ? activeStyle : undefined)}
+            to="/profile"
+          >
+            Аккаунт
+            <span className="header__profile_decor" />
+          </NavLink>
+        </div>
       </div>
-    </div>
-  )};
+    );
+  };
 
   const burgerButton = () => (
     <>
@@ -77,41 +70,48 @@ function Header() {
 
   const moviesPageHeader = () => {
     const activeStyle = {
-      fontWeight: 500
+      fontWeight: 500,
     };
 
     return (
-    <header className="header header_theme_light">
-      <Link className="header__link header__link_logo" to="/" />
-      <div className="header__menu header__menu_theme_light">
+      <header className="header header_theme_light">
+        <Link className="header__link header__link_logo" to="/" />
+        <div className="header__menu header__menu_theme_light">
+          <NavLink
+            className="header__link header__link_nav"
+            style={({ isActive }) => (isActive ? activeStyle : undefined)}
+            to="/movies"
+          >
+            Фильмы
+          </NavLink>
+          <NavLink
+            className="header__link header__link_nav"
+            style={({ isActive }) => (isActive ? activeStyle : undefined)}
+            to="/saved-movies"
+          >
+            Сохраненные фильмы
+          </NavLink>
+        </div>
         <NavLink
-          className="header__link header__link_nav"
+          className="header__link header__link_nav header__link_profile"
           style={({ isActive }) => (isActive ? activeStyle : undefined)}
-          to="/movies"
+          to="/profile"
         >
-          Фильмы
+          Аккаунт
+          <span className="header__profile_decor" />
         </NavLink>
-        <NavLink
-          className="header__link header__link_nav"
-          style={({ isActive }) => (isActive ? activeStyle : undefined)}
-          to="/saved-movies"
-        >
-          Сохраненные фильмы
-        </NavLink>
-      </div>
-      <NavLink
-        className="header__link header__link_nav header__link_profile"
-        style={({ isActive }) => (isActive ? activeStyle : undefined)}
-        to="/profile"
-      >
-        Аккаунт
-        <span className="header__profile_decor" />
-      </NavLink>
-      {burgerButton()}
-    </header>
-  )};
+        {burgerButton()}
+      </header>
+    );
+  };
 
-  return location === '/' ? mainPageHeader() : moviesPageHeader();
+  const renderHeader = () => {
+    if (allowedPages.includes(location)) {
+      return location === '/' ? mainPageHeader() : moviesPageHeader();
+    }
+    return null;
+  };
+  return renderHeader();
 }
 
 export default Header;
