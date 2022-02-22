@@ -5,7 +5,6 @@ import AuthForm from '../AuthForm/AuthForm';
 function Login() {
   return (
     <AuthForm>
-      <div className="auth__logo" role="img" />
       <h1 className="auth__title">Добро пожаловать!</h1>
       <label className="auth__label" htmlFor="nameInput">
         Имя

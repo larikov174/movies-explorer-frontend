@@ -19,7 +19,7 @@ function Profile() {
       <button type="button" className="profile__button">
         Редактировать
       </button>
-      <Link className="profile__link" to="/login">
+      <Link className="profile__link" to="/signin">
         Выйти из аккаунта
       </Link>
     </section>

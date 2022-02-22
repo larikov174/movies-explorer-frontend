@@ -32,6 +32,7 @@ export default function AuthForm({ children, onSubmit }) {
 
   return (
     <form className="auth" onSubmit={onSubmit}>
+      <Link className="auth__logo" role="img" to="/" />
       {children}
       {location === '/signup' ? renderTitles(signUpDialog) : renderTitles(signInDialog)}
     </form>
