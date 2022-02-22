@@ -23,7 +23,7 @@ export default function AuthForm({ children, onSubmit }) {
       </button>
       <div className="auth__actions_link">
         <p className="auth__text">{user.question}&nbsp;</p>
-        <Link className="auth__link" to={user.link}>
+        <Link className="auth__text auth__text_link" to={user.link}>
           {user.linkTitle}
         </Link>
       </div>
