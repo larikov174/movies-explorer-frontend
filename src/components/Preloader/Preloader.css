@@ -47,7 +47,7 @@
   height: 100%;
   z-index: 10;
   padding: 0;
-  margin: 70px auto;
+  margin: 200px auto 200px;
 }
 
 .preloader__container {
@@ -86,4 +86,26 @@
   z-index: 10;
   background: #2be080;
   animation: preloader-inside-red 1s ease-in-out infinite;
+}
+
+@media screen and (max-width: 768px) {
+  .preloader {
+    margin: 100px auto 100px;
+  }
+
+  .preloader__container {
+    width: 50px;
+    height: 50px;
+  }
+
+  .preloader__round {
+    width: 50px;
+    height: 50px;
+  }
+
+  .preloader__round::after,
+  .preloader__round::before {
+    width: 50px;
+    height: 50px;
+  }
 }
