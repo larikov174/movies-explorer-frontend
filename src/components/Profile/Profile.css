@@ -56,6 +56,12 @@
   cursor: pointer;
 }
 
+.profile__input {
+  border: none;
+  outline: none;
+  text-align: end;
+}
+
 .profile__button:hover {
   opacity: 0.7;
   transition: opacity 0.15s ease-in;
