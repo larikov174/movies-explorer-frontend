@@ -22,7 +22,7 @@ function Movies() {
       return (
         <>
           <SearchForm />
-          <MoviesCardList />
+          <MoviesCardList initData={initData} />
         </>
       );
     }

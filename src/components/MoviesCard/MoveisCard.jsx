@@ -1,10 +1,8 @@
-/* eslint-disable no-console */
 import './MoviesCard.css';
 import './SFX.css';
 import React, { useState } from 'react';
-import image from '../../images/default-picture.png';
 
-function MoviesCard() {
+function MoviesCard({duration, description, image}) {
   const [isVisible, setIsVisible] = useState(false);
   return (
     <article className="movies-card">
@@ -15,8 +13,8 @@ function MoviesCard() {
         </button>
       </div>
       <div className="movies-card__info">
-        <h2 className="movies-card__title">Название фильма</h2>
-        <p className="movies-card__duration">1ч17м</p>
+        <h2 className="movies-card__title">{description}</h2>
+        <p className="movies-card__duration">{duration}</p>
       </div>
     </article>
   );
