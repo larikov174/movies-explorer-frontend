@@ -17,16 +17,27 @@ function BurgerMenu() {
       <div className={`burger-menu ${isMenuVisible ? 'visible' : ''}`}>
         <div className="burger-menu__overlay" />
         <div className="burger-menu__container">
-          <NavLink className="burger__link" style={({ isActive }) => (isActive ? activeStyle : undefined)} to="/">
+          <NavLink
+            className="burger__link"
+            style={({ isActive }) => (isActive ? activeStyle : undefined)}
+            to="/"
+            onClick={() => setIsMenuVisible(false)}
+          >
             Главная
           </NavLink>
-          <NavLink className="burger__link" style={({ isActive }) => (isActive ? activeStyle : undefined)} to="/movies">
+          <NavLink
+            className="burger__link"
+            style={({ isActive }) => (isActive ? activeStyle : undefined)}
+            to="/movies"
+            onClick={() => setIsMenuVisible(false)}
+          >
             Фильмы
           </NavLink>
           <NavLink
             className="burger__link"
             style={({ isActive }) => (isActive ? activeStyle : undefined)}
             to="/saved-movies"
+            onClick={() => setIsMenuVisible(false)}
           >
             Сохраненные фильмы
           </NavLink>
@@ -34,6 +45,7 @@ function BurgerMenu() {
             className="burger__link burger__link_profile"
             style={({ isActive }) => (isActive ? activeStyle : undefined)}
             to="/profile"
+            onClick={() => setIsMenuVisible(false)}
           >
             Аккаунт
             <span className="header__profile_decor" />
