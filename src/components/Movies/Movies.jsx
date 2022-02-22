@@ -3,11 +3,12 @@ import React, { useState } from 'react';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Preloader from '../Preloader/Preloader';
+import defaultImage from '../../images/default-picture.png';
 
 function Movies() {
   const length = 18;
   const moviesDB = Array(length).fill({
-    image: '../../images/default-picture.png',
+    image: defaultImage,
     description: 'Название фильма',
     duration: '1ч 17м',
   });
