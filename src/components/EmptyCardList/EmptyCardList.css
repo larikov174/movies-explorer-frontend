@@ -1,0 +1,16 @@
+.empty-list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 400px;
+  margin: 0 auto;
+}
+
+.empty-list__title {
+  font: normal 400 14px/18px Inter, serif;
+  color: #858585;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}

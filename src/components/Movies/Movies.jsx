@@ -19,7 +19,7 @@ function Movies() {
   }, 3000);
 
   const renderData = () => {
-    if (initData) {
+    if (initData && initData.length > 0) {
       return (
         <>
           <SearchForm />

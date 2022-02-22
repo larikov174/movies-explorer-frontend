@@ -1,11 +1,13 @@
+/* eslint-disable no-console */
 import './SavedMovies.css';
 import React, { useState } from 'react';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import SearchForm from '../SearchForm/SearchForm';
+import EmptyCardList from '../EmptyCardList/EmptyCardList';
 import defaultImage from '../../images/default-picture.png';
 
 function SavedMovies() {
-  const length = 2;
+  const length = 0;
   const moviesDB = Array(length).fill({
     image: defaultImage,
     description: 'Название фильма',
@@ -18,7 +20,7 @@ function SavedMovies() {
   }, 500);
 
   const renderData = () => {
-    if (initData) {
+    if (initData && initData.length > 0) {
       return (
         <>
           <SearchForm />
@@ -29,16 +31,12 @@ function SavedMovies() {
     return (
       <>
         <SearchForm />
-        <SearchForm />
+        <EmptyCardList title="Сохранённых фильмов не обнаружено." />
       </>
     );
   };
 
-  return (
-    <section className="saved-movies">
-      {renderData()}
-    </section>
-  );
+  return <section className="saved-movies">{renderData()}</section>;
 }
 
 export default SavedMovies;
