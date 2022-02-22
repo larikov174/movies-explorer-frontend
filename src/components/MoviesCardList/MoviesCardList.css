@@ -49,6 +49,10 @@
   box-shadow: inset 0px 0px 5px #bbbbbb;
 }
 
+.movies-card-list__button_idle {
+  display: none;
+}
+
 .movies-card__overlay {
   position: absolute;
   top: 0;

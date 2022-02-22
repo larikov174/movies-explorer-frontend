@@ -7,7 +7,7 @@ import EmptyCardList from '../EmptyCardList/EmptyCardList';
 import defaultImage from '../../images/default-picture.png';
 
 function SavedMovies() {
-  const length = 0;
+  const length = 4;
   const moviesDB = Array(length).fill({
     image: defaultImage,
     description: 'Название фильма',
