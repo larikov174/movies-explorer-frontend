@@ -1,6 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
 import './AboutMe.css';
+import React from 'react';
 
 function AboutMe() {
   const links = [
@@ -10,9 +9,9 @@ function AboutMe() {
 
   const getLink = () =>
     links.map((link) => (
-      <Link key={link.name} className="about-me__text about-me__text_link" to={link.url}>
+      <a key={link.name} className="about-me__text about-me__text_link" href={link.url} target="_blank" rel="noreferrer" >
         {link.name}
-      </Link>
+      </a>
     ));
 
   return (

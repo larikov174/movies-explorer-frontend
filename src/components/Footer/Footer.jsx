@@ -1,6 +1,6 @@
-import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
 import './Footer.css';
+import React from 'react';
+import { useLocation } from 'react-router-dom';
 
 function Footer() {
   const currentDate = new Date();
@@ -14,9 +14,9 @@ function Footer() {
 
   const getLink = () =>
     links.map((link) => (
-      <Link key={link.name} className="footer__text footer__text_link" to={link.url}>
+      <a key={link.name} className="footer__text footer__text_link" href={link.url} target="_blank" rel="noreferrer">
         {link.name}
-      </Link>
+      </a>
     ));
 
   const renderFooter = () => {

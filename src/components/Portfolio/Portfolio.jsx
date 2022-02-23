@@ -1,21 +1,20 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import './Portfolio.css';
 
 function Portfolio() {
   const links = [
-    { url: 'https://practicum.yandex.ru/', name: 'Статичный сайт' },
-    { url: 'https://practicum.yandex.ru/', name: 'Адаптивный сайт' },
-    { url: 'https://practicum.yandex.ru/', name: 'Одностраничное приложение' },
+    { url: 'https://larikov174.github.io/how-to-learn/index.html', name: 'Статичный сайт' },
+    { url: 'https://larikov174.github.io/russian-travel/index.html', name: 'Адаптивный сайт' },
+    { url: 'https://larikov174.github.io/mesto-react/index.html', name: 'Одностраничное приложение' },
   ];
 
   const getLink = () =>
     links.map((link) => (
       <li key={link.name}>
-        <Link key={link.name} className="portfolio__text portfolio__link" to={link.url}>
+        <a key={link.name} className="portfolio__text portfolio__link" href={link.url} target="_blank" rel="noreferrer">
           <p className="portfolio__text portfolio__text_link">{link.name}</p>
           <span className="portfolio__arrow" />
-        </Link>
+        </a>
       </li>
     ));
 
