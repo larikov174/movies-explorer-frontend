@@ -11,7 +11,7 @@
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  gap: 90px 30px;
+  gap: 60px 30px;
   margin: 0;
   padding: 0;
 }
@@ -53,15 +53,26 @@
   display: none;
 }
 
-@media screen and (max-width: 1280px) {
+@media screen and (max-width: 1279px) {
+  .movies-card-list {
+    align-items: center;
+  }
+
   .movies-card-list__content {
-    justify-content: center;
+    width: 710px;
+    gap: 47px 30px;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .movies-card-list__content {
+    width: 300px;
   }
 }
 
 @media screen and (max-width: 480px) {
   .movies-card-list__content {
-    gap: 70px 30px;
+    gap: 39px 30px;
   }
 
   .movies-card-list {
