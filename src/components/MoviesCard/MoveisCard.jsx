@@ -1,12 +1,11 @@
 import './MoviesCard.css';
 import './SFX.css';
-import React from 'react';
+import React, { useState } from 'react';
+import Modal from '../Modal/Modal';
 
 function MoviesCard({ duration, description, image }) {
-  const handleCardClick = () => {
-    const result = 1;
-    return result;
-  };
+  const [isOpen, setIsOpen] = useState(false);
+  const handleCardClick = () => setIsOpen(true);
 
   return (
     <article className="movies-card">
@@ -20,6 +19,7 @@ function MoviesCard({ duration, description, image }) {
         <h2 className="movies-card__title">{description}</h2>
         <p className="movies-card__duration">{duration}</p>
       </div>
+      <Modal data={{ type: 'success', title: 'Сохранение успешно!' }} isOpen={isOpen} />
     </article>
   );
 }
