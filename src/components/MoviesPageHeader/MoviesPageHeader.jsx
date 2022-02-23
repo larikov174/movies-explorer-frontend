@@ -1,7 +1,6 @@
 import '../Header/Header.css';
 import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
-import BurgerMenu from '../BurgerMenu/BurgerMenu';
 
 function MoviesPageHeader() {
   const activeStyle = {
@@ -35,7 +34,6 @@ function MoviesPageHeader() {
         Аккаунт
         <span className="header__profile_decor" />
       </NavLink>
-      <BurgerMenu />
     </header>
   );
 }

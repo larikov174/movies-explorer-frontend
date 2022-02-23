@@ -10,6 +10,7 @@ import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import Profile from '../Profile/Profile';
 import PageNotFound from '../PageNotFound/PageNotFound';
+import BurgerMenu from '../BurgerMenu/BurgerMenu';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
         />
       </Routes>
       <Footer />
+      <BurgerMenu />
     </div>
   );
 }
