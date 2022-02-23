@@ -12,6 +12,7 @@ import Profile from '../Profile/Profile';
 import PageNotFound from '../PageNotFound/PageNotFound';
 import BurgerMenu from '../BurgerMenu/BurgerMenu';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import Modal from '../Modal/Modal';
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
       </Routes>
       <Footer />
       <BurgerMenu />
+      <Modal data={{ type: 'success', title: 'Сохранение успешно!' }} isOpen />
     </div>
   );
 }
