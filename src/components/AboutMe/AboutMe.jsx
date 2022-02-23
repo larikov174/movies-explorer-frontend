@@ -1,5 +1,7 @@
 import './AboutMe.css';
 import React from 'react';
+import image from '../../images/avatar.png';
+import video from '../../images/avatar.mp4';
 
 function AboutMe() {
   const links = [
@@ -9,7 +11,7 @@ function AboutMe() {
 
   const getLink = () =>
     links.map((link) => (
-      <a key={link.name} className="about-me__text about-me__text_link" href={link.url} target="_blank" rel="noreferrer" >
+      <a key={link.name} className="about-me__text about-me__text_link" href={link.url} target="_blank" rel="noreferrer">
         {link.name}
       </a>
     ));
@@ -34,7 +36,10 @@ function AboutMe() {
           </p>
           <nav className="about-me__nav">{getLink()}</nav>
         </div>
-        <div className="about-me__avatar" role="img" label="фотография студента" />
+        <video autoPlay loop muted inline="true" className="about-me__avatar" label="фотография студента">
+          <source src={video} type="video/mp4" />
+          <img src={image} alt="фотография студента"/>
+        </video>
       </div>
     </section>
   );
