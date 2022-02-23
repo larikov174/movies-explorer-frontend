@@ -4,37 +4,46 @@ import { useLocation, Link } from 'react-router-dom';
 export default function AuthForm({ children, onSubmit }) {
   const location = useLocation().pathname;
   const signUpDialog = {
+    caption: 'Рады видеть!',
     buttonTitle: 'Зарегистрироваться',
     question: 'Уже зарегистрированы?',
     linkTitle: 'Войти',
     link: '/signin',
   };
   const signInDialog = {
+    caption: 'Добро пожаловать!',
     buttonTitle: 'Войти',
     question: 'Ещё не зарегистрированы?',
     linkTitle: 'Регистрация',
     link: '/signup',
   };
 
-  const renderTitles = (user) => (
+  const renderLinks = (item) => (
     <div className="auth__actions">
       <button type="submit" className="auth__button">
-        {user.buttonTitle}
+        {item.buttonTitle}
       </button>
       <div className="auth__actions_link">
-        <p className="auth__text">{user.question}&nbsp;</p>
-        <Link className="auth__text auth__text_link" to={user.link}>
-          {user.linkTitle}
+        <p className="auth__text">{item.question}&nbsp;</p>
+        <Link className="auth__text auth__text_link" to={item.link}>
+          {item.linkTitle}
         </Link>
       </div>
     </div>
   );
 
+  const renderContent = (type) => (
+    <>
+    <h1 className="auth__title">{type.caption}</h1>
+    {children}
+    {renderLinks(type)}
+  </>
+  )
+
   return (
     <form className="auth" onSubmit={onSubmit}>
       <Link className="auth__logo" role="img" to="/" />
-      {children}
-      {location === '/signup' ? renderTitles(signUpDialog) : renderTitles(signInDialog)}
+      {location === '/signup' ? renderContent(signUpDialog) : renderContent(signInDialog)}
     </form>
   );
 }

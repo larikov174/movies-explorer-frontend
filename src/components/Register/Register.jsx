@@ -5,7 +5,6 @@ import AuthForm from '../AuthForm/AuthForm';
 function Register() {
   return (
     <AuthForm>
-      <h1 className="auth__title">Добро пожаловать!</h1>
       <label className="auth__label" htmlFor="nameInput">
         Имя
         <input type="text" className="auth__input" placeholder="Введите имя..." id="nameInput" required />
