@@ -1,16 +1,20 @@
 import './MoviesCard.css';
 import './SFX.css';
-import React, { useState } from 'react';
+import React from 'react';
 
-function MoviesCard({duration, description, image}) {
-  const [isVisible, setIsVisible] = useState(false);
+function MoviesCard({ duration, description, image }) {
+  const handleCardClick = () => {
+    const result = 1;
+    return result;
+  };
+
   return (
     <article className="movies-card">
-      <div className="movies-card__poster" onMouseEnter={() => setIsVisible(true)} onMouseLeave={() => setIsVisible(false)}>
+      <div className="movies-card__poster">
         <img className="movies-card__image" alt="Обложка фильма" src={image} />
-        <button className={`movies-card__button ${isVisible ? 'movies-card__button_visible slide' : ''}`} type="submit">
-          Сохранить
-        </button>
+        <div className="movies-card__overlay" onClick={handleCardClick} role="presentation">
+          <span className="movies-card__decor" />
+        </div>
       </div>
       <div className="movies-card__info">
         <h2 className="movies-card__title">{description}</h2>
