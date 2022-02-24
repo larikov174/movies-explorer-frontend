@@ -35,6 +35,7 @@
   flex-direction: column;
   margin-top: 40px;
   width: 100%;
+  background-color: #f9f9f9;
 }
 
 .auth__label {
