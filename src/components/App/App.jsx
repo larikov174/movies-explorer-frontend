@@ -1,6 +1,6 @@
+import './App.css';
 import React, { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import './App.css';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import Login from '../Login/Login';
@@ -36,6 +36,7 @@ function App() {
         <Route path="/saved-movies" element={<SavedMovies />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="*" element={<PageNotFound />} />
+      {/* TODO: ProtectedRoute заготовка для будущей итерации */}
         <Route
           path="/main"
           element={

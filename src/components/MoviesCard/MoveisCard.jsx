@@ -1,5 +1,4 @@
 import './MoviesCard.css';
-import './SFX.css';
 import React, { useState } from 'react';
 
 function MoviesCard({ duration, description, image, onCardClick }) {
