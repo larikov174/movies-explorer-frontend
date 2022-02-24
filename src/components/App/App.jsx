@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import './App.css';
 import Header from '../Header/Header';
@@ -12,8 +12,19 @@ import Profile from '../Profile/Profile';
 import PageNotFound from '../PageNotFound/PageNotFound';
 import BurgerMenu from '../BurgerMenu/BurgerMenu';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import Modal from '../Modal/Modal';
 
 function App() {
+  const [isModalVisible, setIsModalVisible] = useState({ type: '', title: '', visible: false });
+
+  const handleModalOpen = (message) => {
+    setIsModalVisible({ type: message.type, title: message.title, visible: message.visible });
+  };
+
+  const closeAllModals = () => {
+    setIsModalVisible(false);
+  };
+
   return (
     <div className="page">
       <Header />
@@ -21,7 +32,7 @@ function App() {
         <Route path="/" element={<Main />} />
         <Route path="/signin" element={<Login />} />
         <Route path="/signup" element={<Register />} />
-        <Route path="/movies" element={<Movies />} />
+        <Route path="/movies" element={<Movies onCardClick={handleModalOpen} />} />
         <Route path="/saved-movies" element={<SavedMovies />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="*" element={<PageNotFound />} />
@@ -36,6 +47,7 @@ function App() {
       </Routes>
       <Footer />
       <BurgerMenu />
+      <Modal onOpen={isModalVisible} onClose={closeAllModals} />
     </div>
   );
 }

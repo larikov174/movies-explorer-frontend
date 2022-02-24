@@ -1,11 +1,10 @@
 import './MoviesCard.css';
 import './SFX.css';
-import React, { useState } from 'react';
-import Modal from '../Modal/Modal';
+import React from 'react';
 
-function MoviesCard({ duration, description, image }) {
-  const [isOpen, setIsOpen] = useState(false);
-  const handleCardClick = () => setIsOpen(true);
+function MoviesCard({ duration, description, image, onCardClick }) {
+  // TODO: добавить провеку результатов сохранения фильма в базу, пока всегда успешно
+  const handleCardClick = () => onCardClick({ type: 'success', title: 'Сохранение успешно!', visible: true });
 
   return (
     <article className="movies-card">
@@ -19,7 +18,6 @@ function MoviesCard({ duration, description, image }) {
         <h2 className="movies-card__title">{description}</h2>
         <p className="movies-card__duration">{duration}</p>
       </div>
-      <Modal data={{ type: 'success', title: 'Сохранение успешно!' }} isOpen={isOpen} />
     </article>
   );
 }

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import MoviesCard from '../MoviesCard/MoveisCard';
 
-function MoviesCardList({ initData }) {
+function MoviesCardList({ initData, onCardClick }) {
   let index = 1;
   const location = useLocation().pathname;
   const [moviesQuantity, setMoviesQuantity] = useState(12);
@@ -12,7 +12,15 @@ function MoviesCardList({ initData }) {
   const renderCards = () =>
     initData.map((film) => {
       if (index <= moviesQuantity) {
-        return <MoviesCard key={(index += 1)} duration={film.duration} description={film.description} image={film.image} />;
+        return (
+          <MoviesCard
+            key={(index += 1)}
+            duration={film.duration}
+            description={film.description}
+            image={film.image}
+            onCardClick={onCardClick}
+          />
+        );
       }
       return null;
     });

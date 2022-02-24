@@ -1,30 +1,30 @@
 import './Modal.css';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 
-function Modal({ data, isOpen }) {
-  const [isVisible, setIsVisible] = useState(isOpen);
-  const renderNotification = (note) => (
+function Modal({ onOpen, onClose }) {
+  const renderNotification = () => (
     <>
-      <div className={`modal__icon ${note.type === 'success' ? 'modal__icon_success' : 'modal__icon_denied'}`} role="img" />
-      <h2 className="modal__title">{note.title}</h2>
+      <div
+        className={`modal__icon ${onOpen.type === 'success' ? 'modal__icon_success' : 'modal__icon_denied'}`}
+        role="img"
+      />
+      <h2 className="modal__title">{onOpen.title}</h2>
     </>
   );
 
-  const handleModalClose = () => setIsVisible(false);
-
   useEffect(() => {
-    if (isVisible) {
+    if (onOpen.visible) {
       setTimeout(() => {
-        handleModalClose();
+        onClose();
       }, 1500);
     }
-  },[]);
+  });
 
   return (
-    <section className={`modal ${isVisible ? 'modal__visible' : ''}`}>
+    <section className={`modal ${onOpen.visible ? 'modal__visible' : ''}`}>
       <div className="modal__container modal__slide">
-        {renderNotification(data)}
-        <button type="button" className="modal__button" onClick={handleModalClose} />
+        {renderNotification()}
+        <button type="button" className="modal__button" onClick={onClose} />
       </div>
     </section>
   );

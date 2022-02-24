@@ -6,7 +6,7 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Preloader from '../Preloader/Preloader';
 import defaultImage from '../../images/default-picture.png';
 
-function Movies() {
+function Movies({ onCardClick }) {
   const [initData, setInitData] = useState(null);
 
   // TODO: удалить на следующей итерации, блок кода для демо прелоудера и фетча данных
@@ -23,7 +23,7 @@ function Movies() {
   }, []);
 
   const renderData = () => {
-    if (initData && initData.length > 0) return <MoviesCardList initData={initData} />;
+    if (initData && initData.length > 0) return <MoviesCardList initData={initData} onCardClick={onCardClick}/>;
     if (initData && initData.length === 0) return <EmptyCardList title="Фильмов в базе не обнаружено." />;
     return <Preloader />;
   };
