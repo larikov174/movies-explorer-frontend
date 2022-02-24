@@ -1,2 +1,5 @@
-# movies-explorer-frontend
-Frontend for Yandex Praktikum diploma project
+## Фронт для диплоной работы `movies-explorer`
+### Публичный ip **51.250.6.249**
+[1]: https://larikov.nomoredomains.work
+### Готовый пероект можно найти [по этой ссылке][1]
+
