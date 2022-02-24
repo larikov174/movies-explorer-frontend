@@ -42,6 +42,12 @@
   transition: opacity 0.2s ease-in;
 }
 
+.movies-card__overlay_saved {
+  background-color: #00000038;
+  opacity: 1;
+  cursor: default !important;
+}
+
 .movies-card__decor {
   width: 72px;
   height: 21px;
@@ -54,6 +60,12 @@
   right: 14px;
   z-index: 3;
   opacity: 1;
+}
+
+.movies-card__decor_saved {
+  background-image: url('../../images/saved-icon.svg');
+  width: 21px;
+  height: 21px;
 }
 
 .movies-card__info {
