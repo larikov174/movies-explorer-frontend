@@ -42,15 +42,17 @@
 
 .modal__button {
   background-image: url('../../images/close-icon.svg');
+  background-color: transparent;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  border-radius: 50%;
+  border: none;
   width: 20px;
   height: 20px;
   position: absolute;
   top: 5px;
   right: 5px;
-  border-radius: 50%;
 }
 
 .modal__button:hover {
