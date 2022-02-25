@@ -24,21 +24,15 @@ function AboutMe() {
           <h3 className="about-me__text about-me__text_column-title">Андрей Лариков</h3>
           <p className="about-me__text about-me__text_subtitle">Фронтенд-разработчик, 36 лет</p>
           <p className="about-me__text about-me__description">
-            Я родился в Воронеже, живу в Челябинске, закончил факультет экономики и финансов ЮУрГУ.
-          </p>
-          <p className="about-me__text about-me__description">
-            У меня есть жена, двое детей и собака. Люблю поиграть на гитаре, зимой люблю покататься на беговых лыжах, а летом
-            на роликах.
-          </p>
-          <p className="about-me__text about-me__description">
-            Программированием как хобби увлекаюсь давно, но именно веб-разработку решил превратить в свою профессию. После
-            окончания курсов Яндекс.Практикум, ищу постоянную работу в сфере IT.
+            Я из Челябинска, закончил факультет экономики и финансов ЮУрГУ. Программированием как хобби увлекаюсь давно,
+            но именно веб-разработку решил превратить в свою профессию. После окончания курсов Яндекс.Практикум, ищу
+            постоянную работу в сфере IT.
           </p>
           <nav className="about-me__nav">{getLink()}</nav>
         </div>
         <video autoPlay loop muted inline="true" className="about-me__avatar" label="фотография студента">
           <source src={video} type="video/mp4" />
-          <img src={image} alt="фотография студента"/>
+          <img src={image} alt="фотография студента" />
         </video>
       </div>
     </section>
