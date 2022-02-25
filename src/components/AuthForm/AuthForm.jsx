@@ -34,16 +34,18 @@ export default function AuthForm({ children, onSubmit }) {
 
   const renderContent = (type) => (
     <>
-    <h1 className="auth__title">{type.caption}</h1>
-    {children}
-    {renderLinks(type)}
-  </>
-  )
+      <h1 className="auth__title">{type.caption}</h1>
+      <div className="auth__content">
+        {children}
+        {renderLinks(type)}
+      </div>
+    </>
+  );
 
   return (
     <form className="auth" onSubmit={onSubmit}>
       <Link className="auth__logo" role="img" to="/" />
-      {location === '/signup' ? renderContent(signUpDialog) : renderContent(signInDialog)}
+      {renderContent(location === '/signup' ? signUpDialog : signInDialog)}
     </form>
   );
 }
