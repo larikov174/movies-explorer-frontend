@@ -1,6 +1,6 @@
 .about-project {
   width: 100%;
-  margin: 110px 0 0;
+  padding: 100px 70px;
   box-sizing: border-box;
 }
 
@@ -74,7 +74,7 @@
 
 @media screen and (max-width: 768px) {
   .about-project {
-    margin: 90px 0 0;
+    padding: 90px 50px;
   }
 
   .about-project__columns {
@@ -95,7 +95,7 @@
 
 @media screen and (max-width: 480px) {
   .about-project {
-    margin: 70px 0 0;
+    padding: 70px 14px;
   }
 
   .about-project__text {

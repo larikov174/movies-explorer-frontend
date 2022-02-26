@@ -1,7 +1,7 @@
 .about-me {
   width: 100%;
   min-height: 536px;
-  margin: 210px 0 0 0;
+  padding: 100px 70px;
   box-sizing: border-box;
 }
 
@@ -76,7 +76,7 @@
 
 @media screen and (max-width: 768px) {
   .about-me {
-    margin: 180px 0 0 0;
+    padding: 90px 50px;
   }
 
   .about-me__avatar {
@@ -94,10 +94,6 @@
 }
 
 @media screen and (max-width: 640px) {
-  .about-me {
-    margin: 140px 0 0 0;
-  }
-
   .about-me__columns {
     display: flex;
     flex-direction: column-reverse;
@@ -119,6 +115,10 @@
 }
 
 @media screen and (max-width: 480px) {
+  .about-me {
+    padding: 70px 14px;
+  }
+
   .about-me__text {
     font-size: 11px;
     line-height: 16px;
