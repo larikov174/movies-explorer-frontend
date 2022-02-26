@@ -1,0 +1,130 @@
+.about-project {
+  width: 100%;
+  padding: 100px 70px;
+  box-sizing: border-box;
+}
+
+.about-project__text {
+  font: normal 400 14px/20px Inter, serif;
+  color: #000000;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+
+.about-project__text_centered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-project__text_title {
+  font-size: 22px;
+  line-height: 26px;
+  letter-spacing: -0.04em;
+  padding-bottom: 23px;
+  border-bottom: 1px solid #000000;
+}
+
+.about-project__text_column-title {
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: -0.04em;
+  padding-bottom: 26px;
+}
+
+.about-project__columns {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  margin: 70px 0 0;
+  gap: 40px;
+}
+
+.about-project__schedule {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  margin: 110px 0 0;
+}
+
+.about-project__column_backend {
+  width: 20%;
+}
+
+.about-project__column_frontend {
+  width: 100%;
+}
+
+.about-project__text_green-background {
+  min-height: 36px;
+  background-color: #2be080;
+}
+
+.about-project__text_white-background {
+  min-height: 36px;
+  background-color: #f2f2f2;
+}
+
+.about-project__text_grey {
+  color: #a0a0a0;
+  font-weight: 500;
+  margin-top: 14px;
+}
+
+@media screen and (max-width: 768px) {
+  .about-project {
+    padding: 90px 50px;
+  }
+
+  .about-project__columns {
+    gap: 30px;
+  }
+
+  .about-project__schedule {
+    margin: 90px 0 0;
+  }
+
+  .about-project__column_backend {
+    width: 40%;
+  }
+  .about-project__text_grey {
+    margin-top: 10px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .about-project {
+    padding: 70px 14px;
+  }
+
+  .about-project__text {
+    font-size: 11px;
+  }
+
+  .about-project__text_title {
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .about-project__text_column-title {
+    font-size: 18px;
+    line-height: 22px;
+    padding-bottom: 16px;
+  }
+
+  .about-project__columns {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 60px 0 0;
+  }
+
+  .about-project__columns {
+    gap: 56px;
+  }
+
+  .about-project__schedule {
+    margin: 60px 0 0;
+  }
+}
