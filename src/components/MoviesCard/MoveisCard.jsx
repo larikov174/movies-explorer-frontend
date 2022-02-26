@@ -18,8 +18,8 @@ function MoviesCard({ duration, description, image, onCardClick }) {
       );
     }
     return (
-      <div className="movies-card__overlay" onClick={handleCardClick} role="presentation">
-        <button type="button" className="movies-card__button" />
+      <div className="movies-card__overlay" role="presentation">
+        <button type="button" className="movies-card__button" onClick={handleCardClick} />
       </div>
     );
   };

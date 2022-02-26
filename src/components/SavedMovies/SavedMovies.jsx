@@ -11,7 +11,7 @@ function SavedMovies() {
 
   // TODO: удалить на следующей итерации, блок кода для демо прелоудера
   useEffect(() => {
-    const length = 0;
+    const length = 3;
     const moviesDB = Array(length).fill({
       image: defaultImage,
       description: 'Название фильма',
