@@ -80,6 +80,11 @@
   opacity: 1 !important;
   cursor: default;
 }
+.movies-card__button_delete {
+  background-image: url('../../images/delete-icon.svg');
+  width: 21px;
+  height: 21px;
+}
 
 .movies-card__info {
   margin: 14px 14px 0;

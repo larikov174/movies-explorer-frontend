@@ -6,7 +6,7 @@ import EmptyCardList from '../EmptyCardList/EmptyCardList';
 import Preloader from '../Preloader/Preloader';
 import defaultImage from '../../images/default-picture.png';
 
-function SavedMovies() {
+function SavedMovies({ onCardClick }) {
   const [initData, setInitData] = useState(null);
 
   // TODO: удалить на следующей итерации, блок кода для демо прелоудера
@@ -23,7 +23,7 @@ function SavedMovies() {
   }, []);
 
   const renderData = () => {
-    if (initData && initData.length > 0) return <MoviesCardList initData={initData} />;
+    if (initData && initData.length > 0) return <MoviesCardList initData={initData} onCardClick={onCardClick} />;
     if (initData && initData.length === 0) return <EmptyCardList title="Сохранённых фильмов не обнаружено." />;
     return <Preloader />;
   };

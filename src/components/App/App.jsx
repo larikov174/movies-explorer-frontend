@@ -33,7 +33,7 @@ function App() {
         <Route path="/signin" element={<Login />} />
         <Route path="/signup" element={<Register />} />
         <Route path="/movies" element={<Movies onCardClick={handleModalOpen} />} />
-        <Route path="/saved-movies" element={<SavedMovies />} />
+        <Route path="/saved-movies" element={<SavedMovies onCardClick={handleModalOpen} />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="*" element={<PageNotFound />} />
       {/* TODO: ProtectedRoute заготовка для будущей итерации */}
