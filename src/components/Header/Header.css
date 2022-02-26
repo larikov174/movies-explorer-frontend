@@ -90,6 +90,10 @@
   .header__link_profile {
     display: none;
   }
+
+  .header__menu_theme_light {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 480px) {
