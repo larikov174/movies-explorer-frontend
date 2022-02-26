@@ -1,6 +1,6 @@
 @keyframes slide {
   from {
-    top: 30px;
+    top: 100px;
   }
   to {
     top: -200px;
@@ -35,7 +35,7 @@
   align-items: center;
   justify-content: center;
   position: fixed;
-  top: 30px;
+  top: 100px;
   left: calc(100vw / 2 - 300px / 2);
   box-shadow: 0 0 6px 0px #00000014;
 }
