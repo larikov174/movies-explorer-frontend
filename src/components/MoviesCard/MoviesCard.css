@@ -48,7 +48,7 @@
   cursor: default !important;
 }
 
-.movies-card__decor {
+.movies-card__button {
   width: 72px;
   height: 21px;
   background-image: url('../../images/save-icon.svg');
@@ -60,12 +60,25 @@
   right: 14px;
   z-index: 3;
   opacity: 1;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
 }
 
-.movies-card__decor_saved {
+.movies-card__button:hover {
+  opacity: 0.8;
+}
+
+.movies-card__button:active {
+  box-shadow: inset 0px 0px 5px #c1c1c1;
+}
+
+.movies-card__button_saved {
   background-image: url('../../images/saved-icon.svg');
   width: 21px;
   height: 21px;
+  opacity: 1 !important;
+  cursor: default;
 }
 
 .movies-card__info {

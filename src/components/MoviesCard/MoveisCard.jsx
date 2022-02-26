@@ -13,13 +13,13 @@ function MoviesCard({ duration, description, image, onCardClick }) {
     if (isSaved) {
       return (
         <div className="movies-card__overlay movies-card__overlay_saved" role="presentation">
-          <span className="movies-card__decor movies-card__decor_saved" />
+          <button type="button" className="movies-card__button movies-card__button_saved" />
         </div>
       );
     }
     return (
       <div className="movies-card__overlay" onClick={handleCardClick} role="presentation">
-        <span className="movies-card__decor" />
+        <button type="button" className="movies-card__button" />
       </div>
     );
   };
