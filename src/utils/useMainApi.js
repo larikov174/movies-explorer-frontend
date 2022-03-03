@@ -9,21 +9,21 @@ export default function useMainApi() {
 
   return {
     checkToken() {
-      return fetch(`${baseUrl}check`, {
+      return fetch(`${baseUrl}/check`, {
         method: 'GET',
         credentials: 'include',
       }).then(res => res.ok);
     },
 
     getUserInfo() {
-      return fetch(`${baseUrl}users/me`, {
+      return fetch(`${baseUrl}/users/me`, {
         method: 'GET',
         credentials: 'include',
       }).then(handleResponse);
     },
 
     setUserInfo(data) {
-      return fetch(`${baseUrl}users/me`, {
+      return fetch(`${baseUrl}/users/me`, {
         method: 'PATCH',
         credentials: 'include',
         headers: {

@@ -9,7 +9,7 @@ export default function useAuth() {
 
   return {
     signup({ password, email }) {
-      return fetch(`${baseUrl}signup`, {
+      return fetch(`${baseUrl}/signup`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -22,7 +22,7 @@ export default function useAuth() {
     },
 
     signin({ password, email }) {
-      return fetch(`${baseUrl}signin`, {
+      return fetch(`${baseUrl}/signin`, {
         method: 'POST',
         credentials: 'include',
         headers: {
@@ -36,7 +36,7 @@ export default function useAuth() {
     },
 
     signout() {
-      return fetch(`${baseUrl}signout`, {
+      return fetch(`${baseUrl}/signout`, {
         method: 'GET',
         credentials: 'include',
       }).then(handleResponse);
