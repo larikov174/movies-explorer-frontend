@@ -8,6 +8,13 @@ export default function useAuth() {
   };
 
   return {
+    checkToken() {
+      return fetch(`${baseUrl}/check`, {
+        method: 'GET',
+        credentials: 'include',
+      }).then(res => res.ok);
+    },
+
     signup({ password, email }) {
       return fetch(`${baseUrl}/signup`, {
         method: 'POST',

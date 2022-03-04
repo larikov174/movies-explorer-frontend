@@ -18,19 +18,19 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Modal from '../Modal/Modal';
 
 function App() {
-  const loaded = useRef(null);
+  const token = useRef(null);
   const [user, setUser] = useState(null);
   const [isModalVisible, setIsModalVisible] = useState({ type: '', title: '', visible: false });
   const navigate = useNavigate();
-  const { signin } = useAuth();
-  const { checkToken, getUserInfo } = useMainApi();
-
-  const handleError = (err) => console.error(err);
+  const { signin, checkToken } = useAuth();
+  const { getUserInfo } = useMainApi();
 
   const currentUser = useMemo(() => ({ user }), []);
 
+  const handleError = (err) => console.error(err);
+
   const onLoadCheck = () => {
-    checkToken().then((res) => (loaded.current = res));
+    checkToken().then((res) => (token.current = res));
   };
 
   const handleModalOpen = (message) => {
@@ -50,9 +50,7 @@ function App() {
               setUser(data);
             })
             .then(() => {
-              // getCards().then((initCards) => {
-              //   setCards(initCards);
-              // });
+              handleModalOpen({ type: 'success', title: 'Авторизация успешна!', visible: true });
             })
             .finally(() => {
               navigate('/movies');
@@ -61,12 +59,23 @@ function App() {
       })
       .catch((error) => {
         handleError(error);
-        // setIsInfoTooltipState({ visible: true, queryApproved: false });
+        handleModalOpen({ type: 'fail', title: 'Ошибка авторизации', visible: true });
       });
   };
 
   useEffect(() => {
-    if (loaded === null) return onLoadCheck();
+    if (token === null) return onLoadCheck();
+
+      getUserInfo()
+        .then((data) => {
+          setUser(data);
+        })
+        .then(() => {
+          handleModalOpen({ type: 'success', title: 'Авторизация успешна!', visible: true });
+        })
+        .finally(() => {
+          navigate('/movies');
+        });
 
     const escHandler = (evt) => evt.key === 'Escape' && closeAllModals();
     document.addEventListener('keydown', escHandler);

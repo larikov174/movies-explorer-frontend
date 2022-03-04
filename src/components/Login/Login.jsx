@@ -14,10 +14,9 @@ function Login({ onLogin }) {
       onLogin({ password, email });
     } catch (err) {
       handleError(err);
-    } finally {
-      // setButtonTitle('Войти');
     }
   };
+
   return (
     <AuthForm onSubmit={handleLogin}>
       <label className="auth__label" htmlFor="emailInput">
