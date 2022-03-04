@@ -1,8 +1,8 @@
-import React from 'react';
-import './ProtectedRoute.css';
+import React, { useContext } from 'react';
+import { Navigate } from 'react-router-dom';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 
-function ProtectedRoute() {
-  return <div>ProtectedRoute</div>;
+export default function ProtectedRoute({ children }) {
+  const { user } = useContext(CurrentUserContext);
+  return user ? children : <Navigate to="/signin" replace/>;
 }
-
-export default ProtectedRoute;

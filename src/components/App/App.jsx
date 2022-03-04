@@ -64,18 +64,19 @@ function App() {
   };
 
   useEffect(() => {
-    if (token === null) return onLoadCheck();
+    if (token === null) {
+      onLoadCheck();
+    }
 
-      getUserInfo()
-        .then((data) => {
-          setUser(data);
-        })
-        .then(() => {
-          handleModalOpen({ type: 'success', title: 'Авторизация успешна!', visible: true });
-        })
-        .finally(() => {
-          navigate('/movies');
-        });
+    // if (token !== null) {
+    //   getUserInfo()
+    //     .then((data) => {
+    //       setUser(data);
+    //     })
+    //     .finally(() => {
+    //       navigate('/movies');
+    //     });
+    // }
 
     const escHandler = (evt) => evt.key === 'Escape' && closeAllModals();
     document.addEventListener('keydown', escHandler);
@@ -93,19 +94,31 @@ function App() {
           <Route path="/" element={<Main />} />
           <Route path="/signin" element={<Login onLogin={handleLogin} />} />
           <Route path="/signup" element={<Register />} />
-          <Route path="/movies" element={<Movies onCardClick={handleModalOpen} />} />
-          <Route path="/saved-movies" element={<SavedMovies onCardClick={handleModalOpen} />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="*" element={<PageNotFound />} />
-          {/* TODO: ProtectedRoute заготовка для будущей итерации */}
           <Route
-            path="/main"
+            path="movies"
             element={
               <ProtectedRoute>
-                <Main />
+                <Movies onCardClick={handleModalOpen} />
               </ProtectedRoute>
             }
           />
+          <Route
+            path="saved-movies"
+            element={
+              <ProtectedRoute>
+                <SavedMovies onCardClick={handleModalOpen} />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="profile"
+            element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
         <Footer />
         <BurgerMenu />
