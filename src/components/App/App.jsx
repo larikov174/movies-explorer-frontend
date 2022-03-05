@@ -22,7 +22,7 @@ function App() {
   const [user, setUser] = useState(null);
   const [isModalVisible, setIsModalVisible] = useState({ type: '', title: '', visible: false });
   const navigate = useNavigate();
-  const { signin, checkToken } = useAuth();
+  const { signin, signup, checkToken } = useAuth();
   const { getUserInfo } = useMainApi();
 
   const currentUser = useMemo(() => ({ user }), []);
@@ -63,6 +63,18 @@ function App() {
       });
   };
 
+  const handleSignUp = async ({ password, email, name }) => {
+    signup({ password, email, name })
+      .then(() => {
+        navigate('/signin');
+        handleModalOpen({ type: 'success', title: 'Авторизация успешна!', visible: true });
+      })
+      .catch((error) => {
+        handleError(error)
+        handleModalOpen({ type: 'fail', title: 'Ошибка авторизации', visible: true });
+      });
+  };
+
   useEffect(() => {
     if (token.current === null) {
       onLoadCheck();
@@ -91,7 +103,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/signin" element={<Login onLogin={handleLogin} />} />
-          <Route path="/signup" element={<Register />} />
+          <Route path="/signup" element={<Register onSingUp={handleSignUp} />} />
           <Route
             path="movies"
             element={

@@ -15,7 +15,7 @@ export default function useAuth() {
       }).then(res => res.ok);
     },
 
-    signup({ password, email }) {
+    signup({ password, email, name }) {
       return fetch(`${baseUrl}/signup`, {
         method: 'POST',
         headers: {
@@ -24,6 +24,7 @@ export default function useAuth() {
         body: JSON.stringify({
           password,
           email,
+          name
         }),
       }).then(handleResponse);
     },
