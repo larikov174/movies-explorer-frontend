@@ -13,6 +13,7 @@ import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import Profile from '../Profile/Profile';
 import PageNotFound from '../PageNotFound/PageNotFound';
+import Preloader from '../Preloader/Preloader';
 import BurgerMenu from '../BurgerMenu/BurgerMenu';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Modal from '../Modal/Modal';
@@ -21,6 +22,7 @@ function App() {
   const token = useRef(null);
   const [user, setUser] = useState(null);
   const [isModalVisible, setIsModalVisible] = useState({ type: '', title: '', visible: false });
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const { signin, signup, checkToken } = useAuth();
   const { getUserInfo } = useMainApi();
@@ -42,15 +44,16 @@ function App() {
   };
 
   const handleLogin = ({ password, email }) => {
+    setIsLoading(true);
     signin({ password, email })
       .then((res) => {
-        if (res.login === 'ok') {
+        if (res.login === 'Авторизация успешна.') {
           getUserInfo()
             .then((data) => {
               setUser(data);
             })
             .then(() => {
-              handleModalOpen({ type: 'success', title: 'Авторизация успешна!', visible: true });
+              // handleModalOpen({ type: 'success', title: 'Авторизация успешна!', visible: true });
             })
             .finally(() => {
               navigate('/movies');
@@ -58,19 +61,21 @@ function App() {
         }
       })
       .catch((error) => {
+        setIsLoading(false);
         handleError(error);
         handleModalOpen({ type: 'fail', title: 'Ошибка авторизации', visible: true });
       });
   };
 
   const handleSignUp = async ({ password, email, name }) => {
+    setIsLoading(true);
     signup({ password, email, name })
       .then(() => {
         navigate('/signin');
-        handleModalOpen({ type: 'success', title: 'Авторизация успешна!', visible: true });
       })
       .catch((error) => {
-        handleError(error)
+        setIsLoading(false);
+        handleError(error);
         handleModalOpen({ type: 'fail', title: 'Ошибка авторизации', visible: true });
       });
   };
@@ -102,8 +107,8 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Main />} />
-          <Route path="/signin" element={<Login onLogin={handleLogin} />} />
-          <Route path="/signup" element={<Register onSingUp={handleSignUp} />} />
+          <Route path="/signin" element={isLoading ? <Preloader /> : <Login onLogin={handleLogin} />} />
+          <Route path="/signup" element={isLoading ? <Preloader /> : <Register onSingUp={handleSignUp} />} />
           <Route
             path="movies"
             element={
