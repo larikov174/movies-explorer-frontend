@@ -64,19 +64,17 @@ function App() {
   };
 
   useEffect(() => {
-    if (token === null) {
+    if (token.current === null) {
       onLoadCheck();
+    } else {
+      getUserInfo()
+        .then((data) => {
+          setUser(data);
+        })
+        .finally(() => {
+          navigate('/movies');
+        });
     }
-
-    // if (token !== null) {
-    //   getUserInfo()
-    //     .then((data) => {
-    //       setUser(data);
-    //     })
-    //     .finally(() => {
-    //       navigate('/movies');
-    //     });
-    // }
 
     const escHandler = (evt) => evt.key === 'Escape' && closeAllModals();
     document.addEventListener('keydown', escHandler);

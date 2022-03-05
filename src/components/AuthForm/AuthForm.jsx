@@ -1,22 +1,9 @@
 import React from 'react';
 import { useLocation, Link } from 'react-router-dom';
+import { signUpDialog, signInDialog } from '../../utils/const';
 
 export default function AuthForm({ children, onSubmit }) {
   const location = useLocation().pathname;
-  const signUpDialog = {
-    caption: 'Рады видеть!',
-    buttonTitle: 'Зарегистрироваться',
-    question: 'Уже зарегистрированы?',
-    linkTitle: 'Войти',
-    link: '/signin',
-  };
-  const signInDialog = {
-    caption: 'Добро пожаловать!',
-    buttonTitle: 'Войти',
-    question: 'Ещё не зарегистрированы?',
-    linkTitle: 'Регистрация',
-    link: '/signup',
-  };
 
   const renderLinks = (item) => (
     <div className="auth__actions">

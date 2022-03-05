@@ -1,4 +1,4 @@
-import baseUrl from './const';
+import { baseUrl } from './const';
 
 export default function useAuth() {
 

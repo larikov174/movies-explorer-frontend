@@ -7,14 +7,9 @@ function Login({ onLogin }) {
   const [password, setPassword] = useState();
   const onEmailChange = (e) => setEmail(e.target.value);
   const onPassChange = (e) => setPassword(e.target.value);
-  const handleError = (err) => console.error(err);
   const handleLogin = (e) => {
     e.preventDefault();
-    try {
-      onLogin({ password, email });
-    } catch (err) {
-      handleError(err);
-    }
+    onLogin({ password, email });
   };
 
   return (
