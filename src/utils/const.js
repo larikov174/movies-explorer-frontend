@@ -17,6 +17,20 @@ const signInDialog = {
   link: '/signup',
 };
 
+const caption = {
+  name: 'Имя',
+  email: 'E-mail',
+  password: 'Пароль',
+  edit: 'Редактировать',
+  signOut: 'Выйти из аккаунта',
+  signUp: 'Регистрация',
+  signIn: 'Войти',
+  movies: 'Фильмы',
+  savedMovies: 'Сохраненные фильмы',
+  profile: 'Аккаунт',
+  find: 'Найти',
+}
+
 export {
-  baseUrl, signUpDialog, signInDialog
+  baseUrl, signUpDialog, signInDialog, caption,
 }

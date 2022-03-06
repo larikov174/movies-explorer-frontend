@@ -1,6 +1,7 @@
 import '../Header/Header.css';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { caption } from '../../utils/const';
 
 function MainPageHeader() {
   return (
@@ -8,10 +9,10 @@ function MainPageHeader() {
       <Link className="header__link header__link_logo" to="/" />
       <div className="header__menu">
         <Link className="header__link header__link_signup" to="/signup">
-          Регистрация
+          {caption.signUp}
         </Link>
         <Link className="header__link header__link_signin" to="/signin">
-          Войти
+          {caption.signIn}
         </Link>
       </div>
     </header>

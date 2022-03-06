@@ -1,6 +1,7 @@
 import '../Header/Header.css';
 import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
+import { caption } from '../../utils/const';
 
 function MoviesPageHeader() {
   const activeStyle = {
@@ -16,14 +17,14 @@ function MoviesPageHeader() {
           style={({ isActive }) => (isActive ? activeStyle : undefined)}
           to="/movies"
         >
-          Фильмы
+          {caption.movies}
         </NavLink>
         <NavLink
           className="header__link header__link_nav"
           style={({ isActive }) => (isActive ? activeStyle : undefined)}
           to="/saved-movies"
         >
-          Сохраненные фильмы
+          {caption.savedMovies}
         </NavLink>
       </div>
       <NavLink
@@ -31,7 +32,7 @@ function MoviesPageHeader() {
         style={({ isActive }) => (isActive ? activeStyle : undefined)}
         to="/profile"
       >
-        Аккаунт
+        {caption.profile}
         <span className="header__profile_decor" />
       </NavLink>
     </header>

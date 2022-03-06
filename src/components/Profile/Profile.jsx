@@ -1,5 +1,6 @@
 import './Profile.css';
 import React from 'react';
+import { caption } from '../../utils/const';
 
 function Profile({onSignOut}) {
   return (
@@ -8,7 +9,7 @@ function Profile({onSignOut}) {
       <form className="profile__content">
         <div className="profile__row">
           <label htmlFor="userName" className="profile__text profile__text_subtitle">
-            Имя
+            {caption.name}
           </label>
           <input
             type="text"
@@ -21,7 +22,7 @@ function Profile({onSignOut}) {
         </div>
         <div className="profile__row">
           <label htmlFor="userEmail" className="profile__text profile__text_subtitle">
-            E-mail
+            {caption.email}
           </label>
           <input
             type="email"
@@ -33,11 +34,11 @@ function Profile({onSignOut}) {
           />
         </div>
       <button type="submit" className="profile__button">
-        Редактировать
+        {caption.edit}
       </button>
       </form>
       <button className="profile__link" type="button" onClick={onSignOut}>
-        Выйти из аккаунта
+        {caption.signOut}
       </button>
     </section>
   );
