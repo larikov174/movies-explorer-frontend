@@ -1,6 +1,5 @@
-/* eslint-disable no-console */
 import './App.css';
-import React, { useState, useRef, useEffect, useMemo } from 'react';
+import React, { useState, useRef, useMemo } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import useAuth from '../../utils/useAuth';
@@ -31,7 +30,17 @@ function App() {
   const currentUser = useMemo(() => ({ user }), []);
   const handleError = (err) => console.error(err);
   const onLoadCheck = () => {
-    checkToken().then((res) => (token.current = res));
+    checkToken()
+      .then((res) => (token.current = res))
+      .then(() => {
+        if (token.current) {
+          getUserInfo()
+            .then((data) => setUser(data))
+            .then(() => navigate('/movies'));
+        }
+        navigate('/signin');
+      })
+      .catch((error) => handleError(error));
   };
 
   const handleModalOpen = (message) => {
@@ -44,9 +53,10 @@ function App() {
 
   const handleSignIn = ({ password, email }) => {
     setIsLoading(true);
-    signin({ password, email })
+    if (token.current) return navigate('/movies');
+
+    return signin({ password, email })
       .then((res) => {
-        console.log(res);
         if (res.code === 200) {
           getUserInfo()
             .then((data) => {
@@ -55,7 +65,7 @@ function App() {
             .then(() => {
               setIsLoading(false);
               navigate('/movies');
-            })
+            });
         }
       })
       .catch((error) => {
@@ -89,38 +99,17 @@ function App() {
         handleError(error);
         handleModalOpen({ type: 'fail', title: 'Ошибка авторизации', visible: true });
       })
-      .finally(() =>{
+      .finally(() => {
         setIsLoading(false);
         navigate('/');
         handleModalOpen({ type: 'success', title: 'Сессия завершена.', visible: true });
-      })
-  }
-
-  useEffect(() => {
-    if (token.current === null) {
-      onLoadCheck();
-    } else {
-      getUserInfo()
-        .then((data) => {
-          setUser(data);
-        })
-        .finally(() => {
-          navigate('/movies');
-        });
-    }
-
-    const escHandler = (evt) => evt.key === 'Escape' && closeAllModals();
-    document.addEventListener('keydown', escHandler);
-
-    return () => {
-      document.removeEventListener('keydown', escHandler);
-    };
-  }, [token.current]);
+      });
+  };
 
   return (
     <div className="page">
       <CurrentUserContext.Provider value={currentUser}>
-        <Header />
+        <Header onEnter={onLoadCheck} />
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/signin" element={isLoading ? <Preloader /> : <Login onLogin={handleSignIn} />} />
@@ -128,7 +117,7 @@ function App() {
           <Route
             path="movies"
             element={
-              <ProtectedRoute>
+              <ProtectedRoute token={token}>
                 <Movies onCardClick={handleModalOpen} />
               </ProtectedRoute>
             }
@@ -136,7 +125,7 @@ function App() {
           <Route
             path="saved-movies"
             element={
-              <ProtectedRoute>
+              <ProtectedRoute token={token}>
                 <SavedMovies onCardClick={handleModalOpen} />
               </ProtectedRoute>
             }
@@ -144,7 +133,7 @@ function App() {
           <Route
             path="profile"
             element={
-              <ProtectedRoute>
+              <ProtectedRoute token={token}>
                 <Profile onSignOut={handleSignOut} />
               </ProtectedRoute>
             }

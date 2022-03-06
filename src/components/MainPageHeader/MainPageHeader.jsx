@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { caption } from '../../utils/const';
 
-function MainPageHeader() {
+function MainPageHeader({ onEnter }) {
   return (
     <header className="header">
       <Link className="header__link header__link_logo" to="/" />
@@ -11,9 +11,9 @@ function MainPageHeader() {
         <Link className="header__link header__link_signup" to="/signup">
           {caption.signUp}
         </Link>
-        <Link className="header__link header__link_signin" to="/signin">
+        <button type='button' className="header__link header__link_signin" onClick={onEnter}>
           {caption.signIn}
-        </Link>
+        </button>
       </div>
     </header>
   );
