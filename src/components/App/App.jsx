@@ -20,17 +20,15 @@ import Modal from '../Modal/Modal';
 
 function App() {
   const token = useRef(null);
-  const [user, setUser] = useState("user");
+  const navigate = useNavigate();
+  const [user, setUser] = useState('user');
   const [isModalVisible, setIsModalVisible] = useState({ type: '', title: '', visible: false });
   const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigate();
-  const { signin, signup, checkToken } = useAuth();
+  const { signin, signup, signout, checkToken } = useAuth();
   const { getUserInfo } = useMainApi();
 
   const currentUser = useMemo(() => ({ user }), []);
-
   const handleError = (err) => console.error(err);
-
   const onLoadCheck = () => {
     checkToken().then((res) => (token.current = res));
   };
@@ -43,7 +41,7 @@ function App() {
     setIsModalVisible(false);
   };
 
-  const handleLogin = ({ password, email }) => {
+  const handleSignIn = ({ password, email }) => {
     setIsLoading(true);
     signin({ password, email })
       .then((res) => {
@@ -80,6 +78,24 @@ function App() {
       });
   };
 
+  const handleSignOut = () => {
+    setIsLoading(true);
+    signout()
+      .then(() => {
+        setUser(null);
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        handleError(error);
+        handleModalOpen({ type: 'fail', title: 'Ошибка авторизации', visible: true });
+      })
+      .finally(() =>{
+        setIsLoading(false);
+        navigate('/');
+        handleModalOpen({ type: 'success', title: 'Сессия завершена.', visible: true });
+      })
+  }
+
   useEffect(() => {
     if (token.current === null) {
       onLoadCheck();
@@ -107,7 +123,7 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Main />} />
-          <Route path="/signin" element={isLoading ? <Preloader /> : <Login onLogin={handleLogin} />} />
+          <Route path="/signin" element={isLoading ? <Preloader /> : <Login onLogin={handleSignIn} />} />
           <Route path="/signup" element={isLoading ? <Preloader /> : <Register onSingUp={handleSignUp} />} />
           <Route
             path="movies"
@@ -129,7 +145,7 @@ function App() {
             path="profile"
             element={
               <ProtectedRoute>
-                <Profile />
+                <Profile onSignOut={handleSignOut} />
               </ProtectedRoute>
             }
           />

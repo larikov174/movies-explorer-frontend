@@ -1,8 +1,7 @@
 import './Profile.css';
 import React from 'react';
-import { Link } from 'react-router-dom';
 
-function Profile() {
+function Profile({onSignOut}) {
   return (
     <section className="profile">
       <h1 className="profile__title">Привет, Юзер!</h1>
@@ -37,9 +36,9 @@ function Profile() {
         Редактировать
       </button>
       </form>
-      <Link className="profile__link" to="/signin">
+      <button className="profile__link" type="button" onClick={onSignOut}>
         Выйти из аккаунта
-      </Link>
+      </button>
     </section>
   );
 }
