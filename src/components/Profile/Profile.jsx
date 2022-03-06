@@ -1,11 +1,14 @@
 import './Profile.css';
-import React from 'react';
+import React, { useContext } from 'react';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 import { caption } from '../../utils/const';
 
 function Profile({onSignOut}) {
+  const { user } = useContext(CurrentUserContext);
+
   return (
     <section className="profile">
-      <h1 className="profile__title">Привет, Юзер!</h1>
+      <h1 className="profile__title">Привет, {user.name}</h1>
       <form className="profile__content">
         <div className="profile__row">
           <label htmlFor="userName" className="profile__text profile__text_subtitle">
@@ -17,6 +20,7 @@ function Profile({onSignOut}) {
             id="userName"
             className="profile__text profile__input"
             placeholder="Введите имя..."
+            value={user.name || ''}
             required
           />
         </div>
@@ -30,6 +34,7 @@ function Profile({onSignOut}) {
             id="userEmail"
             className="profile__text profile__input"
             placeholder="pochta@pochta.ru"
+            value={user.email || ''}
             required
           />
         </div>

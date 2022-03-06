@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import './App.css';
 import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
@@ -21,7 +22,7 @@ import Modal from '../Modal/Modal';
 function App() {
   const token = useRef(null);
   const navigate = useNavigate();
-  const [user, setUser] = useState('user');
+  const [user, setUser] = useState(null);
   const [isModalVisible, setIsModalVisible] = useState({ type: '', title: '', visible: false });
   const [isLoading, setIsLoading] = useState(false);
   const { signin, signup, signout, checkToken } = useAuth();
@@ -45,17 +46,16 @@ function App() {
     setIsLoading(true);
     signin({ password, email })
       .then((res) => {
-        if (res.login === 'Авторизация успешна.') {
+        console.log(res);
+        if (res.code === 200) {
           getUserInfo()
             .then((data) => {
               setUser(data);
             })
             .then(() => {
               setIsLoading(false);
-            })
-            .finally(() => {
               navigate('/movies');
-            });
+            })
         }
       })
       .catch((error) => {
@@ -115,7 +115,7 @@ function App() {
     return () => {
       document.removeEventListener('keydown', escHandler);
     };
-  }, []);
+  }, [token.current]);
 
   return (
     <div className="page">
