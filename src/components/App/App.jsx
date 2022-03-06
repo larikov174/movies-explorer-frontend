@@ -78,7 +78,7 @@ function App() {
       });
   };
 
-  const handleSignUp = async ({ password, email, name }) => {
+  const handleSignUp = ({ password, email, name }) => {
     setIsLoading(true);
     signup({ password, email, name })
       .then(() => {
@@ -95,7 +95,7 @@ function App() {
     setIsLoading(true);
     signout()
       .then(() => {
-        setUser(null);
+        navigate('/');
       })
       .catch((error) => {
         setIsLoading(false);
@@ -104,7 +104,7 @@ function App() {
       })
       .finally(() => {
         setIsLoading(false);
-        navigate('/');
+        setUser(null);
         handleModalOpen({ type: 'success', title: 'Сессия завершена.', visible: true });
       });
   };
