@@ -20,7 +20,7 @@ import Modal from '../Modal/Modal';
 
 function App() {
   const token = useRef(null);
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState("user");
   const [isModalVisible, setIsModalVisible] = useState({ type: '', title: '', visible: false });
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
@@ -53,7 +53,7 @@ function App() {
               setUser(data);
             })
             .then(() => {
-              // handleModalOpen({ type: 'success', title: 'Авторизация успешна!', visible: true });
+              setIsLoading(false);
             })
             .finally(() => {
               navigate('/movies');

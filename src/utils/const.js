@@ -1,5 +1,5 @@
-// const baseUrl = 'http://localhost:3001/';
-const baseUrl = 'https://api.larikov.nomoredomains.work';
+const baseUrl = 'http://localhost:3001';
+// const baseUrl = 'https://api.larikov.nomoredomains.work';
 
 const signUpDialog = {
   caption: 'Рады видеть!',
