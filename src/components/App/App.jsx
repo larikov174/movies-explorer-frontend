@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import './App.css';
 import React, { useState, useRef, useMemo } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
@@ -56,33 +57,32 @@ function App() {
     setIsModalVisible(false);
   };
 
-  const handleSignIn = ({ password, email }) => {
+  const handleSignIn = async ({ password, email }) => {
     setIsLoading(true);
-    return signin({ password, email })
-      .then((res) => {
-        if (res.code === 200) {
-          getUserInfo()
-            .then((data) => {
-              setUser(data);
-            })
-            .then(() => {
-              setIsLoading(false);
-              navigate('/movies');
-            });
-        }
-      })
-      .catch((error) => {
-        setIsLoading(false);
-        handleError(error);
-        handleModalOpen({ type: 'fail', title: 'Ошибка авторизации', visible: true });
-      });
+    try {
+      const res = await signin({ password, email });
+      if (res.code === 200) {
+        getUserInfo()
+          .then((data) => {
+            setUser(data);
+          })
+          .then(() => {
+            setIsLoading(false);
+            navigate('/movies');
+          });
+      }
+    } catch (error) {
+      setIsLoading(false);
+      handleError(error);
+      handleModalOpen({ type: 'fail', title: 'Ошибка авторизации', visible: true });
+    }
   };
 
-  const handleSignUp = ({ password, email, name }) => {
+  const handleSignUp = async ({ password, email, name }) => {
     setIsLoading(true);
     signup({ password, email, name })
       .then(() => {
-        navigate('/signin');
+        navigate('/movies');
       })
       .catch((error) => {
         setIsLoading(false);
