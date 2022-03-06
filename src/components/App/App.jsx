@@ -27,7 +27,11 @@ function App() {
   const { signin, signup, signout, checkToken } = useAuth();
   const { getUserInfo } = useMainApi();
 
-  const currentUser = useMemo(() => ({ user }), []);
+  const currentUser = useMemo(() => {
+    if (user) return { user };
+    return null;
+  }, [user]);
+
   const handleError = (err) => console.error(err);
   const onLoadCheck = () => {
     checkToken()
@@ -36,7 +40,8 @@ function App() {
         if (token.current) {
           getUserInfo()
             .then((data) => setUser(data))
-            .then(() => navigate('/movies'));
+            .then(() => navigate('/movies'))
+            .catch((error) => handleError(error));
         }
         navigate('/signin');
       })
@@ -53,8 +58,6 @@ function App() {
 
   const handleSignIn = ({ password, email }) => {
     setIsLoading(true);
-    if (token.current) return navigate('/movies');
-
     return signin({ password, email })
       .then((res) => {
         if (res.code === 200) {
@@ -107,8 +110,8 @@ function App() {
   };
 
   return (
-    <div className="page">
-      <CurrentUserContext.Provider value={currentUser}>
+    <CurrentUserContext.Provider value={currentUser}>
+      <div className="page">
         <Header onEnter={onLoadCheck} />
         <Routes>
           <Route path="/" element={<Main />} />
@@ -143,8 +146,8 @@ function App() {
         <Footer />
         <BurgerMenu />
         <Modal onOpen={isModalVisible} onClose={closeAllModals} />
-      </CurrentUserContext.Provider>
-    </div>
+      </div>
+    </CurrentUserContext.Provider>
   );
 }
 

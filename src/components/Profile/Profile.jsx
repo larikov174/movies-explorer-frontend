@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import './Profile.css';
 import React, { useContext } from 'react';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
@@ -5,6 +6,7 @@ import { caption } from '../../utils/const';
 
 function Profile({onSignOut}) {
   const { user } = useContext(CurrentUserContext);
+  console.log(user);
 
   return (
     <section className="profile">
