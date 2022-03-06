@@ -15,7 +15,7 @@ export default function useMainApi() {
       }).then(handleResponse);
     },
 
-    setUserInfo(data) {
+    setUserInfo({ name, email }) {
       return fetch(`${baseUrl}/users/me`, {
         method: 'PATCH',
         credentials: 'include',
@@ -23,8 +23,8 @@ export default function useMainApi() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          name: data.name,
-          about: data.about,
+          name,
+          email
         }),
       }).then(handleResponse);
     },

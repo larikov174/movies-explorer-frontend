@@ -1,28 +1,40 @@
 /* eslint-disable no-console */
 import './Profile.css';
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import { caption } from '../../utils/const';
 
-function Profile({onSignOut}) {
+function Profile({ onSignOut, onUpdate }) {
   const { user } = useContext(CurrentUserContext);
-  console.log(user);
+  const [name, setName] = useState();
+  const [email, setEmail] = useState();
+  const onNameChange = (e) => setName(e.target.value);
+  const onEmailChange = (e) => setEmail(e.target.value);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    return user && onUpdate({ name, email });
+  };
+
+  useEffect(() => {
+      setName(user.name);
+      setEmail(user.email);
+  }, [user]);
 
   return (
     <section className="profile">
-      <h1 className="profile__title">Привет, {user.name}</h1>
+      <h1 className="profile__title">Привет, {name}!</h1>
       <form className="profile__content">
         <div className="profile__row">
           <label htmlFor="userName" className="profile__text profile__text_subtitle">
             {caption.name}
           </label>
           <input
+            onChange={onNameChange}
             type="text"
-            name="userName"
-            id="userName"
             className="profile__text profile__input"
             placeholder="Введите имя..."
-            value={user.name || ''}
+            id="userName"
+            value={name || 'Введите имя...'}
             required
           />
         </div>
@@ -35,14 +47,15 @@ function Profile({onSignOut}) {
             name="userEmail"
             id="userEmail"
             className="profile__text profile__input"
-            placeholder="pochta@pochta.ru"
-            value={user.email || ''}
+            placeholder="Введите email..."
+            value={email || 'Введите email...'}
+            onChange={onEmailChange}
             required
           />
         </div>
-      <button type="submit" className="profile__button">
-        {caption.edit}
-      </button>
+        <button type="submit" className="profile__button" onSubmit={handleSubmit}>
+          {caption.edit}
+        </button>
       </form>
       <button className="profile__link" type="button" onClick={onSignOut}>
         {caption.signOut}

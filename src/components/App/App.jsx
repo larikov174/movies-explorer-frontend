@@ -26,14 +26,16 @@ function App() {
   const [isModalVisible, setIsModalVisible] = useState({ type: '', title: '', visible: false });
   const [isLoading, setIsLoading] = useState(false);
   const { signin, signup, signout, checkToken } = useAuth();
-  const { getUserInfo } = useMainApi();
+  const { getUserInfo, setUserInfo } = useMainApi();
 
   const currentUser = useMemo(() => {
     if (user) return { user };
+    console.log(user);
     return null;
   }, [user]);
 
   const handleError = (err) => console.error(err);
+
   const onLoadCheck = () => {
     checkToken()
       .then((res) => (token.current = res))
@@ -53,7 +55,7 @@ function App() {
     setIsModalVisible({ type: message.type, title: message.title, visible: message.visible });
   };
 
-  const closeAllModals = () => {
+  const closeModal = () => {
     setIsModalVisible(false);
   };
 
@@ -67,7 +69,6 @@ function App() {
             setUser(data);
           })
           .then(() => {
-            setIsLoading(false);
             navigate('/movies');
           });
       }
@@ -78,7 +79,7 @@ function App() {
     }
   };
 
-  const handleSignUp = async ({ password, email, name }) => {
+  const handleSignUp = ({ password, email, name }) => {
     setIsLoading(true);
     signup({ password, email, name })
       .then(() => {
@@ -100,12 +101,26 @@ function App() {
       .catch((error) => {
         setIsLoading(false);
         handleError(error);
-        handleModalOpen({ type: 'fail', title: 'Ошибка авторизации', visible: true });
+        handleModalOpen({ type: 'fail', title: 'Ошибка завершения сессии.', visible: true });
       })
       .finally(() => {
         setIsLoading(false);
         setUser(null);
         handleModalOpen({ type: 'success', title: 'Сессия завершена.', visible: true });
+      });
+  };
+
+  const handleUpdateUser = ({ name, email }) => {
+    setIsLoading(true);
+    setUserInfo({ name, email })
+      .then((newData) => {
+        console.log(newData);
+        setUser(newData);
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        handleError(error);
+        handleModalOpen({ type: 'fail', title: 'Ошибка обновления данных.', visible: true });
       });
   };
 
@@ -134,10 +149,10 @@ function App() {
             }
           />
           <Route
-            path="profile"
+            path="/profile"
             element={
               <ProtectedRoute token={token}>
-                <Profile onSignOut={handleSignOut} />
+                {isLoading ? <Preloader /> : <Profile onSignOut={handleSignOut} onUpdate={handleUpdateUser} />}
               </ProtectedRoute>
             }
           />
@@ -145,7 +160,7 @@ function App() {
         </Routes>
         <Footer />
         <BurgerMenu />
-        <Modal onOpen={isModalVisible} onClose={closeAllModals} />
+        <Modal onOpen={isModalVisible} onClose={closeModal} />
       </div>
     </CurrentUserContext.Provider>
   );
