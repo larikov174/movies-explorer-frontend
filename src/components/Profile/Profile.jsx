@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import './Profile.css';
 import React, { useContext, useState, useEffect } from 'react';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
@@ -16,14 +15,14 @@ function Profile({ onSignOut, onUpdate }) {
   };
 
   useEffect(() => {
-      setName(user.name);
-      setEmail(user.email);
+    setName(user.name);
+    setEmail(user.email);
   }, [user]);
 
   return (
     <section className="profile">
       <h1 className="profile__title">Привет, {name}!</h1>
-      <form className="profile__content">
+      <form className="profile__content" onSubmit={handleSubmit}>
         <div className="profile__row">
           <label htmlFor="userName" className="profile__text profile__text_subtitle">
             {caption.name}
@@ -53,13 +52,13 @@ function Profile({ onSignOut, onUpdate }) {
             required
           />
         </div>
-        <button type="submit" className="profile__button" onSubmit={handleSubmit}>
+        <button type="submit" className="profile__button">
           {caption.edit}
         </button>
+        <button className="profile__link" type="button" onClick={onSignOut}>
+          {caption.signOut}
+        </button>
       </form>
-      <button className="profile__link" type="button" onClick={onSignOut}>
-        {caption.signOut}
-      </button>
     </section>
   );
 }
