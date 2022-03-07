@@ -30,7 +30,6 @@ function App() {
 
   const currentUser = useMemo(() => {
     if (user) return { user };
-    console.log(user);
     return null;
   }, [user]);
 
@@ -121,7 +120,11 @@ function App() {
         setIsLoading(false);
         handleError(error);
         handleModalOpen({ type: 'fail', title: 'Ошибка обновления данных.', visible: true });
-      });
+      })
+      .finally(()=>{
+        setIsLoading(false);
+        handleModalOpen({ type: 'success', title: 'Данные обновлены успешно.', visible: true });
+      })
   };
 
   return (
