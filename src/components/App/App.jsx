@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import './App.css';
 import React, { useState, useRef, useMemo } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
@@ -35,6 +34,14 @@ function App() {
 
   const handleError = (err) => console.error(err);
 
+  const handleModalOpen = (message) => {
+    setIsModalVisible({ type: message.type, title: message.title, visible: message.visible });
+  };
+
+  const closeModal = () => {
+    setIsModalVisible(false);
+  };
+
   const onLoadCheck = () => {
     checkToken()
       .then((res) => (token.current = res))
@@ -44,18 +51,14 @@ function App() {
             .then((data) => setUser(data))
             .then(() => navigate('/movies'))
             .catch((error) => handleError(error));
+        } else {
+          navigate('/signin');
         }
-        navigate('/signin');
       })
-      .catch((error) => handleError(error));
-  };
-
-  const handleModalOpen = (message) => {
-    setIsModalVisible({ type: message.type, title: message.title, visible: message.visible });
-  };
-
-  const closeModal = () => {
-    setIsModalVisible(false);
+      .catch((error) => {
+        handleError(error);
+        handleModalOpen({ type: 'fail', title: 'Ошибка получения данных.', visible: true });
+      });
   };
 
   const handleSignIn = async ({ password, email }) => {
@@ -113,7 +116,6 @@ function App() {
     setIsLoading(true);
     setUserInfo({ name, email })
       .then((newData) => {
-        console.log(newData);
         setUser(newData);
       })
       .catch((error) => {
@@ -121,10 +123,10 @@ function App() {
         handleError(error);
         handleModalOpen({ type: 'fail', title: 'Ошибка обновления данных.', visible: true });
       })
-      .finally(()=>{
+      .finally(() => {
         setIsLoading(false);
         handleModalOpen({ type: 'success', title: 'Данные обновлены успешно.', visible: true });
-      })
+      });
   };
 
   return (
