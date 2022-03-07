@@ -13,13 +13,18 @@ function Movies({ onCardClick }) {
   // const [searchResult, setSearchResult] = useState();
   const { getMovies } = useMoviesApi();
 
-  const handleSearchQuery = () => {
-    getMovies()
-    .then((res)=>{
-      console.log(res);
+  const handleSearchQuery = (query) => {
+    getMovies().then((res) => {
+      const result = res.filter(
+        (movie) =>
+        movie.nameRU && movie.nameRU.toLowerCase().includes(query.toLowerCase()) ||
+        movie.nameEN && movie.nameEN.toLowerCase().includes(query.toLowerCase()) ||
+        movie.description && movie.description.toLowerCase().includes(query.toLowerCase())
+      );
+      console.log(result);
       // setSearchResult((res)=> data.)
-    })
-  }
+    });
+  };
 
   // TODO: удалить на следующей итерации, блок кода для демо прелоудера и фетча данных
   useEffect(() => {

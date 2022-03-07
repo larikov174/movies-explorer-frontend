@@ -9,7 +9,7 @@ function SearchForm({ onSubmit }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     localStorage.setItem('query', query);
-    onSubmit();
+    onSubmit(query);
   };
 
   return (
