@@ -17,7 +17,7 @@ function MoviesCardList({ initData, onCardClick }) {
             key={(index += 1)}
             duration={film.duration}
             description={film.description}
-            image={film.image}
+            image={`https://api.nomoreparties.co${film.image.url}`}
             onCardClick={onCardClick}
           />
         );
