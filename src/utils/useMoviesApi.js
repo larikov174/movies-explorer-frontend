@@ -8,10 +8,11 @@ export default function useMoviesApi() {
   };
 
   return {
-    getMovies() {
-      return fetch(`${moviesUrl}`, {
+    async getMovies() {
+      const res = await fetch(`${moviesUrl}`, {
         method: 'GET',
-      }).then(handleResponse);
+      });
+      return handleResponse(res);
     },
   }
 }

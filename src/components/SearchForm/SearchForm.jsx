@@ -8,7 +8,8 @@ function SearchForm({ onSubmit }) {
   const onInputChange = (e) => setQuery(e.target.value);
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(query);
+    localStorage.setItem('query', query);
+    onSubmit();
   };
 
   return (

@@ -10,11 +10,15 @@ import useMoviesApi from '../../utils/useMoviesApi';
 
 function Movies({ onCardClick }) {
   const [initData, setInitData] = useState(null);
+  // const [searchResult, setSearchResult] = useState();
   const { getMovies } = useMoviesApi();
 
-  const handleSearchQuery = (data) => {
-    console.log(data);
-    getMovies();
+  const handleSearchQuery = () => {
+    getMovies()
+    .then((res)=>{
+      console.log(res);
+      // setSearchResult((res)=> data.)
+    })
   }
 
   // TODO: удалить на следующей итерации, блок кода для демо прелоудера и фетча данных
