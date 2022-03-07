@@ -1,4 +1,4 @@
-import { baseUrl } from "./const";
+import { mainUrl } from "./const";
 
 export default function useMainApi() {
 
@@ -9,14 +9,14 @@ export default function useMainApi() {
 
   return {
     getUserInfo() {
-      return fetch(`${baseUrl}/users/me`, {
+      return fetch(`${mainUrl}/users/me`, {
         method: 'GET',
         credentials: 'include',
       }).then(handleResponse);
     },
 
     setUserInfo({ name, email }) {
-      return fetch(`${baseUrl}/users/me`, {
+      return fetch(`${mainUrl}/users/me`, {
         method: 'PATCH',
         credentials: 'include',
         headers: {

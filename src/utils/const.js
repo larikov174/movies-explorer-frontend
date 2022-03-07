@@ -1,5 +1,6 @@
-const baseUrl = 'http://localhost:3001';
-// const baseUrl = 'https://api.larikov.nomoredomains.work';
+const mainUrl = 'http://localhost:3001'
+// const baseUrl = 'https://api.larikov.nomoredomains.work'
+const moviesUrl = 'https://api.nomoreparties.co/beatfilm-movies'
 
 const signUpDialog = {
   caption: 'Рады видеть!',
@@ -32,5 +33,9 @@ const caption = {
 }
 
 export {
-  baseUrl, signUpDialog, signInDialog, caption,
+  mainUrl,
+  moviesUrl,
+  signUpDialog,
+  signInDialog,
+  caption,
 }

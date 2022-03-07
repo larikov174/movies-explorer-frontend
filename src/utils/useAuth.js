@@ -1,4 +1,4 @@
-import { baseUrl } from './const';
+import { mainUrl } from './const';
 
 export default function useAuth() {
 
@@ -9,14 +9,14 @@ export default function useAuth() {
 
   return {
     checkToken() {
-      return fetch(`${baseUrl}/check`, {
+      return fetch(`${mainUrl}/check`, {
         method: 'GET',
         credentials: 'include',
       }).then(res => res.ok);
     },
 
     signup({ password, email, name }) {
-      return fetch(`${baseUrl}/signup`, {
+      return fetch(`${mainUrl}/signup`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -30,7 +30,7 @@ export default function useAuth() {
     },
 
     signin({ password, email }) {
-      return fetch(`${baseUrl}/signin`, {
+      return fetch(`${mainUrl}/signin`, {
         method: 'POST',
         credentials: 'include',
         headers: {
@@ -44,7 +44,7 @@ export default function useAuth() {
     },
 
     signout() {
-      return fetch(`${baseUrl}/signout`, {
+      return fetch(`${mainUrl}/signout`, {
         method: 'GET',
         credentials: 'include',
       }).then(handleResponse);
