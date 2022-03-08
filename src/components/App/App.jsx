@@ -38,11 +38,11 @@ function App() {
     setIsModalVisible({ type: message.type, title: message.title, visible: message.visible });
   };
 
-  const closeModal = () => {
+  const handleModalClose = () => {
     setIsModalVisible(false);
   };
 
-  const onLoad = () => {
+  const handleOnLoad = () => {
     checkToken()
       .then((res) => (token.current = res))
       .then(() => {
@@ -149,7 +149,7 @@ function App() {
   };
 
   useEffect(() => {
-    onLoad();
+    handleOnLoad();
   }, []);
 
   return (
@@ -193,7 +193,7 @@ function App() {
         </Routes>
         <Footer />
         <BurgerMenu />
-        <Modal onOpen={isModalVisible} onClose={closeModal} />
+        <Modal onOpen={isModalVisible} onClose={handleModalClose} />
       </div>
     </CurrentUserContext.Provider>
   );
