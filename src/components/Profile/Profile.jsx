@@ -4,7 +4,7 @@ import CurrentUserContext from '../../contexts/CurrentUserContext';
 import { caption } from '../../utils/const';
 
 function Profile({ onSignOut, onUpdate }) {
-  const { user } = useContext(CurrentUserContext);
+  const user = useContext(CurrentUserContext);
   const [name, setName] = useState();
   const [email, setEmail] = useState();
   const onNameChange = (e) => setName(e.target.value);
@@ -15,8 +15,10 @@ function Profile({ onSignOut, onUpdate }) {
   };
 
   useEffect(() => {
-    setName(user.name);
-    setEmail(user.email);
+    if (user){
+      setName(user.name);
+      setEmail(user.email);
+    }
   }, [user]);
 
   return (
