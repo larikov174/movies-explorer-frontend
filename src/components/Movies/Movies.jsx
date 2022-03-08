@@ -5,7 +5,7 @@ import EmptyCardList from '../EmptyCardList/EmptyCardList';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Preloader from '../Preloader/Preloader';
 
-function Movies({ onSearch, isLoading, searchResult, onCardClick }) {
+function Movies({ onSearch, isLoading, searchResult, handleShortMovie, onCardClick }) {
   const [result, setResult] = useState(searchResult);
 
   useEffect(() => {
@@ -21,7 +21,7 @@ function Movies({ onSearch, isLoading, searchResult, onCardClick }) {
 
   return (
     <section className="movies">
-      <SearchForm onSubmit={onSearch} />
+      <SearchForm onSubmit={onSearch} handleShortMovie={handleShortMovie} />
       {isLoading ? <Preloader /> : renderData()}
     </section>
   );

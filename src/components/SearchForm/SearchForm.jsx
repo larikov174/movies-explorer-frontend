@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import { caption } from '../../utils/const';
 
-function SearchForm({ onSubmit }) {
+function SearchForm({ onSubmit, handleShortMovie }) {
   const [query, setQuery] = useState();
   const onInputChange = (e) => setQuery(e.target.value);
   const handleSubmit = (e) => {
@@ -34,7 +34,7 @@ function SearchForm({ onSubmit }) {
           {caption.find}
         </button>
       </form>
-      <FilterCheckbox />
+      <FilterCheckbox onClick={handleShortMovie}/>
     </section>
   );
 }

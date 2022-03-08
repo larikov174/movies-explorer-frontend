@@ -1,7 +1,7 @@
 import './FilterCheckbox.css';
 import React, { useState, useEffect } from 'react';
 
-function FilterCheckbox() {
+function FilterCheckbox({ onClick }) {
   const [isActive, setIsActive] = useState(false);
   const handleChange = (e) => {
     setIsActive(e.target.checked);
@@ -16,7 +16,14 @@ function FilterCheckbox() {
   return (
     <div className="checkbox__container">
       <label className="checkbox__label" htmlFor="checkbox">
-        <input className="checkbox__element" type="checkbox" id="checkbox" onChange={handleChange} checked={isActive} />
+        <input
+          className="checkbox__element"
+          type="checkbox"
+          id="checkbox"
+          onChange={handleChange}
+          onClick={onClick}
+          checked={isActive}
+        />
         <div className="checkbox__slider checkbox__round" />
       </label>
       <p className="checkbox__text">Короткометражки</p>

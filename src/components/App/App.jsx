@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import './App.css';
 import React, { useState, useRef, useMemo, useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
@@ -148,6 +149,19 @@ function App() {
       });
   };
 
+  const handleShortMovie = () => {
+    const movies = JSON.parse(localStorage.movies);
+    const shortOption = localStorage.shortMovie;
+    const movieLengthLimit = 40;
+    const result = movies.filter((movie) => movie.duration <= movieLengthLimit);
+    console.log(result);
+
+    if (shortOption) return setSearchResult(movies.filter((movie) => movie.duration <= movieLengthLimit));
+    return setSearchResult(movies);
+
+    // return setSearchResult(result);
+  };
+
   useEffect(() => {
     handleOnLoad();
   }, []);
@@ -168,6 +182,7 @@ function App() {
                   onSearch={handleSearchQuery}
                   isLoading={isLoading}
                   searchResult={searchResult}
+                  handleShortMovie={handleShortMovie}
                   onCardClick={handleModalOpen}
                 />
               </ProtectedRoute>
