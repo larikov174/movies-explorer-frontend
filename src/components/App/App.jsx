@@ -4,6 +4,7 @@ import { Routes, Route, useNavigate } from 'react-router-dom';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import useAuth from '../../utils/useAuth';
 import useMainApi from '../../utils/useMainApi';
+import useMoviesApi from '../../utils/useMoviesApi';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import Login from '../Login/Login';
@@ -22,10 +23,12 @@ function App() {
   const token = useRef(null);
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
+  const [searchResult, setSearchResult] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState({ type: '', title: '', visible: false });
   const [isLoading, setIsLoading] = useState(false);
   const { signin, signup, signout, checkToken } = useAuth();
   const { getUserInfo, setUserInfo } = useMainApi();
+  const { getMovies } = useMoviesApi();
 
   const currentUser = useMemo(() => user, [user]);
 
@@ -124,6 +127,27 @@ function App() {
       });
   };
 
+  const handleSearchQuery = (query) => {
+    setIsLoading(true);
+    getMovies()
+      .then((movies) => {
+        const result = movies.filter(
+          (movie) =>
+            (movie.nameRU && movie.nameRU.toLowerCase().includes(query.toLowerCase())) ||
+            (movie.nameEN && movie.nameEN.toLowerCase().includes(query.toLowerCase())) ||
+            (movie.description && movie.description.toLowerCase().includes(query.toLowerCase())),
+        );
+        localStorage.setItem('movies', JSON.stringify(result));
+        setSearchResult(result);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        handleError(error);
+        handleModalOpen({ type: 'fail', title: 'Ошибка загрузки данных.', visible: true });
+      });
+  };
+
   useEffect(() => {
     onLoad();
   }, []);
@@ -140,7 +164,12 @@ function App() {
             path="movies"
             element={
               <ProtectedRoute>
-                <Movies onCardClick={handleModalOpen} />
+                <Movies
+                  onSearch={handleSearchQuery}
+                  isLoading={isLoading}
+                  searchResult={searchResult}
+                  onCardClick={handleModalOpen}
+                />
               </ProtectedRoute>
             }
           />
