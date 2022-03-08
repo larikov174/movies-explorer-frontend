@@ -1,9 +1,9 @@
-import '../Header/Header.css';
+import './Header.css';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { caption } from '../../utils/const';
 
-function MainPageHeader({ onEnter }) {
+export default function MainHeader({ onEnter }) {
   return (
     <header className="header">
       <Link className="header__link header__link_logo" to="/" />
@@ -18,5 +18,3 @@ function MainPageHeader({ onEnter }) {
     </header>
   );
 }
-
-export default MainPageHeader;

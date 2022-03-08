@@ -1,20 +1,20 @@
 import './Header.css';
-import React from 'react';
+import React, { useContext } from 'react';
 import { useLocation } from 'react-router-dom';
-import MainPageHeader from '../MainPageHeader/MainPageHeader';
-import MoviesPageHeader from '../MoviesPageHeader/MoviesPageHeader';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
+import MainHeader from './MainHeader';
+import MoviesHeader from './MoviesHeader';
 
-function Header({ onEnter }) {
+export default function Header({ onEnter }) {
   const location = useLocation().pathname;
   const allowedPages = ['/', '/movies', '/saved-movies', '/profile'];
+  const currentUser = useContext(CurrentUserContext);
 
   const renderHeader = () => {
     if (allowedPages.includes(location)) {
-      return location === '/' ? <MainPageHeader onEnter={onEnter} /> : <MoviesPageHeader />;
+      return currentUser ? <MoviesHeader /> : <MainHeader onEnter={onEnter} />;
     }
     return null;
   };
   return renderHeader();
 }
-
-export default Header;

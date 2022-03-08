@@ -12,6 +12,7 @@
 
 .header_theme_light {
   background-color: #fff;
+  color: #fff;
   justify-content: start;
 }
 
@@ -35,6 +36,10 @@
 .header__link_nav {
   font: normal 400 13px/18px Inter, serif;
   color: #000;
+}
+
+.header__link_nav_light {
+  color: #fff;
 }
 
 .header__link_profile {
