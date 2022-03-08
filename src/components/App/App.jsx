@@ -108,6 +108,7 @@ function App() {
       .finally(() => {
         setIsLoading(false);
         setUser(null);
+        localStorage.clear();
         handleModalOpen({ type: 'success', title: 'Сессия завершена.', visible: true });
       });
   };
