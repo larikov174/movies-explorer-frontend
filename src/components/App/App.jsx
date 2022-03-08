@@ -1,6 +1,3 @@
-/* eslint-disable no-undef */
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-console */
 import './App.css';
 import React, { useState, useRef, useMemo, useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
@@ -30,13 +27,7 @@ function App() {
   const { signin, signup, signout, checkToken } = useAuth();
   const { getUserInfo, setUserInfo } = useMainApi();
 
-  // const currentUser = useMemo(() => {
-  //   if (user) return { user };
-  //   return null;
-  // }, [user]);
-
-  // const currentUser = useMemo(() => user, [user]);
-  // const user = useRef(null);
+  const currentUser = useMemo(() => user, [user]);
 
   const handleError = (err) => console.error(err);
 
@@ -66,6 +57,7 @@ function App() {
         handleModalOpen({ type: 'fail', title: 'Ошибка получения данных.', visible: true });
       });
   };
+
   const onLoad = () => {
     checkToken()
       .then((res) => (token.current = res))
@@ -154,10 +146,9 @@ function App() {
   useEffect(() => {
     onLoad();
   }, []);
-  console.log(user);
 
   return (
-    <CurrentUserContext.Provider value={user}>
+    <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
         <Header onEnter={onLoadCheck} />
         <Routes>
@@ -184,7 +175,7 @@ function App() {
             path="/profile"
             element={
               <ProtectedRoute>
-                {isLoading ? <Preloader /> : <Profile onSignOut={handleSignOut} onUpdate={handleUpdateUser} />}
+                <Profile onSignOut={handleSignOut} onUpdate={handleUpdateUser} />
               </ProtectedRoute>
             }
           />
