@@ -61,12 +61,10 @@ function App() {
       const res = await signin({ password, email });
       if (res.code === 200) {
         getUserInfo()
-          .then((data) => {
-            setUser(data);
-          })
-          .then(() => {
-            navigate('/movies');
-          });
+          .then((data) => setUser(data))
+          .then(() => navigate('/movies'))
+          .catch((error) => handleError(error))
+          .finally(() => setIsLoading(false));
       }
     } catch (error) {
       setIsLoading(false);
@@ -75,17 +73,19 @@ function App() {
     }
   };
 
-  const handleSignUp = ({ password, email, name }) => {
+  const handleSignUp = async ({ password, email, name }) => {
     setIsLoading(true);
-    signup({ password, email, name })
-      .then(() => {
+    try {
+      const res = await signup({ password, email, name });
+      if (res) {
+        setUser(res);
         navigate('/movies');
-      })
-      .catch((error) => {
-        setIsLoading(false);
-        handleError(error);
-        handleModalOpen({ type: 'fail', title: 'Ошибка авторизации', visible: true });
-      });
+      }
+    } catch (error) {
+      setIsLoading(false);
+      handleError(error);
+      handleModalOpen({ type: 'fail', title: 'Ошибка авторизации', visible: true });
+    }
   };
 
   const handleSignOut = () => {

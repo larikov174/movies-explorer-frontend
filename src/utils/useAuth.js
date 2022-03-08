@@ -18,6 +18,7 @@ export default function useAuth() {
     signup({ password, email, name }) {
       return fetch(`${mainUrl}/signup`, {
         method: 'POST',
+        credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
         },
