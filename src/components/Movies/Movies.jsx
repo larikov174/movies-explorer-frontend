@@ -8,9 +8,11 @@ import useMoviesApi from '../../utils/useMoviesApi';
 
 function Movies({ onCardClick }) {
   const [searchResult, setSearchResult] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const { getMovies } = useMoviesApi();
 
   const handleSearchQuery = (query) => {
+    setIsLoading(true);
     getMovies()
       .then((movies) => {
         const result = movies.filter(
@@ -21,6 +23,7 @@ function Movies({ onCardClick }) {
         );
         localStorage.setItem('movies', JSON.stringify(result))
         setSearchResult(result)
+        setIsLoading(false)
       });
   };
 
@@ -32,14 +35,13 @@ function Movies({ onCardClick }) {
 
   const renderData = () => {
     if (searchResult && searchResult.length > 0) return <MoviesCardList initData={searchResult} onCardClick={onCardClick} />;
-    if (searchResult && searchResult.length === 0) return <EmptyCardList />;
-    return <Preloader />;
+    return <EmptyCardList />;
   };
 
   return (
     <section className="movies">
       <SearchForm onSubmit={handleSearchQuery} />
-      {renderData()}
+      {isLoading? <Preloader /> : renderData()}
     </section>
   );
 }
