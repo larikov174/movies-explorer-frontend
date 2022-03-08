@@ -1,5 +1,5 @@
 import './SearchForm.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import { caption } from '../../utils/const';
 
@@ -11,6 +11,12 @@ function SearchForm({ onSubmit }) {
     localStorage.setItem('query', query);
     onSubmit(query);
   };
+
+  useEffect(() => {
+    if (localStorage.query) {
+      setQuery(localStorage.query);
+    }
+  }, []);
 
   return (
     <section className="search-form">
