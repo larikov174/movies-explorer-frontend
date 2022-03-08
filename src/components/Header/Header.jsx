@@ -5,14 +5,14 @@ import CurrentUserContext from '../../contexts/CurrentUserContext';
 import MainHeader from './MainHeader';
 import MoviesHeader from './MoviesHeader';
 
-export default function Header({ onEnter }) {
+export default function Header() {
   const location = useLocation().pathname;
   const allowedPages = ['/', '/movies', '/saved-movies', '/profile'];
   const currentUser = useContext(CurrentUserContext);
 
   const renderHeader = () => {
     if (allowedPages.includes(location)) {
-      return currentUser ? <MoviesHeader /> : <MainHeader onEnter={onEnter} />;
+      return currentUser ? <MoviesHeader /> : <MainHeader />;
     }
     return null;
   };

@@ -39,25 +39,6 @@ function App() {
     setIsModalVisible(false);
   };
 
-  const onLoadCheck = () => {
-    checkToken()
-      .then((res) => (token.current = res))
-      .then(() => {
-        if (token.current) {
-          getUserInfo()
-            .then((data) => setUser(data))
-            .then(() => navigate('/movies'))
-            .catch((error) => handleError(error));
-        } else {
-          navigate('/signin');
-        }
-      })
-      .catch((error) => {
-        handleError(error);
-        handleModalOpen({ type: 'fail', title: 'Ошибка получения данных.', visible: true });
-      });
-  };
-
   const onLoad = () => {
     checkToken()
       .then((res) => (token.current = res))
@@ -150,7 +131,7 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
-        <Header onEnter={onLoadCheck} />
+        <Header />
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/signin" element={isLoading ? <Preloader /> : <Login onLogin={handleSignIn} />} />
