@@ -7,7 +7,7 @@ import Preloader from '../Preloader/Preloader';
 import useMoviesApi from '../../utils/useMoviesApi';
 
 function Movies({ onCardClick }) {
-  const [searchResult, setSearchResult] = useState();
+  const [searchResult, setSearchResult] = useState([]);
   const { getMovies } = useMoviesApi();
 
   const handleSearchQuery = (query) => {
@@ -25,7 +25,9 @@ function Movies({ onCardClick }) {
   };
 
   useEffect(()=>{
-    setSearchResult(JSON.parse(localStorage.movies))
+    if(localStorage.movies) {
+      setSearchResult(JSON.parse(localStorage.movies))
+    }
   },[])
 
   const renderData = () => {
