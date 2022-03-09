@@ -30,9 +30,16 @@ const caption = {
   savedMovies: 'Сохраненные фильмы',
   profile: 'Аккаунт',
   find: 'Найти',
+  more: 'Ещё',
   empty: 'Ничего не найдено',
   searchFail: `Во время запроса произошла ошибка.
   Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз`
+}
+
+const screenWidth = {
+  large: 1280,
+  medium: 768,
+  small: 480,
 }
 
 export {
@@ -41,4 +48,5 @@ export {
   signUpDialog,
   signInDialog,
   caption,
+  screenWidth,
 }
