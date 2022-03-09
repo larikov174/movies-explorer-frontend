@@ -12,7 +12,7 @@ function MoviesCard({ duration, description, image, onCardClick }) {
   // TODO: добавить провеку результатов сохранения фильма в базу, пока всегда успешно
   const handleCardClick = () => {
     if (location === '/movies') {
-      setIsSaved(true);
+      setIsSaved(isSaved);
       onCardClick({ type: 'success', title: 'Сохранение успешно!', visible: true });
     }
     return onCardClick({ type: 'success', title: 'Удалено успешно!', visible: true });

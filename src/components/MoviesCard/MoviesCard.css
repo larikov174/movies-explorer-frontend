@@ -45,7 +45,6 @@
 .movies-card__overlay_saved {
   background-color: #00000038;
   opacity: 1;
-  cursor: default !important;
 }
 
 .movies-card__button {
@@ -77,8 +76,7 @@
   background-image: url('../../images/saved-icon.svg');
   width: 21px;
   height: 21px;
-  opacity: 1 !important;
-  cursor: default;
+  opacity: 1;
 }
 .movies-card__button_delete {
   background-image: url('../../images/delete-icon.svg');
