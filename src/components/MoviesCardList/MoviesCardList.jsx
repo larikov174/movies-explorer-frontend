@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import './MoviesCardList.css';
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
@@ -19,12 +20,17 @@ function MoviesCardList({ initData, onCardClick }) {
     }
   };
 
-  const handleButtonClick = () => (
+  const handleMoreCards = () => (
     window.innerWidth < screenWidth.large
       ? setMoviesQuantity(moviesQuantity + 2)
       : setMoviesQuantity(moviesQuantity + 3)
   )
 
+  const handleIdleState = () => (
+    location === '/saved-movies' || index === moviesQuantity
+      ? 'movies-card-list__button_idle'
+      : ''
+  )
 
   const renderCards = () =>
     initData.map((film) => {
@@ -45,6 +51,7 @@ function MoviesCardList({ initData, onCardClick }) {
   const resizeThrottler = () => {
     setTimeout(() => {
       handleCardsQuantity();
+      handleIdleState();
       renderCards();
     }, 66);
   };
@@ -60,9 +67,9 @@ function MoviesCardList({ initData, onCardClick }) {
       <div className="movies-card-list__content">{renderCards()}</div>
       <div className="movies-card-list__action">
         <button
-          className={`movies-card-list__button ${location === '/saved-movies' ? 'movies-card-list__button_idle' : ''}`}
+          className={`movies-card-list__button ${handleIdleState()}`}
           type="button"
-          onClick={handleButtonClick}
+          onClick={handleMoreCards}
         >
           {caption.more}
         </button>
