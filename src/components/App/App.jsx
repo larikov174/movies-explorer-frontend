@@ -30,6 +30,9 @@ function App() {
   const { signin, signup, signout, checkToken } = useAuth();
   const { getUserInfo, setUserInfo } = useMainApi();
   const { getMovies } = useMoviesApi();
+  const localStorageMovies = JSON.parse(localStorage.movies);
+  const shortMovieOption = JSON.parse(localStorage.shortMovie);
+  const movieLengthLimit = 40;
 
   const currentUser = useMemo(() => user, [user]);
 
@@ -139,7 +142,10 @@ function App() {
             (movie.description && movie.description.toLowerCase().includes(query.toLowerCase())),
         );
         localStorage.setItem('movies', JSON.stringify(result));
-        setSearchResult(result);
+        setSearchResult(()=>{
+          if (shortMovieOption) return result.filter((movie) => movie.duration <= movieLengthLimit);
+          return result;
+        });
         setIsLoading(false);
       })
       .catch((error) => {
@@ -150,11 +156,8 @@ function App() {
   };
 
   const handleShortMovie = () => {
-    const movies = JSON.parse(localStorage.movies);
-    const shortOption = localStorage.shortMovie;
-    const movieLengthLimit = 40;
-    const result = movies.filter((movie) => (
-      JSON.parse(shortOption)
+    const result = localStorageMovies.filter((movie) => (
+      shortMovieOption
       ? movie.duration >= movieLengthLimit
       : movie.duration <= movieLengthLimit
     ));
