@@ -153,13 +153,12 @@ function App() {
     const movies = JSON.parse(localStorage.movies);
     const shortOption = localStorage.shortMovie;
     const movieLengthLimit = 40;
-    const result = movies.filter((movie) => movie.duration <= movieLengthLimit);
-    console.log(result);
-
-    if (shortOption) return setSearchResult(movies.filter((movie) => movie.duration <= movieLengthLimit));
-    return setSearchResult(movies);
-
-    // return setSearchResult(result);
+    const result = movies.filter((movie) => (
+      JSON.parse(shortOption)
+      ? movie.duration >= movieLengthLimit
+      : movie.duration <= movieLengthLimit
+    ));
+    setSearchResult(result)
   };
 
   useEffect(() => {

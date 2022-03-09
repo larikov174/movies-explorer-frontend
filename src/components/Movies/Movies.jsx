@@ -7,11 +7,19 @@ import Preloader from '../Preloader/Preloader';
 
 function Movies({ onSearch, isLoading, searchResult, handleShortMovie, onCardClick }) {
   const [result, setResult] = useState(searchResult);
+  const { query, movies } = localStorage;
 
   useEffect(() => {
-    if (localStorage.movies) {
-      setResult(JSON.parse(localStorage.movies));
+    if (query) {
+      onSearch(query);
     }
+  }, []);
+
+  useEffect(() => {
+    if (movies) {
+      setResult(JSON.parse(movies));
+    }
+    setResult(searchResult);
   }, [searchResult]);
 
   const renderData = () => {
