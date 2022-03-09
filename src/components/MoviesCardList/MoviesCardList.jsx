@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import './MoviesCardList.css';
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
@@ -8,17 +7,24 @@ import { caption, screenWidth } from '../../utils/const';
 function MoviesCardList({ initData, onCardClick }) {
   let index = 1;
   const location = useLocation().pathname;
-  const [moviesQuantity, setMoviesQuantity] = useState(5);
+  const [moviesQuantity, setMoviesQuantity] = useState(null);
+
   const handleCardsQuantity = () => {
-    if (screenWidth.large > window.innerWidth > screenWidth.medium) {
+    if (window.innerWidth >= screenWidth.large) {
       setMoviesQuantity(12);
-    }
-    if (screenWidth.medium > window.innerWidth > screenWidth.small) {
+    } else if (window.innerWidth >= screenWidth.medium) {
       setMoviesQuantity(8);
+    } else {
+      setMoviesQuantity(5);
     }
-    // return setMoviesQuantity(5);
   };
-  const handleButtonClick = () => setMoviesQuantity(moviesQuantity + 3);
+
+  const handleButtonClick = () => (
+    window.innerWidth < screenWidth.large
+      ? setMoviesQuantity(moviesQuantity + 2)
+      : setMoviesQuantity(moviesQuantity + 3)
+  )
+
 
   const renderCards = () =>
     initData.map((film) => {
@@ -44,6 +50,7 @@ function MoviesCardList({ initData, onCardClick }) {
   };
 
   useEffect(() => {
+    handleCardsQuantity();
     window.addEventListener('resize', resizeThrottler, false);
     return () => window.removeEventListener('resize', resizeThrottler, false);
   }, []);

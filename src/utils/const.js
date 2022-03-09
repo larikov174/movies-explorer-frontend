@@ -38,7 +38,7 @@ const caption = {
 
 const screenWidth = {
   large: 1280,
-  medium: 768,
+  medium: 750,
   small: 480,
 }
 
