@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import './MoviesCardList.css';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import MoviesCard from '../MoviesCard/MoveisCard';
 import { caption, screenWidth } from '../../utils/const';
@@ -8,6 +8,7 @@ import { caption, screenWidth } from '../../utils/const';
 function MoviesCardList({ initData, onCardClick }) {
   let index = 1;
   const location = useLocation().pathname;
+  const pageEndRef = useRef(null);
   const [moviesQuantity, setMoviesQuantity] = useState(null);
 
   const handleCardsQuantity = () => {
@@ -20,17 +21,19 @@ function MoviesCardList({ initData, onCardClick }) {
     }
   };
 
-  const handleMoreCards = () => (
-    window.innerWidth < screenWidth.large
-      ? setMoviesQuantity(moviesQuantity + 2)
-      : setMoviesQuantity(moviesQuantity + 3)
-  )
+  const handleScrollToBottom = () => pageEndRef.current.scrollIntoView({ behavior: 'smooth' });
 
-  const handleIdleState = () => (
-    location === '/saved-movies' || index === moviesQuantity
-      ? 'movies-card-list__button_idle'
-      : ''
-  )
+  const handleMoreCards = () =>
+    window.innerWidth < screenWidth.large ? setMoviesQuantity(moviesQuantity + 2) : setMoviesQuantity(moviesQuantity + 3);
+
+  const handleIdleState = () =>
+    location === '/saved-movies' || index <= moviesQuantity ? 'movies-card-list__button_idle' : '';
+
+  const handleClick = () => {
+    handleMoreCards();
+    handleScrollToBottom();
+    handleIdleState();
+  };
 
   const renderCards = () =>
     initData.map((film) => {
@@ -51,7 +54,6 @@ function MoviesCardList({ initData, onCardClick }) {
   const resizeThrottler = () => {
     setTimeout(() => {
       handleCardsQuantity();
-      handleIdleState();
       renderCards();
     }, 66);
   };
@@ -66,14 +68,11 @@ function MoviesCardList({ initData, onCardClick }) {
     <div className="movies-card-list">
       <div className="movies-card-list__content">{renderCards()}</div>
       <div className="movies-card-list__action">
-        <button
-          className={`movies-card-list__button ${handleIdleState()}`}
-          type="button"
-          onClick={handleMoreCards}
-        >
+        <button className={`movies-card-list__button ${handleIdleState()}`} type="button" onClick={handleClick}>
           {caption.more}
         </button>
       </div>
+      <div ref={pageEndRef} />
     </div>
   );
 }
