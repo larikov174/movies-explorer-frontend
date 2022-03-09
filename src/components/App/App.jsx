@@ -142,10 +142,11 @@ function App() {
             (movie.description && movie.description.toLowerCase().includes(query.toLowerCase())),
         );
         localStorage.setItem('movies', JSON.stringify(result));
-        setSearchResult(()=>{
-          if (shortMovieOption) return result.filter((movie) => movie.duration <= movieLengthLimit);
-          return result;
-        });
+        setSearchResult(() => (
+          shortMovieOption
+            ? result.filter((movie) => movie.duration <= movieLengthLimit)
+            : result
+        ));
         setIsLoading(false);
       })
       .catch((error) => {
@@ -158,8 +159,8 @@ function App() {
   const handleShortMovie = () => {
     const result = localStorageMovies.filter((movie) => (
       shortMovieOption
-      ? movie.duration >= movieLengthLimit
-      : movie.duration <= movieLengthLimit
+        ? movie.duration >= movieLengthLimit
+        : movie.duration <= movieLengthLimit
     ));
     setSearchResult(result)
   };
