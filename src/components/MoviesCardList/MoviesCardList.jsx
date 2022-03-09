@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import './MoviesCardList.css';
 import React, { useState, useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
@@ -6,10 +5,10 @@ import MoviesCard from '../MoviesCard/MoveisCard';
 import { caption, screenWidth } from '../../utils/const';
 
 function MoviesCardList({ initData, onCardClick }) {
-  let index = 1;
   const location = useLocation().pathname;
   const pageEndRef = useRef(null);
   const [moviesQuantity, setMoviesQuantity] = useState(null);
+  const [moviesToAdd, setMoviesToAdd] = useState(null);
 
   const handleCardsQuantity = () => {
     if (window.innerWidth >= screenWidth.large) {
@@ -21,13 +20,19 @@ function MoviesCardList({ initData, onCardClick }) {
     }
   };
 
+  const handleMoreCards = () => {
+    if (window.innerWidth < screenWidth.large) {
+      setMoviesToAdd(2);
+    } else {
+      setMoviesToAdd(3);
+    }
+    setMoviesQuantity(moviesQuantity + moviesToAdd);
+  };
+
   const handleScrollToBottom = () => pageEndRef.current.scrollIntoView({ behavior: 'smooth' });
 
-  const handleMoreCards = () =>
-    window.innerWidth < screenWidth.large ? setMoviesQuantity(moviesQuantity + 2) : setMoviesQuantity(moviesQuantity + 3);
-
   const handleIdleState = () =>
-    location === '/saved-movies' || index <= moviesQuantity ? 'movies-card-list__button_idle' : '';
+    location === '/saved-movies' || initData.length <= moviesQuantity ? 'movies-card-list__button_idle' : '';
 
   const handleClick = () => {
     handleMoreCards();
@@ -36,20 +41,17 @@ function MoviesCardList({ initData, onCardClick }) {
   };
 
   const renderCards = () =>
-    initData.map((film) => {
-      if (index <= moviesQuantity) {
-        return (
-          <MoviesCard
-            key={(index += 1)}
-            duration={film.duration}
-            description={film.description}
-            image={`https://api.nomoreparties.co${film.image.url}`}
-            onCardClick={onCardClick}
-          />
-        );
-      }
-      return null;
-    });
+    initData
+      .slice(0, moviesQuantity)
+      .map((film) => (
+        <MoviesCard
+          key={film.id}
+          duration={film.duration}
+          description={film.description}
+          image={`https://api.nomoreparties.co${film.image.url}`}
+          onCardClick={onCardClick}
+        />
+      ));
 
   const resizeThrottler = () => {
     setTimeout(() => {
