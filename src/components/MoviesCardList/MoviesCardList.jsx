@@ -46,9 +46,17 @@ function MoviesCardList({ initData, onCardClick }) {
       .map((film) => (
         <MoviesCard
           key={film.id}
+          country={film.country}
+          director={film.director}
           duration={film.duration}
           description={film.description}
+          year={film.year}
           image={`https://api.nomoreparties.co${film.image.url}`}
+          trailer={film.trailer}
+          nameRU={film.nameRU}
+          nameEN={film.nameEN}
+          thumbnail={film.thumbnail}
+          id={film.movieId}
           onCardClick={onCardClick}
         />
       ));
