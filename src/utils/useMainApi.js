@@ -8,15 +8,16 @@ export default function useMainApi() {
   };
 
   return {
-    getUserInfo() {
-      return fetch(`${mainUrl}/users/me`, {
+    async getUserInfo() {
+      const res = await fetch(`${mainUrl}/users/me`, {
         method: 'GET',
         credentials: 'include',
-      }).then(handleResponse);
+      });
+      return handleResponse(res);
     },
 
-    setUserInfo({ name, email }) {
-      return fetch(`${mainUrl}/users/me`, {
+    async setUserInfo({ name, email }) {
+      const res = await fetch(`${mainUrl}/users/me`, {
         method: 'PATCH',
         credentials: 'include',
         headers: {
@@ -26,7 +27,39 @@ export default function useMainApi() {
           name,
           email
         }),
-      }).then(handleResponse);
+      });
+      return handleResponse(res);
     },
+
+    async getMovies() {
+      const res = await fetch(`${mainUrl}/movies`, {
+        method: 'GET',
+        credentials: 'include',
+      });
+      return handleResponse(res);
+    },
+
+    async postMovie({
+      country, director, duration, year, description, image, trailer, nameRU, nameEN, thumbnail, movieId, }) {
+      const res = await fetch(`${mainUrl}/movies`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          country, director, duration, year, description, image, trailer, nameRU, nameEN, thumbnail, movieId,
+        }),
+      });
+      return handleResponse(res);
+    },
+
+    async deleteMovie({ _id }) {
+      const res = await fetch(`${mainUrl}/movies/${_id}`, {
+        method: 'DELETE',
+        credentials: 'include',
+      });
+      return handleResponse(res);
+    }
   }
 }
