@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 import MoviesCard from '../MoviesCard/MoveisCard';
 import { caption, screenWidth } from '../../utils/const';
 
-function MoviesCardList({ initData, onCardClick }) {
+function MoviesCardList({ initData, onCardClick, onPostMovie }) {
   const location = useLocation().pathname;
   const pageEndRef = useRef(null);
   const [moviesQuantity, setMoviesQuantity] = useState(null);
@@ -46,18 +46,9 @@ function MoviesCardList({ initData, onCardClick }) {
       .map((film) => (
         <MoviesCard
           key={film.id}
-          country={film.country}
-          director={film.director}
-          duration={film.duration}
-          description={film.description}
-          year={film.year}
-          image={`https://api.nomoreparties.co${film.image.url}`}
-          trailer={film.trailer}
-          nameRU={film.nameRU}
-          nameEN={film.nameEN}
-          thumbnail={film.thumbnail}
-          id={film.movieId}
           onCardClick={onCardClick}
+          onPostMovie={onPostMovie}
+          film={film}
         />
       ));
 

@@ -1,16 +1,22 @@
+/* eslint-disable no-console */
 import './MoviesCard.css';
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
-function MoviesCard({ duration, description, image, onCardClick }) {
+function MoviesCard({
+  onCardClick,
+  onPostMovie,
+  film,
+}) {
   const [isSaved, setIsSaved] = useState(false);
   const location = useLocation().pathname;
-  const minutes = duration % 60;
-  const hours = (duration - minutes) / 60;
+  const minutes = film.duration % 60;
+  const hours = (film.duration - minutes) / 60;
   const timeStamp = `${hours}ч ${minutes < 10 ? '0' : ''}${minutes}м`;
 
-  // TODO: добавить провеку результатов сохранения фильма в базу, пока всегда успешно
   const handleCardClick = () => {
+    onPostMovie(film);
+    console.log(film);
     if (location === '/movies') {
       setIsSaved(isSaved);
       onCardClick({ type: 'success', title: 'Сохранение успешно!', visible: true });
@@ -42,11 +48,11 @@ function MoviesCard({ duration, description, image, onCardClick }) {
   return (
     <article className="movies-card">
       <div className="movies-card__poster">
-        <img className="movies-card__image" alt="Обложка фильма" src={image} />
+        <img className="movies-card__image" alt="Обложка фильма" src={`https://api.nomoreparties.co${film.image.url}`} />
         {location === '/movies' ? renderCardOnMoviesPage() : renderCardOnSavedMoviesPage()}
       </div>
       <div className="movies-card__info">
-        <h2 className="movies-card__title">{description}</h2>
+        <h2 className="movies-card__title">{film.description}</h2>
         <p className="movies-card__duration">{timeStamp}</p>
       </div>
     </article>

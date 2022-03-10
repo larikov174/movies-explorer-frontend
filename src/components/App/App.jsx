@@ -28,11 +28,11 @@ function App() {
   const [isModalVisible, setIsModalVisible] = useState({ visible: false });
   const [isLoading, setIsLoading] = useState(false);
   const { signin, signup, signout, checkToken } = useAuth();
-  const { getUserInfo, setUserInfo, getFavoriteMovies } = useMainApi();
+  const { getUserInfo, setUserInfo, getFavoriteMovies, postToFavorite } = useMainApi();
   const { getMovies } = useMoviesApi();
-  const { movies , shortMovie } = localStorage;
-  const localStorageMovies = movies? JSON.parse(movies) : false;
-  let shortMovieOption = shortMovie? JSON.parse(shortMovie) : false;
+  const { movies, shortMovie } = localStorage;
+  const localStorageMovies = movies ? JSON.parse(movies) : false;
+  let shortMovieOption = shortMovie ? JSON.parse(shortMovie) : false;
   const movieLengthLimit = 40;
 
   const currentUser = useMemo(() => user, [user]);
@@ -155,7 +155,7 @@ function App() {
 
   const handleShortMovie = () => {
     shortMovieOption = !shortMovieOption;
-    if(localStorageMovies.length > 0) {
+    if (localStorageMovies.length > 0) {
       const result = localStorageMovies.filter((movie) =>
         shortMovieOption ? movie.duration <= movieLengthLimit : movie.duration >= movieLengthLimit,
       );
@@ -176,6 +176,11 @@ function App() {
         handleError(error);
         handleModalOpen({ type: 'fail', title: 'Ошибка загрузки данных.', visible: true });
       });
+  };
+
+  const handlePostFavoriteMovie = (movie) => {
+    setIsLoading(true);
+    postToFavorite(movie).then(() => setIsLoading(false));
   };
 
   useEffect(() => {
@@ -211,6 +216,7 @@ function App() {
                 <SavedMovies
                   onLoad={handleFavoriteMovieList}
                   favoriteMovieList={favoriteMovieList}
+                  onPostMovie={handlePostFavoriteMovie}
                   isLoading={isLoading}
                   onCardClick={handleModalOpen}
                 />
