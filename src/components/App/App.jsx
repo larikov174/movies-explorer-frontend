@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import './App.css';
 import React, { useState, useRef, useMemo, useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
@@ -144,7 +143,6 @@ function App() {
             (movie.description && movie.description.toLowerCase().includes(query.toLowerCase())),
         );
         localStorage.setItem('movies', JSON.stringify(result));
-        console.log(shortMovieOption);
         setSearchResult(() => (shortMovieOption ? result.filter((movie) => movie.duration <= movieLengthLimit) : result));
         setIsLoading(false);
       })
