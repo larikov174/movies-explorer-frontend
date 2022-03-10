@@ -31,7 +31,7 @@ export default function useMainApi() {
       return handleResponse(res);
     },
 
-    async getMovies() {
+    async getFavoriteMovies() {
       const res = await fetch(`${mainUrl}/movies`, {
         method: 'GET',
         credentials: 'include',
@@ -39,7 +39,7 @@ export default function useMainApi() {
       return handleResponse(res);
     },
 
-    async postMovie({
+    async postToFavorite({
       country, director, duration, year, description, image, trailer, nameRU, nameEN, thumbnail, movieId, }) {
       const res = await fetch(`${mainUrl}/movies`, {
         method: 'POST',
@@ -54,7 +54,7 @@ export default function useMainApi() {
       return handleResponse(res);
     },
 
-    async deleteMovie({ _id }) {
+    async deleteFromFavorite({ _id }) {
       const res = await fetch(`${mainUrl}/movies/${_id}`, {
         method: 'DELETE',
         credentials: 'include',

@@ -24,14 +24,16 @@ function App() {
   const token = useRef(null);
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
+  const [favoriteMovieList, setFavoriteMovieList] = useState(null);
   const [searchResult, setSearchResult] = useState([]);
-  const [isModalVisible, setIsModalVisible] = useState({ type: '', title: '', visible: false });
+  const [isModalVisible, setIsModalVisible] = useState({ visible: false });
   const [isLoading, setIsLoading] = useState(false);
   const { signin, signup, signout, checkToken } = useAuth();
-  const { getUserInfo, setUserInfo } = useMainApi();
+  const { getUserInfo, setUserInfo, getFavoriteMovies } = useMainApi();
   const { getMovies } = useMoviesApi();
-  const localStorageMovies = JSON.parse(localStorage.movies);
-  const shortMovieOption = JSON.parse(localStorage.shortMovie);
+  const { movies , shortMovie } = localStorage;
+  const localStorageMovies = movies? JSON.parse(movies) : false;
+  let shortMovieOption = shortMovie? JSON.parse(shortMovie) : false;
   const movieLengthLimit = 40;
 
   const currentUser = useMemo(() => user, [user]);
@@ -134,19 +136,16 @@ function App() {
   const handleSearchQuery = (query) => {
     setIsLoading(true);
     getMovies()
-      .then((movies) => {
-        const result = movies.filter(
+      .then((allMovies) => {
+        const result = allMovies.filter(
           (movie) =>
             (movie.nameRU && movie.nameRU.toLowerCase().includes(query.toLowerCase())) ||
             (movie.nameEN && movie.nameEN.toLowerCase().includes(query.toLowerCase())) ||
             (movie.description && movie.description.toLowerCase().includes(query.toLowerCase())),
         );
         localStorage.setItem('movies', JSON.stringify(result));
-        setSearchResult(() => (
-          shortMovieOption
-            ? result.filter((movie) => movie.duration <= movieLengthLimit)
-            : result
-        ));
+        console.log(shortMovieOption);
+        setSearchResult(() => (shortMovieOption ? result.filter((movie) => movie.duration <= movieLengthLimit) : result));
         setIsLoading(false);
       })
       .catch((error) => {
@@ -157,12 +156,28 @@ function App() {
   };
 
   const handleShortMovie = () => {
-    const result = localStorageMovies.filter((movie) => (
-      shortMovieOption
-        ? movie.duration >= movieLengthLimit
-        : movie.duration <= movieLengthLimit
-    ));
-    setSearchResult(result)
+    shortMovieOption = !shortMovieOption;
+    if(localStorageMovies.length > 0) {
+      const result = localStorageMovies.filter((movie) =>
+        shortMovieOption ? movie.duration <= movieLengthLimit : movie.duration >= movieLengthLimit,
+      );
+      setSearchResult(result);
+    }
+  };
+
+  const handleFavoriteMovieList = () => {
+    setIsLoading(true);
+    getFavoriteMovies()
+      .then((list) => {
+        localStorage.setItem('favorite', JSON.stringify(list));
+        setFavoriteMovieList(list);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        handleError(error);
+        handleModalOpen({ type: 'fail', title: 'Ошибка загрузки данных.', visible: true });
+      });
   };
 
   useEffect(() => {
@@ -195,7 +210,12 @@ function App() {
             path="saved-movies"
             element={
               <ProtectedRoute>
-                <SavedMovies onCardClick={handleModalOpen} />
+                <SavedMovies
+                  onLoad={handleFavoriteMovieList}
+                  favoriteMovieList={favoriteMovieList}
+                  isLoading={isLoading}
+                  onCardClick={handleModalOpen}
+                />
               </ProtectedRoute>
             }
           />
