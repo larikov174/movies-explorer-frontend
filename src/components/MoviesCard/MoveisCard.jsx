@@ -2,10 +2,7 @@ import './MoviesCard.css';
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
-function MoviesCard({
-  onPostMovie,
-  film,
-}) {
+function MoviesCard({ onPostMovie, film }) {
   const [isSaved, setIsSaved] = useState(false);
   const location = useLocation().pathname;
   const minutes = film.duration % 60;
@@ -13,7 +10,7 @@ function MoviesCard({
   const timeStamp = `${hours}ч ${minutes < 10 ? '0' : ''}${minutes}м`;
 
   const handleCardClick = () => {
-    onPostMovie(film)
+    onPostMovie(film);
     if (location === '/movies') {
       setIsSaved(isSaved);
     }
@@ -43,7 +40,11 @@ function MoviesCard({
   return (
     <article className="movies-card">
       <div className="movies-card__poster">
-        <img className="movies-card__image" alt="Обложка фильма" src={`https://api.nomoreparties.co${film.image.url}`} />
+        <img
+          className="movies-card__image"
+          alt="Обложка фильма"
+          src={location === '/movies' ? `https://api.nomoreparties.co${film.image.url}` : film.image}
+        />
         {location === '/movies' ? renderCardOnMoviesPage() : renderCardOnSavedMoviesPage()}
       </div>
       <div className="movies-card__info">

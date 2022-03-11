@@ -45,7 +45,7 @@ function MoviesCardList({ initData, onPostMovie }) {
       .slice(0, moviesQuantity)
       .map((film) => (
         <MoviesCard
-          key={film.id}
+          key={location === '/movies' ? film.id : film._id}
           onPostMovie={onPostMovie}
           film={film}
         />
