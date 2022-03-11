@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import './MoviesCard.css';
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
@@ -15,8 +14,7 @@ function MoviesCard({
   const timeStamp = `${hours}ч ${minutes < 10 ? '0' : ''}${minutes}м`;
 
   const handleCardClick = () => {
-    onPostMovie(film);
-    console.log(film);
+    onPostMovie(film)
     if (location === '/movies') {
       setIsSaved(isSaved);
       onCardClick({ type: 'success', title: 'Сохранение успешно!', visible: true });

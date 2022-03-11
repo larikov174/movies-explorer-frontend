@@ -5,7 +5,7 @@ import EmptyCardList from '../EmptyCardList/EmptyCardList';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Preloader from '../Preloader/Preloader';
 
-function Movies({ onSearch, isLoading, searchResult, handleShortMovie, onCardClick }) {
+function Movies({ onSearch, isLoading, searchResult, handleShortMovie, onCardClick, onPostMovie }) {
   const [result, setResult] = useState(searchResult);
   const { query, movies } = localStorage;
 
@@ -23,7 +23,8 @@ function Movies({ onSearch, isLoading, searchResult, handleShortMovie, onCardCli
   }, [searchResult]);
 
   const renderData = () => {
-    if (result && result.length > 0) return <MoviesCardList initData={result} onCardClick={onCardClick} />;
+    if (result && result.length > 0)
+      return <MoviesCardList initData={result} onCardClick={onCardClick} onPostMovie={onPostMovie} />;
     return <EmptyCardList />;
   };
 

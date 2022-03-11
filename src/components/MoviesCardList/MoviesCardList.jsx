@@ -59,6 +59,7 @@ function MoviesCardList({ initData, onCardClick, onPostMovie }) {
     }, 66);
   };
 
+
   useEffect(() => {
     handleCardsQuantity();
     window.addEventListener('resize', resizeThrottler, false);

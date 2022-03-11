@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-console */
 import './App.css';
 import React, { useState, useRef, useMemo, useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
@@ -179,6 +181,7 @@ function App() {
   };
 
   const handlePostFavoriteMovie = (movie) => {
+    console.log(movie);
     setIsLoading(true);
     postToFavorite(movie).then(() => setIsLoading(false));
   };
@@ -205,6 +208,7 @@ function App() {
                   searchResult={searchResult}
                   handleShortMovie={handleShortMovie}
                   onCardClick={handleModalOpen}
+                  onPostMovie={handlePostFavoriteMovie}
                 />
               </ProtectedRoute>
             }

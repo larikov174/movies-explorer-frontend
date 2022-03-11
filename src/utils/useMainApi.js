@@ -40,7 +40,7 @@ export default function useMainApi() {
     },
 
     async postToFavorite({
-      country, director, duration, year, description, image, trailer, nameRU, nameEN, thumbnail, movieId, }) {
+      country, director, duration, year, description, image, trailerLink, nameRU, nameEN, id, }) {
       const res = await fetch(`${mainUrl}/movies`, {
         method: 'POST',
         credentials: 'include',
@@ -48,7 +48,17 @@ export default function useMainApi() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          country, director, duration, year, description, image, trailer, nameRU, nameEN, thumbnail, movieId,
+          country,
+          director,
+          duration,
+          year,
+          description,
+          nameRU,
+          nameEN,
+          movieId: id,
+          trailer: trailerLink,
+          image: `https://api.nomoreparties.co${image.url}`,
+          thumbnail: `https://api.nomoreparties.co${image.formats.thumbnail.url}`,
         }),
       });
       return handleResponse(res);
