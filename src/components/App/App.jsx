@@ -181,9 +181,29 @@ function App() {
   };
 
   const handlePostFavoriteMovie = (movie) => {
-    console.log(movie);
     setIsLoading(true);
-    postToFavorite(movie).then(() => setIsLoading(false));
+    postToFavorite(movie)
+      .then(() => {
+        getFavoriteMovies()
+          .then((list) => {
+            localStorage.setItem('favorite', JSON.stringify(list));
+            setFavoriteMovieList(list);
+          })
+          .catch((error) => {
+            setIsLoading(false);
+            handleError(error);
+            handleModalOpen({ type: 'fail', title: 'Ошибка загрузки данных.', visible: true });
+          });
+      })
+      .then(() => {
+        setIsLoading(false);
+        handleModalOpen({ type: 'success', title: 'Фильм сохранен успешно.', visible: true });
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        handleError(error);
+        handleModalOpen({ type: 'fail', title: 'Ошибка, сохранение не выполнено.', visible: true });
+      });
   };
 
   useEffect(() => {
@@ -207,7 +227,6 @@ function App() {
                   isLoading={isLoading}
                   searchResult={searchResult}
                   handleShortMovie={handleShortMovie}
-                  onCardClick={handleModalOpen}
                   onPostMovie={handlePostFavoriteMovie}
                 />
               </ProtectedRoute>
@@ -222,7 +241,6 @@ function App() {
                   favoriteMovieList={favoriteMovieList}
                   onPostMovie={handlePostFavoriteMovie}
                   isLoading={isLoading}
-                  onCardClick={handleModalOpen}
                 />
               </ProtectedRoute>
             }

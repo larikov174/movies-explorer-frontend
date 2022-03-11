@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 function MoviesCard({
-  onCardClick,
   onPostMovie,
   film,
 }) {
@@ -17,9 +16,7 @@ function MoviesCard({
     onPostMovie(film)
     if (location === '/movies') {
       setIsSaved(isSaved);
-      onCardClick({ type: 'success', title: 'Сохранение успешно!', visible: true });
     }
-    return onCardClick({ type: 'success', title: 'Удалено успешно!', visible: true });
   };
 
   const renderCardOnMoviesPage = () => {

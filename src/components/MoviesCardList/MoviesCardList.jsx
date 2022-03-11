@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 import MoviesCard from '../MoviesCard/MoveisCard';
 import { caption, screenWidth } from '../../utils/const';
 
-function MoviesCardList({ initData, onCardClick, onPostMovie }) {
+function MoviesCardList({ initData, onPostMovie }) {
   const location = useLocation().pathname;
   const pageEndRef = useRef(null);
   const [moviesQuantity, setMoviesQuantity] = useState(null);
@@ -46,7 +46,6 @@ function MoviesCardList({ initData, onCardClick, onPostMovie }) {
       .map((film) => (
         <MoviesCard
           key={film.id}
-          onCardClick={onCardClick}
           onPostMovie={onPostMovie}
           film={film}
         />
