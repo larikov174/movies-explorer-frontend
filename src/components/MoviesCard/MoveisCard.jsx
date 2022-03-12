@@ -14,19 +14,24 @@ function MoviesCard({ onPostMovie, film }) {
   const handleDelete = () => null;
 
   const renderCardOnMoviesPage = () => (
-    <div className={`movies-card__overlay ${isSaved && 'movies-card__overlay_saved'}`} role="presentation">
+    <a
+      className={`movies-card__overlay ${isSaved && 'movies-card__overlay_saved'}`}
+      href={film.trailerLink}
+      target="_blank"
+      rel="noreferrer"
+    >
       <button
         type="button"
         className={`movies-card__button ${isSaved && 'movies-card__button_saved'}`}
         onClick={isSaved ? handleDelete : handleSave}
       />
-    </div>
+    </a>
   );
 
   const renderCardOnSavedMoviesPage = () => (
-    <div className="movies-card__overlay" role="presentation">
+    <a className="movies-card__overlay" href={film.trailer} target="_blank" rel="noreferrer">
       <button type="button" className="movies-card__button movies-card__button_delete" onClick={handleDelete} />
-    </div>
+    </a>
   );
 
   useEffect(() => {
