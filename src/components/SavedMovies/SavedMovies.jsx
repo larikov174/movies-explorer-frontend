@@ -7,16 +7,20 @@ import Preloader from '../Preloader/Preloader';
 import { caption } from '../../utils/const';
 
 export default function SavedMovies({ onLoad, favoriteMovieList, isLoading, onPostMovie }) {
-  const [initData, setInitData] = useState(null);
+  const [initData, setInitData] = useState(favoriteMovieList);
 
   useEffect(() => {
-    onLoad();
-    setInitData(favoriteMovieList);
+    if (!initData) {
+      onLoad();
+    }
   }, []);
 
+  useEffect(() => {
+    setInitData(favoriteMovieList);
+  }, [favoriteMovieList]);
+
   const renderData = () => {
-    if (initData && initData.length > 0)
-      return <MoviesCardList initData={initData} onPostMovie={onPostMovie} />;
+    if (initData && initData.length > 0) return <MoviesCardList initData={initData} onPostMovie={onPostMovie} />;
     return <EmptyCardList title={caption.empty} />;
   };
 

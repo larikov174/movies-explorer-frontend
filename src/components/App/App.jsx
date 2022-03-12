@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-console */
 import './App.css';
 import React, { useState, useRef, useMemo, useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
@@ -22,14 +20,15 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Modal from '../Modal/Modal';
 
 function App() {
-  const { movies, shortMovie } = localStorage;
-  const localStorageMovies = movies ? JSON.parse(movies) : false;
-  let shortMovieOption = shortMovie ? JSON.parse(shortMovie) : false;
-  const movieLengthLimit = 40;
   const token = useRef(null);
   const navigate = useNavigate();
+  const { movies, favorite, shortMovie } = localStorage;
+  let shortMovieOption = shortMovie ? JSON.parse(shortMovie) : false;
+  const localStorageMovies = movies ? JSON.parse(movies) : false;
+  const localStoragFavoriteMovies = favorite ? JSON.parse(favorite) : false;
+  const movieLengthLimit = 40;
   const [user, setUser] = useState(null);
-  const [favoriteMovieList, setFavoriteMovieList] = useState(null);
+  const [favoriteMovieList, setFavoriteMovieList] = useState(localStoragFavoriteMovies);
   const [searchResult, setSearchResult] = useState(localStorageMovies);
   const [isModalVisible, setIsModalVisible] = useState({ visible: false });
   const [isLoading, setIsLoading] = useState(false);
