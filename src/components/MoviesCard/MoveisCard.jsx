@@ -2,7 +2,7 @@ import './MoviesCard.css';
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
-function MoviesCard({ onPostMovie, film }) {
+function MoviesCard({ onPostMovie, onDeleteMovie, film }) {
   const { favorite } = localStorage;
   const [isSaved, setIsSaved] = useState(false);
   const location = useLocation().pathname;
@@ -11,7 +11,7 @@ function MoviesCard({ onPostMovie, film }) {
   const timeStamp = `${hours}ч ${minutes < 10 ? '0' : ''}${minutes}м`;
 
   const handleSave = () => onPostMovie(film);
-  const handleDelete = () => null;
+  const handleDelete = () => onDeleteMovie(film);
 
   const renderCardOnMoviesPage = () => (
     <a

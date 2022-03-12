@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import './App.css';
 import React, { useState, useRef, useMemo, useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
@@ -33,7 +34,7 @@ function App() {
   const [isModalVisible, setIsModalVisible] = useState({ visible: false });
   const [isLoading, setIsLoading] = useState(false);
   const { signin, signup, signout, checkToken } = useAuth();
-  const { getUserInfo, setUserInfo, getFavoriteMovies, postToFavorite } = useMainApi();
+  const { getUserInfo, setUserInfo, getFavoriteMovies, postToFavorite, deleteFromFavorite } = useMainApi();
   const { getMovies } = useMoviesApi();
 
   const currentUser = useMemo(() => user, [user]);
@@ -205,6 +206,28 @@ function App() {
       });
   };
 
+  const handleDeleteFavoriteMovie = (movie) => {
+    const removeFromList = (deletedMovie) =>
+      localStoragFavoriteMovies.filter((movieInList) => movieInList._id !== deletedMovie._id);
+
+    setIsLoading(true);
+
+    deleteFromFavorite(movie)
+      .then((res) => {
+        setFavoriteMovieList(removeFromList(res));
+        localStorage.favorite = JSON.stringify(removeFromList(res));
+      })
+      .then(() => {
+        setIsLoading(false);
+        handleModalOpen({ type: 'success', title: 'Удалено успешно.', visible: true });
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        handleError(error);
+        handleModalOpen({ type: 'fail', title: 'Ошибка, удаление не выполнено.', visible: true });
+      });
+  };
+
   useEffect(() => {
     handleOnLoad();
   }, []);
@@ -239,6 +262,7 @@ function App() {
                   onLoad={handleFavoriteMovieList}
                   favoriteMovieList={favoriteMovieList}
                   onPostMovie={handlePostFavoriteMovie}
+                  onDeleteMovie={handleDeleteFavoriteMovie}
                   isLoading={isLoading}
                 />
               </ProtectedRoute>
