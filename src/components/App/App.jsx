@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import './App.css';
 import React, { useState, useRef, useMemo, useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
@@ -144,7 +143,7 @@ function App() {
             (movie.nameEN && movie.nameEN.toLowerCase().includes(query.toLowerCase())) ||
             (movie.description && movie.description.toLowerCase().includes(query.toLowerCase())),
         );
-        localStorage.setItem('movies', JSON.stringify(result));
+        localStorage.movies = JSON.stringify(result);
         setSearchResult(() => (shortMovieOption ? result.filter((movie) => movie.duration <= movieLengthLimit) : result));
         setIsLoading(false);
       })
@@ -169,7 +168,7 @@ function App() {
     setIsLoading(true);
     getFavoriteMovies()
       .then((list) => {
-        localStorage.setItem('favorite', JSON.stringify(list));
+        localStorage.favorite = JSON.stringify(list);
         setFavoriteMovieList(list);
         setIsLoading(false);
       })
@@ -186,7 +185,7 @@ function App() {
       .then(() => {
         getFavoriteMovies()
           .then((list) => {
-            localStorage.setItem('favorite', JSON.stringify(list));
+            localStorage.favorite = JSON.stringify(list);
             setFavoriteMovieList(list);
           })
           .catch((error) => {
