@@ -22,20 +22,20 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Modal from '../Modal/Modal';
 
 function App() {
+  const { movies, shortMovie } = localStorage;
+  const localStorageMovies = movies ? JSON.parse(movies) : false;
+  let shortMovieOption = shortMovie ? JSON.parse(shortMovie) : false;
+  const movieLengthLimit = 40;
   const token = useRef(null);
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [favoriteMovieList, setFavoriteMovieList] = useState(null);
-  const [searchResult, setSearchResult] = useState([]);
+  const [searchResult, setSearchResult] = useState(localStorageMovies);
   const [isModalVisible, setIsModalVisible] = useState({ visible: false });
   const [isLoading, setIsLoading] = useState(false);
   const { signin, signup, signout, checkToken } = useAuth();
   const { getUserInfo, setUserInfo, getFavoriteMovies, postToFavorite } = useMainApi();
   const { getMovies } = useMoviesApi();
-  const { movies, shortMovie } = localStorage;
-  const localStorageMovies = movies ? JSON.parse(movies) : false;
-  let shortMovieOption = shortMovie ? JSON.parse(shortMovie) : false;
-  const movieLengthLimit = 40;
 
   const currentUser = useMemo(() => user, [user]);
 

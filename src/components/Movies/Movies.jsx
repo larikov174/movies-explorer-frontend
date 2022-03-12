@@ -7,18 +7,8 @@ import Preloader from '../Preloader/Preloader';
 
 function Movies({ onSearch, isLoading, searchResult, handleShortMovie, onPostMovie }) {
   const [result, setResult] = useState(searchResult);
-  const { query, movies } = localStorage;
 
   useEffect(() => {
-    if (query) {
-      onSearch(query);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (movies) {
-      setResult(JSON.parse(movies));
-    }
     setResult(searchResult);
   }, [searchResult]);
 
