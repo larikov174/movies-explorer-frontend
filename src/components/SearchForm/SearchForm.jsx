@@ -1,7 +1,7 @@
 import './SearchForm.css';
 import React, { useState, useEffect } from 'react';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
-import { caption } from '../../utils/const';
+import { CAPTION } from '../../utils/const';
 
 function SearchForm({ onSubmit, handleShortMovie }) {
   const [query, setQuery] = useState();
@@ -31,7 +31,7 @@ function SearchForm({ onSubmit, handleShortMovie }) {
           required
         />
         <button className="search-form__button" type="submit">
-          {caption.find}
+          {CAPTION.FIND}
         </button>
       </form>
       <FilterCheckbox onClick={handleShortMovie}/>

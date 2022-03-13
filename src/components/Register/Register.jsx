@@ -1,7 +1,7 @@
 import '../AuthForm/AuthForm.css';
 import React, { useState } from 'react';
 import AuthForm from '../AuthForm/AuthForm';
-import { caption } from '../../utils/const';
+import { CAPTION } from '../../utils/const';
 
 function Register({ onSingUp }) {
   const [name, setName] = useState();
@@ -19,7 +19,7 @@ function Register({ onSingUp }) {
   return (
     <AuthForm onSubmit={handleSignUp}>
       <label className="auth__label" htmlFor="nameInput">
-        {caption.name}
+        {CAPTION.NAME}
         <input
           onChange={onNameChange}
           type="text"
@@ -31,7 +31,7 @@ function Register({ onSingUp }) {
         />
       </label>
       <label className="auth__label" htmlFor="emailInput">
-        {caption.email}
+        {CAPTION.EMAIL}
         <input
           onChange={onEmailChange}
           type="email"
@@ -43,7 +43,7 @@ function Register({ onSingUp }) {
         />
       </label>
       <label className="auth__label" htmlFor="passInput">
-        {caption.password}
+        {CAPTION.PASSWORD}
         <input
           onChange={onPassChange}
           type="password"

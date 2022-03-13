@@ -20,6 +20,7 @@ import Preloader from '../Preloader/Preloader';
 import BurgerMenu from '../BurgerMenu/BurgerMenu';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Modal from '../Modal/Modal';
+import { MOVIE_LENGTH_LIMIT } from '../../utils/const';
 
 function App() {
   const token = useRef(null);
@@ -29,7 +30,6 @@ function App() {
   let shortMovieOption = shortMovie ? JSON.parse(shortMovie) : false;
   const localStorageMovies = movies ? JSON.parse(movies) : false;
   const localStoragFavoriteMovies = favorite ? JSON.parse(favorite) : false;
-  const movieLengthLimit = 40;
   const [user, setUser] = useState(null);
   const [favoriteMovieList, setFavoriteMovieList] = useState(localStoragFavoriteMovies);
   const [searchResult, setSearchResult] = useState(localStorageMovies);
@@ -76,7 +76,7 @@ function App() {
           .then((data) => setUser(data))
           .then(() => {
             handleFavoriteMovieList();
-            navigate('/movies')
+            navigate('/movies');
           })
           .catch((error) => handleError(error))
           .finally(() => setIsLoading(false));
@@ -150,7 +150,7 @@ function App() {
             (movie.description && movie.description.toLowerCase().includes(query.toLowerCase())),
         );
         localStorage.movies = JSON.stringify(result);
-        setSearchResult(() => (shortMovieOption ? result.filter((movie) => movie.duration <= movieLengthLimit) : result));
+        setSearchResult(() => (shortMovieOption ? result.filter((movie) => movie.duration <= MOVIE_LENGTH_LIMIT) : result));
         setIsLoading(false);
       })
       .catch((error) => {
@@ -167,16 +167,16 @@ function App() {
         (movie.nameEN && movie.nameEN.toLowerCase().includes(query.toLowerCase())) ||
         (movie.description && movie.description.toLowerCase().includes(query.toLowerCase())),
     );
-    setFavoriteMovieList(() => (shortMovieOption ? result.filter((movie) => movie.duration <= movieLengthLimit) : result));
+    setFavoriteMovieList(() => (shortMovieOption ? result.filter((movie) => movie.duration <= MOVIE_LENGTH_LIMIT) : result));
   };
 
   const handleShortMovie = () => {
     shortMovieOption = !shortMovieOption;
 
-    if(location === '/movies') {
+    if (location === '/movies') {
       if (localStorageMovies.length > 0) {
         const result = localStorageMovies.filter((movie) =>
-          shortMovieOption ? movie.duration <= movieLengthLimit : movie.duration >= movieLengthLimit,
+          shortMovieOption ? movie.duration <= MOVIE_LENGTH_LIMIT : movie.duration >= MOVIE_LENGTH_LIMIT,
         );
         setSearchResult(result);
       }
@@ -185,9 +185,9 @@ function App() {
     if (location === '/saved-movies') {
       if (localStoragFavoriteMovies.length > 0) {
         const result = localStoragFavoriteMovies.filter((movie) =>
-          shortMovieOption ? movie.duration <= movieLengthLimit : movie.duration >= movieLengthLimit,
+          shortMovieOption ? movie.duration <= MOVIE_LENGTH_LIMIT : movie.duration >= MOVIE_LENGTH_LIMIT,
         );
-        setFavoriteMovieList(() => shortMovieOption? result : localStoragFavoriteMovies);
+        setFavoriteMovieList(() => (shortMovieOption ? result : localStoragFavoriteMovies));
       }
     }
   };

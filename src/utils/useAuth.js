@@ -1,4 +1,4 @@
-import { mainUrl } from './const';
+import { MY_DB } from './const';
 
 export default function useAuth() {
 
@@ -9,14 +9,14 @@ export default function useAuth() {
 
   return {
     checkToken() {
-      return fetch(`${mainUrl}/check`, {
+      return fetch(`${MY_DB}/check`, {
         method: 'GET',
         credentials: 'include',
       }).then(res => res.ok);
     },
 
     signup({ password, email, name }) {
-      return fetch(`${mainUrl}/signup`, {
+      return fetch(`${MY_DB}/signup`, {
         method: 'POST',
         credentials: 'include',
         headers: {
@@ -31,7 +31,7 @@ export default function useAuth() {
     },
 
     signin({ password, email }) {
-      return fetch(`${mainUrl}/signin`, {
+      return fetch(`${MY_DB}/signin`, {
         method: 'POST',
         credentials: 'include',
         headers: {
@@ -45,7 +45,7 @@ export default function useAuth() {
     },
 
     signout() {
-      return fetch(`${mainUrl}/signout`, {
+      return fetch(`${MY_DB}/signout`, {
         method: 'GET',
         credentials: 'include',
       }).then(handleResponse);

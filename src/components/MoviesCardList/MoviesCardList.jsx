@@ -2,7 +2,7 @@ import './MoviesCardList.css';
 import React, { useState, useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import MoviesCard from '../MoviesCard/MoveisCard';
-import { caption, screenWidth } from '../../utils/const';
+import { CAPTION, SCREEN_WIDTH } from '../../utils/const';
 
 function MoviesCardList({ initData, onPostMovie, onDeleteMovie }) {
   const location = useLocation().pathname;
@@ -11,9 +11,9 @@ function MoviesCardList({ initData, onPostMovie, onDeleteMovie }) {
   const [moviesToAdd, setMoviesToAdd] = useState(null);
 
   const handleCardsQuantity = () => {
-    if (window.innerWidth >= screenWidth.large) {
+    if (window.innerWidth >= SCREEN_WIDTH.LARGE) {
       setMoviesQuantity(12);
-    } else if (window.innerWidth >= screenWidth.medium) {
+    } else if (window.innerWidth >= SCREEN_WIDTH.MEDIUM) {
       setMoviesQuantity(8);
     } else {
       setMoviesQuantity(5);
@@ -21,7 +21,7 @@ function MoviesCardList({ initData, onPostMovie, onDeleteMovie }) {
   };
 
   const handleMoreCards = () => {
-    if (window.innerWidth < screenWidth.large) {
+    if (window.innerWidth < SCREEN_WIDTH.LARGE) {
       setMoviesToAdd(2);
     } else {
       setMoviesToAdd(3);
@@ -71,7 +71,7 @@ function MoviesCardList({ initData, onPostMovie, onDeleteMovie }) {
       <div className="movies-card-list__content">{renderCards()}</div>
       <div className="movies-card-list__action">
         <button className={`movies-card-list__button ${handleIdleState()}`} type="button" onClick={handleClick}>
-          {caption.more}
+          {CAPTION.MORE}
         </button>
       </div>
       <div ref={pageEndRef} />

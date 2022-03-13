@@ -4,7 +4,7 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import SearchForm from '../SearchForm/SearchForm';
 import EmptyCardList from '../EmptyCardList/EmptyCardList';
 import Preloader from '../Preloader/Preloader';
-import { caption } from '../../utils/const';
+import { CAPTION } from '../../utils/const';
 
 export default function SavedMovies({
   onLoad,
@@ -30,7 +30,7 @@ export default function SavedMovies({
   const renderData = () => {
     if (initData && initData.length > 0)
       return <MoviesCardList initData={initData} onPostMovie={onPostMovie} onDeleteMovie={onDeleteMovie} />;
-    return <EmptyCardList title={caption.empty} />;
+    return <EmptyCardList title={CAPTION.EMPTY} />;
   };
 
   return (

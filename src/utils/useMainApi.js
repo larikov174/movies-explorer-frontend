@@ -1,4 +1,4 @@
-import { mainUrl } from "./const";
+import { MY_DB } from "./const";
 
 export default function useMainApi() {
 
@@ -9,7 +9,7 @@ export default function useMainApi() {
 
   return {
     async getUserInfo() {
-      const res = await fetch(`${mainUrl}/users/me`, {
+      const res = await fetch(`${MY_DB}/users/me`, {
         method: 'GET',
         credentials: 'include',
       });
@@ -17,7 +17,7 @@ export default function useMainApi() {
     },
 
     async setUserInfo({ name, email }) {
-      const res = await fetch(`${mainUrl}/users/me`, {
+      const res = await fetch(`${MY_DB}/users/me`, {
         method: 'PATCH',
         credentials: 'include',
         headers: {
@@ -32,7 +32,7 @@ export default function useMainApi() {
     },
 
     async getFavoriteMovies() {
-      const res = await fetch(`${mainUrl}/movies`, {
+      const res = await fetch(`${MY_DB}/movies`, {
         method: 'GET',
         credentials: 'include',
       });
@@ -41,7 +41,7 @@ export default function useMainApi() {
 
     async postToFavorite({
       country, director, duration, year, description, image, trailerLink, nameRU, nameEN, id, }) {
-      const res = await fetch(`${mainUrl}/movies`, {
+      const res = await fetch(`${MY_DB}/movies`, {
         method: 'POST',
         credentials: 'include',
         headers: {
@@ -65,7 +65,7 @@ export default function useMainApi() {
     },
 
     async deleteFromFavorite({ _id }) {
-      const res = await fetch(`${mainUrl}/movies/${_id}`, {
+      const res = await fetch(`${MY_DB}/movies/${_id}`, {
         method: 'DELETE',
         credentials: 'include',
       });

@@ -1,7 +1,7 @@
 import './Header.css';
 import React from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom';
-import { caption } from '../../utils/const';
+import { CAPTION } from '../../utils/const';
 
 export default function MoviesHeader() {
   const location = useLocation().pathname;
@@ -18,14 +18,14 @@ export default function MoviesHeader() {
           style={({ isActive }) => (isActive ? activeStyle : undefined)}
           to="/movies"
         >
-          {caption.movies}
+          {CAPTION.MOVIES}
         </NavLink>
         <NavLink
           className={`header__link header__link_nav ${linkStyle}`}
           style={({ isActive }) => (isActive ? activeStyle : undefined)}
           to="/saved-movies"
         >
-          {caption.savedMovies}
+          {CAPTION.SAVED_MOVIES}
         </NavLink>
       </div>
       <NavLink
@@ -33,7 +33,7 @@ export default function MoviesHeader() {
         style={({ isActive }) => (isActive ? activeStyle : undefined)}
         to="/profile"
       >
-        {caption.profile}
+        {CAPTION.PROFILE}
         <span className="header__profile_decor" />
       </NavLink>
     </header>

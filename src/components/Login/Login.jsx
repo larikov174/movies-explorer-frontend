@@ -1,7 +1,7 @@
 import '../AuthForm/AuthForm.css';
 import React, { useState } from 'react';
 import AuthForm from '../AuthForm/AuthForm';
-import { caption } from '../../utils/const';
+import { CAPTION } from '../../utils/const';
 
 function Login({ onLogin }) {
   const [email, setEmail] = useState();
@@ -16,7 +16,7 @@ function Login({ onLogin }) {
   return (
     <AuthForm onSubmit={handleLogin}>
       <label className="auth__label" htmlFor="emailInput">
-        {caption.email}
+        {CAPTION.EMAIL}
         <input
           onChange={onEmailChange}
           type="email"
@@ -28,7 +28,7 @@ function Login({ onLogin }) {
         />
       </label>
       <label className="auth__label" htmlFor="passInput">
-        {caption.password}
+        {CAPTION.PASSWORD}
         <input
           onChange={onPassChange}
           type="password"

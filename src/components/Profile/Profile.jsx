@@ -1,7 +1,7 @@
 import './Profile.css';
 import React, { useContext, useState, useEffect } from 'react';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
-import { caption } from '../../utils/const';
+import { CAPTION } from '../../utils/const';
 
 function Profile({ onSignOut, onUpdate }) {
   const user = useContext(CurrentUserContext);
@@ -27,7 +27,7 @@ function Profile({ onSignOut, onUpdate }) {
       <form className="profile__content" onSubmit={handleSubmit}>
         <div className="profile__row">
           <label htmlFor="userName" className="profile__text profile__text_subtitle">
-            {caption.name}
+            {CAPTION.NAME}
           </label>
           <input
             onChange={onNameChange}
@@ -41,7 +41,7 @@ function Profile({ onSignOut, onUpdate }) {
         </div>
         <div className="profile__row">
           <label htmlFor="userEmail" className="profile__text profile__text_subtitle">
-            {caption.email}
+            {CAPTION.EMAIL}
           </label>
           <input
             type="email"
@@ -55,10 +55,10 @@ function Profile({ onSignOut, onUpdate }) {
           />
         </div>
         <button type="submit" className="profile__button">
-          {caption.edit}
+          {CAPTION.EDIT}
         </button>
         <button className="profile__link" type="button" onClick={onSignOut}>
-          {caption.signOut}
+          {CAPTION.SIGN_OUT}
         </button>
       </form>
     </section>
