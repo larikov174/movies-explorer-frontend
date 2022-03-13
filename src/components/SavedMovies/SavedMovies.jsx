@@ -6,7 +6,15 @@ import EmptyCardList from '../EmptyCardList/EmptyCardList';
 import Preloader from '../Preloader/Preloader';
 import { caption } from '../../utils/const';
 
-export default function SavedMovies({ onLoad, favoriteMovieList, isLoading, onPostMovie, onDeleteMovie }) {
+export default function SavedMovies({
+  onLoad,
+  favoriteMovieList,
+  isLoading,
+  onPostMovie,
+  onDeleteMovie,
+  onSearch,
+  handleShortMovie,
+}) {
   const [initData, setInitData] = useState(favoriteMovieList);
 
   useEffect(() => {
@@ -27,7 +35,7 @@ export default function SavedMovies({ onLoad, favoriteMovieList, isLoading, onPo
 
   return (
     <section className="saved-movies">
-      <SearchForm />
+      <SearchForm onSubmit={onSearch} handleShortMovie={handleShortMovie} />
       {isLoading ? <Preloader /> : renderData()}
     </section>
   );

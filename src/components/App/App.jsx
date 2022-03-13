@@ -1,3 +1,5 @@
+/* eslint-disable no-use-before-define */
+/* eslint-disable no-console */
 import './App.css';
 import React, { useState, useRef, useMemo, useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
@@ -71,7 +73,10 @@ function App() {
       if (res.code === 200) {
         getUserInfo()
           .then((data) => setUser(data))
-          .then(() => navigate('/movies'))
+          .then(() => {
+            handleFavoriteMovieList();
+            navigate('/movies')
+          })
           .catch((error) => handleError(error))
           .finally(() => setIsLoading(false));
       }
@@ -152,6 +157,16 @@ function App() {
         handleError(error);
         handleModalOpen({ type: 'fail', title: 'Ошибка загрузки данных.', visible: true });
       });
+  };
+
+  const handleSearchFavorite = (query) => {
+    const result = localStoragFavoriteMovies.filter(
+      (movie) =>
+        (movie.nameRU && movie.nameRU.toLowerCase().includes(query.toLowerCase())) ||
+        (movie.nameEN && movie.nameEN.toLowerCase().includes(query.toLowerCase())) ||
+        (movie.description && movie.description.toLowerCase().includes(query.toLowerCase())),
+    );
+    setFavoriteMovieList(() => (shortMovieOption ? result.filter((movie) => movie.duration <= movieLengthLimit) : result));
   };
 
   const handleShortMovie = () => {
@@ -263,6 +278,8 @@ function App() {
                   onPostMovie={handlePostFavoriteMovie}
                   onDeleteMovie={handleDeleteFavoriteMovie}
                   isLoading={isLoading}
+                  onSearch={handleSearchFavorite}
+                  handleShortMovie={handleShortMovie}
                 />
               </ProtectedRoute>
             }
