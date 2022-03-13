@@ -63,6 +63,11 @@
   cursor: pointer;
 }
 
+.profile__button:disabled {
+  opacity: 0.7;
+  cursor: default !important;
+}
+
 .profile__button:not([disabled]):hover {
   opacity: 0.7;
   transition: opacity 0.15s ease-in;
@@ -72,25 +77,13 @@
   text-shadow: 1px -5px 12px #bbbbbb;
 }
 
-.profile__link {
+.profile__button_styled {
   font: normal 500 13px/15px Inter, serif;
   color: #ff3055;
-  text-decoration: none;
-  width: fit-content;
-  height: 16px;
   margin: 16px auto 70px;
-  padding: 0;
-  cursor: pointer;
-  background-color: transparent;
-  border: none;
 }
 
-.profile__link:hover {
-  opacity: 0.7;
-  transition: opacity 0.15s ease-in;
-}
-
-.profile__link:active {
+.profile__button_styled:active {
   text-shadow: 1px -5px 12px #bbbbbb;
   color: #ff3056d2;
 }

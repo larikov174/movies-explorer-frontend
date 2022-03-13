@@ -5,8 +5,7 @@ import CurrentUserContext from '../../contexts/CurrentUserContext';
 import useAppHandlers from '../../utils/useAppHandlers';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
-import Login from '../Login/Login';
-import Register from '../Register/Register';
+import AuthForm from '../AuthForm/AuthForm';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
@@ -50,8 +49,8 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Main />} />
-          <Route path="/signin" element={isLoading ? <Preloader /> : <Login onLogin={handleSignIn} />} />
-          <Route path="/signup" element={isLoading ? <Preloader /> : <Register onSingUp={handleSignUp} />} />
+          <Route path="/signin" element={isLoading ? <Preloader /> : <AuthForm onSubmit={handleSignIn} />} />
+          <Route path="/signup" element={isLoading ? <Preloader /> : <AuthForm onSubmit={handleSignUp} />} />
           <Route
             path="movies"
             element={

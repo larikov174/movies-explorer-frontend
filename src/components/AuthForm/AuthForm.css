@@ -30,13 +30,6 @@
   user-select: none;
 }
 
-.auth__input {
-  display: flex;
-  flex-direction: column;
-  margin-top: 40px;
-  width: 100%;
-  background-color: #f9f9f9;
-}
 
 .auth__label {
   font: normal 400 10px/12px Inter, serif;
@@ -48,6 +41,9 @@
 }
 
 .auth__input {
+  display: flex;
+  flex-direction: column;
+  background-color: #f9f9f9;
   font: normal 400 13px/15px Inter, serif;
   width: 100%;
   height: 46px;
@@ -80,9 +76,14 @@
   user-select: none;
 }
 
+.auth__button:disabled {
+  cursor: default !important;
+  opacity: 0.8;
+}
+
 .auth__button:hover {
   cursor: pointer;
-  opacity: 0.9;
+  opacity: 0.8;
   transition: opacity 0.15s ease-in;
 }
 

@@ -10,9 +10,9 @@ export default function useAppHandlers() {
   const navigate = useNavigate();
   const location = useLocation().pathname;
   const { movies, favorite, shortMovie } = localStorage;
-  let shortMovieOption = shortMovie ? JSON.parse(shortMovie) : false;
   const localStorageMovies = movies ? JSON.parse(movies) : false;
   const localStoragFavoriteMovies = favorite ? JSON.parse(favorite) : false;
+  let shortMovieOption = shortMovie ? JSON.parse(shortMovie) : false;
   const [user, setUser] = useState(null);
   const [favoriteMovieList, setFavoriteMovieList] = useState(localStoragFavoriteMovies);
   const [searchResult, setSearchResult] = useState(localStorageMovies);
@@ -189,7 +189,7 @@ export default function useAppHandlers() {
     setIsLoading(true);
     try {
       const res = await signup({ password, email, name });
-      if (res) {
+      if (res._id) {
         setUser(res);
         navigate('/movies');
       }
@@ -197,6 +197,8 @@ export default function useAppHandlers() {
       setIsLoading(false);
       handleError(error);
       handleModalOpen({ type: 'fail', title: 'Ошибка авторизации', visible: true });
+    } finally {
+      setIsLoading(false);
     }
   };
 

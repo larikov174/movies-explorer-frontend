@@ -67,7 +67,7 @@ function Profile({ onSignOut, onUpdate }) {
         <button type="submit" className="profile__button" disabled={!isValid}>
           {CAPTION.EDIT}
         </button>
-        <button className="profile__link" type="button" onClick={handleSignOut}>
+        <button className="profile__button profile__button_styled" type="button" onClick={handleSignOut}>
           {CAPTION.SIGN_OUT}
         </button>
       </form>
