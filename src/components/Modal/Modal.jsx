@@ -16,7 +16,7 @@ function Modal({ onOpen, onClose }) {
     if (onOpen.visible) {
       setTimeout(() => {
         onClose();
-      }, 1500);
+      }, 2000);
     }
   });
 
