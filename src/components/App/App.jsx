@@ -85,7 +85,7 @@ function App() {
             path="/profile"
             element={
               <ProtectedRoute>
-                <Profile onSignOut={handleSignOut} onUpdate={handleUpdateUser} />
+                {isLoading ? <Preloader /> : <Profile onSignOut={handleSignOut} onUpdate={handleUpdateUser} />}
               </ProtectedRoute>
             }
           />
