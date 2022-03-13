@@ -2,7 +2,7 @@
 /* eslint-disable no-console */
 import './App.css';
 import React, { useState, useRef, useMemo, useEffect } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import useAuth from '../../utils/useAuth';
 import useMainApi from '../../utils/useMainApi';
@@ -24,6 +24,7 @@ import Modal from '../Modal/Modal';
 function App() {
   const token = useRef(null);
   const navigate = useNavigate();
+  const location = useLocation().pathname;
   const { movies, favorite, shortMovie } = localStorage;
   let shortMovieOption = shortMovie ? JSON.parse(shortMovie) : false;
   const localStorageMovies = movies ? JSON.parse(movies) : false;
@@ -171,11 +172,23 @@ function App() {
 
   const handleShortMovie = () => {
     shortMovieOption = !shortMovieOption;
-    if (localStorageMovies.length > 0) {
-      const result = localStorageMovies.filter((movie) =>
-        shortMovieOption ? movie.duration <= movieLengthLimit : movie.duration >= movieLengthLimit,
-      );
-      setSearchResult(result);
+
+    if(location === '/movies') {
+      if (localStorageMovies.length > 0) {
+        const result = localStorageMovies.filter((movie) =>
+          shortMovieOption ? movie.duration <= movieLengthLimit : movie.duration >= movieLengthLimit,
+        );
+        setSearchResult(result);
+      }
+    }
+
+    if (location === '/saved-movies') {
+      if (localStoragFavoriteMovies.length > 0) {
+        const result = localStoragFavoriteMovies.filter((movie) =>
+          shortMovieOption ? movie.duration <= movieLengthLimit : movie.duration >= movieLengthLimit,
+        );
+        setFavoriteMovieList(() => shortMovieOption? result : localStoragFavoriteMovies);
+      }
     }
   };
 
