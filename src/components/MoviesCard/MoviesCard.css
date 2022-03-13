@@ -42,6 +42,11 @@
   transition: opacity 0.2s ease-in;
 }
 
+.movies-card__overlay:hover + .movies-card__button, .movies-card__button:hover {
+  display: block;
+  opacity: 1;
+}
+
 .movies-card__overlay_saved {
   background-color: #00000038;
   opacity: 1;
@@ -62,9 +67,10 @@
   border-radius: 30px;
   border: none;
   cursor: pointer;
+  display: none;
 }
 
-.movies-card__button:hover {
+.movies-card__button:hover   {
   opacity: 0.8;
 }
 
@@ -73,12 +79,14 @@
 }
 
 .movies-card__button_saved {
+  display: block;
   background-image: url('../../images/saved-icon.svg');
   width: 21px;
   height: 21px;
   opacity: 1;
 }
 .movies-card__button_delete {
+  display: block;
   background-image: url('../../images/delete-icon.svg');
   width: 21px;
   height: 21px;
