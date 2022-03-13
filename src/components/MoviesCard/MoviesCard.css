@@ -44,7 +44,7 @@
 
 .movies-card__overlay:hover + .movies-card__button, .movies-card__button:hover {
   display: block;
-  opacity: 1;
+  /* opacity: 1; */
 }
 
 .movies-card__overlay_saved {
@@ -70,10 +70,6 @@
   display: none;
 }
 
-.movies-card__button:hover   {
-  opacity: 0.8;
-}
-
 .movies-card__button:active {
   box-shadow: inset 0px 0px 5px #c1c1c1;
 }
@@ -90,6 +86,7 @@
   background-image: url('../../images/delete-icon.svg');
   width: 21px;
   height: 21px;
+  opacity: 1;
 }
 
 .movies-card__info {

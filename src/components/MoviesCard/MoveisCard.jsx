@@ -21,7 +21,7 @@ function MoviesCard({ onPostMovie, onDeleteMovie, film }) {
         target="_blank"
         rel="noreferrer"
       >
-        asd
+        {}
       </a>
       <button
         type="button"
@@ -34,7 +34,7 @@ function MoviesCard({ onPostMovie, onDeleteMovie, film }) {
   const renderCardOnSavedMoviesPage = () => (
     <>
       <a className="movies-card__overlay" href={film.trailer} target="_blank" rel="noreferrer">
-        123
+        {}
       </a>
       <button type="button" className="movies-card__button movies-card__button_delete" onClick={handleDelete} />
     </>
