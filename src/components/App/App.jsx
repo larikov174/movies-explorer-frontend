@@ -16,7 +16,7 @@ import BurgerMenu from '../BurgerMenu/BurgerMenu';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Modal from '../Modal/Modal';
 
-function App() {
+export default function App() {
   const {
     handleModalClose,
     handleOnLoad,
@@ -30,6 +30,7 @@ function App() {
     handleFavoriteMovieList,
     handlePostFavoriteMovie,
     handleDeleteFavoriteMovie,
+    handleDeleteMovie,
     user,
     favoriteMovieList,
     searchResult,
@@ -61,6 +62,7 @@ function App() {
                   searchResult={searchResult}
                   handleShortMovie={handleShortMovie}
                   onPostMovie={handlePostFavoriteMovie}
+                  onDeleteMovie={handleDeleteMovie}
                 />
               </ProtectedRoute>
             }
@@ -98,5 +100,3 @@ function App() {
     </CurrentUserContext.Provider>
   );
 }
-
-export default App;

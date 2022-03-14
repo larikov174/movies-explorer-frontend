@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { useState, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import useAuth from './useAuth';
@@ -239,6 +240,30 @@ export default function useAppHandlers() {
       });
   };
 
+  const handleDeleteMovie = (movie) => {
+    const removeFromList = (deletedMovie) =>
+      localStoragFavoriteMovies.filter((movieInList) => movieInList._id !== deletedMovie._id);
+
+    const movieInList = (film) => localStoragFavoriteMovies.filter((movieinList) => movieinList.movieId === film.id)
+    console.log(movieInList(movie)[0]);
+    setIsLoading(true);
+
+    deleteFromFavorite(movieInList(movie)[0])
+      .then((res) => {
+        setFavoriteMovieList(removeFromList(res));
+        localStorage.favorite = JSON.stringify(removeFromList(res));
+      })
+      .then(() => {
+        setIsLoading(false);
+        handleModalOpen({ type: 'success', title: 'Удалено успешно.', visible: true });
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        handleError(error);
+        handleModalOpen({ type: 'fail', title: 'Ошибка, удаление не выполнено.', visible: true });
+      });
+  }
+
   return {
     handleModalClose,
     handleOnLoad,
@@ -252,6 +277,7 @@ export default function useAppHandlers() {
     handleFavoriteMovieList,
     handlePostFavoriteMovie,
     handleDeleteFavoriteMovie,
+    handleDeleteMovie,
     user,
     favoriteMovieList,
     searchResult,

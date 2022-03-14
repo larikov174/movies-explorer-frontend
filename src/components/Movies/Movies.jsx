@@ -5,7 +5,7 @@ import EmptyCardList from '../EmptyCardList/EmptyCardList';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Preloader from '../Preloader/Preloader';
 
-function Movies({ onSearch, isLoading, searchResult, handleShortMovie, onPostMovie }) {
+function Movies({ onSearch, isLoading, searchResult, handleShortMovie, onPostMovie, onDeleteMovie }) {
   const [result, setResult] = useState(searchResult);
 
   useEffect(() => {
@@ -14,7 +14,7 @@ function Movies({ onSearch, isLoading, searchResult, handleShortMovie, onPostMov
 
   const renderData = () => {
     if (result && result.length > 0)
-      return <MoviesCardList initData={result} onPostMovie={onPostMovie} />;
+      return <MoviesCardList initData={result} onPostMovie={onPostMovie} onDeleteMovie={onDeleteMovie} />;
     return <EmptyCardList />;
   };
 

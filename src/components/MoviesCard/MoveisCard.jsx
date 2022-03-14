@@ -17,7 +17,7 @@ function MoviesCard({ onPostMovie, onDeleteMovie, film }) {
     <button
       type="button"
       className={`movies-card__button ${isSaved && 'movies-card__button_saved'}`}
-      onClick={isSaved ? null : handleSave}
+      onClick={isSaved ? handleDelete : handleSave}
     />
   );
 
