@@ -13,31 +13,16 @@ function MoviesCard({ onPostMovie, onDeleteMovie, film }) {
   const handleSave = () => onPostMovie(film);
   const handleDelete = () => onDeleteMovie(film);
 
-  const renderCardOnMoviesPage = () => (
-    <>
-      <a
-        className={`movies-card__overlay ${isSaved && 'movies-card__overlay_saved'}`}
-        href={film.trailerLink}
-        target="_blank"
-        rel="noreferrer"
-      >
-        {}
-      </a>
-      <button
-        type="button"
-        className={`movies-card__button ${isSaved && 'movies-card__button_saved'}`}
-        onClick={isSaved ? null : handleSave}
-      />
-    </>
+  const renderSaveButton = () => (
+    <button
+      type="button"
+      className={`movies-card__button ${isSaved && 'movies-card__button_saved'}`}
+      onClick={isSaved ? null : handleSave}
+    />
   );
 
-  const renderCardOnSavedMoviesPage = () => (
-    <>
-      <a className="movies-card__overlay" href={film.trailer} target="_blank" rel="noreferrer">
-        {}
-      </a>
-      <button type="button" className="movies-card__button movies-card__button_delete" onClick={handleDelete} />
-    </>
+  const renderDeleteButton = () => (
+    <button type="button" className="movies-card__button movies-card__button_delete" onClick={handleDelete} />
   );
 
   useEffect(() => {
@@ -47,12 +32,15 @@ function MoviesCard({ onPostMovie, onDeleteMovie, film }) {
   return (
     <article className="movies-card">
       <div className="movies-card__poster">
-        <img
-          className="movies-card__image"
-          alt="Обложка фильма"
-          src={location === '/movies' ? `https://api.nomoreparties.co${film.image.url}` : film.image}
-        />
-        {location === '/movies' ? renderCardOnMoviesPage() : renderCardOnSavedMoviesPage()}
+        <a href={location === '/movies' ? film.trailerLink : film.trailer} target="_blank" rel="noreferrer">
+          <img
+            className="movies-card__image movies-card__overlay"
+            alt="Обложка фильма"
+            src={location === '/movies' ? `https://api.nomoreparties.co${film.image.url}` : film.image}
+          />
+        </a>
+        <span className="movies-card__overlay" />
+        {location === '/movies' ? renderSaveButton() : renderDeleteButton()}
       </div>
       <div className="movies-card__info">
         <h2 className="movies-card__title">{film.description}</h2>
