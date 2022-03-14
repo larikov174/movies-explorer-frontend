@@ -1,4 +1,4 @@
-import { MY_DB } from "./const";
+import { MY_DB, MOVIES } from "./const";
 
 export default function useMainApi() {
 
@@ -57,8 +57,8 @@ export default function useMainApi() {
           nameEN,
           movieId: id,
           trailer: trailerLink,
-          image: `https://api.nomoreparties.co${image.url}`,
-          thumbnail: `https://api.nomoreparties.co${image.formats.thumbnail.url}`,
+          image: `${MOVIES}${image.url}`,
+          thumbnail: `${MOVIES}${image.formats.thumbnail.url}`,
         }),
       });
       return handleResponse(res);

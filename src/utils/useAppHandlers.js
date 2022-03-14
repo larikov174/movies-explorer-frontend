@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { useState, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import useAuth from './useAuth';
@@ -245,7 +244,6 @@ export default function useAppHandlers() {
       localStoragFavoriteMovies.filter((movieInList) => movieInList._id !== deletedMovie._id);
 
     const movieInList = (film) => localStoragFavoriteMovies.filter((movieinList) => movieinList.movieId === film.id)
-    console.log(movieInList(movie)[0]);
     setIsLoading(true);
 
     deleteFromFavorite(movieInList(movie)[0])

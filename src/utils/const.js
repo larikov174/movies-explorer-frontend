@@ -1,6 +1,7 @@
 const MY_DB = 'http://localhost:3001'
 // const MY_DB = 'https://api.larikov.nomoredomains.work'
-const MOVIES_DB = 'https://api.nomoreparties.co/beatfilm-movies'
+const MOVIES = 'https://api.nomoreparties.co'
+const MOVIES_DB = `${MOVIES}/beatfilm-movies`
 
 const SIGN_UP_DIALOG = {
   CAPTION: 'Рады видеть!',
@@ -45,6 +46,7 @@ const MOVIE_LENGTH_LIMIT = 40;
 
 export {
   MY_DB,
+  MOVIES,
   MOVIES_DB,
   SIGN_UP_DIALOG,
   SIGN_IN_DIALOG,

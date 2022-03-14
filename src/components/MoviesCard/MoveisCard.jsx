@@ -1,6 +1,7 @@
 import './MoviesCard.css';
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { MOVIES } from '../../utils/const';
 
 function MoviesCard({ onPostMovie, onDeleteMovie, film }) {
   const { favorite } = localStorage;
@@ -36,7 +37,7 @@ function MoviesCard({ onPostMovie, onDeleteMovie, film }) {
           <img
             className="movies-card__image movies-card__overlay"
             alt="Обложка фильма"
-            src={location === '/movies' ? `https://api.nomoreparties.co${film.image.url}` : film.image}
+            src={location === '/movies' ? `${MOVIES}${film.image.url}` : film.image}
           />
         </a>
         <span className="movies-card__overlay" />
