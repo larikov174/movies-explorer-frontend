@@ -26,16 +26,16 @@ function MoviesCardList({ initData, onPostMovie, onDeleteMovie }) {
     } else {
       setMoviesToAdd(3);
     }
-    setMoviesQuantity(moviesQuantity + moviesToAdd);
   };
 
   const handleScrollToBottom = () => pageEndRef.current.scrollIntoView({ behavior: 'smooth' });
 
   const handleIdleState = () =>
-    location === '/saved-movies' || initData.length <= moviesQuantity ? 'movies-card-list__button_idle' : '';
+  location === '/saved-movies' || initData.length <= moviesQuantity ? 'movies-card-list__button_idle' : '';
 
   const handleClick = () => {
     handleMoreCards();
+    setMoviesQuantity(moviesQuantity + moviesToAdd);
     handleScrollToBottom();
     handleIdleState();
   };
@@ -62,6 +62,7 @@ function MoviesCardList({ initData, onPostMovie, onDeleteMovie }) {
 
   useEffect(() => {
     handleCardsQuantity();
+    handleMoreCards();
     window.addEventListener('resize', resizeThrottler, false);
     return () => window.removeEventListener('resize', resizeThrottler, false);
   }, []);
