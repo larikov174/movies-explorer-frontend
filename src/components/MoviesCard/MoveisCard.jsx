@@ -14,16 +14,16 @@ function MoviesCard({ onPostMovie, onDeleteMovie, film }) {
   const handleSave = () => onPostMovie(film);
   const handleDelete = () => onDeleteMovie(film);
 
-  const renderSaveButton = () => (
-    <button
-      type="button"
-      className={`movies-card__button ${isSaved && 'movies-card__button_saved'}`}
-      onClick={isSaved ? handleDelete : handleSave}
-    />
-  );
+  const renderButton = () => (
+    location === '/movies' ?
+      (<button
+        type="button"
+        className={`movies-card__button ${isSaved && 'movies-card__button_saved'}`}
+        onClick={isSaved ? handleDelete : handleSave}/>
+      ) : (
+        <button type="button" className="movies-card__button movies-card__button_delete" onClick={handleDelete} />
+      )
 
-  const renderDeleteButton = () => (
-    <button type="button" className="movies-card__button movies-card__button_delete" onClick={handleDelete} />
   );
 
   useEffect(() => {
@@ -41,7 +41,7 @@ function MoviesCard({ onPostMovie, onDeleteMovie, film }) {
           />
         </a>
         <span className="movies-card__overlay" />
-        {location === '/movies' ? renderSaveButton() : renderDeleteButton()}
+        {renderButton()}
       </div>
       <div className="movies-card__info">
         <h2 className="movies-card__title">{film.description}</h2>
