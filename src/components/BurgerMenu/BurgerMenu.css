@@ -22,6 +22,16 @@
   right: 30px;
 }
 
+.burger__button:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.burger__button_type_main {
+  background-image: url(../../images/burger-icon-main.svg);
+  background-color: transparent;
+}
+
 .burger__button_type_close {
   background-image: url(../../images/close-icon.svg);
   position: fixed;

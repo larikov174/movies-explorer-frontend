@@ -4,7 +4,7 @@ import { NavLink, useLocation } from 'react-router-dom';
 
 function BurgerMenu() {
   const location = useLocation().pathname;
-  const allowedPages = ['/movies', '/saved-movies', '/profile'];
+  const allowedPages = ['/', '/movies', '/saved-movies', '/profile'];
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const activeStyle = {
     borderBottom: '1px solid #000',
@@ -56,7 +56,9 @@ function BurgerMenu() {
     <>
       <button
         type="button"
-        className={`burger__button ${isMenuVisible ? 'burger__button_type_close' : ''}`}
+        className={`burger__button ${isMenuVisible && 'burger__button_type_close'} ${
+          location === '/' && 'burger__button_type_main'
+        }`}
         onClick={() => setIsMenuVisible(!isMenuVisible)}
       />
       {burgerMenu()}
