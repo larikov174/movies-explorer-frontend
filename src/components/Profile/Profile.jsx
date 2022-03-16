@@ -1,18 +1,26 @@
 import './Profile.css';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState, useRef } from 'react';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import useFormWithValidation from '../../utils/useFormWithValidation';
 import { CAPTION } from '../../utils/const';
 
 function Profile({ onSignOut, onUpdate }) {
   const user = useContext(CurrentUserContext);
+  const nameRef = useRef(null);
+  const emailRef = useRef(null);
   const [isNotAvailable, setIsNotAvailable] = useState(false);
+  const [isIdle, setIsIdle] = useState(true);
   const { values, handleChange, errors, setValues, isValid, resetForm } = useFormWithValidation();
 
-  const handleChangeInput = (e) => handleChange(e);
+  const handleChangeInput = (e) => {
+    handleChange(e);
+    if (user.name === nameRef.current.value && user.email === emailRef.current.value) return setIsIdle(true);
+    return setIsIdle(false);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsIdle(true)
     setIsNotAvailable(true);
     try {
       await onUpdate({ email: values.email, name: values.name });
@@ -41,6 +49,7 @@ function Profile({ onSignOut, onUpdate }) {
             {CAPTION.NAME}
           </label>
           <input
+            ref={nameRef}
             type="text"
             name="name"
             id="userName"
@@ -60,6 +69,7 @@ function Profile({ onSignOut, onUpdate }) {
             {CAPTION.EMAIL}
           </label>
           <input
+            ref={emailRef}
             type="email"
             name="email"
             id="userEmail"
@@ -73,7 +83,7 @@ function Profile({ onSignOut, onUpdate }) {
           />
         </div>
         <span className="profile__text profile__error">{errors.email}</span>
-        <button type="submit" className="profile__button" disabled={!isValid}>
+        <button type="submit" className="profile__button" disabled={!isValid || isIdle}>
           {CAPTION.EDIT}
         </button>
         <button className="profile__button profile__button_styled" type="button" onClick={handleSignOut}>
