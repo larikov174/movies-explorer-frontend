@@ -37,7 +37,7 @@
   cursor: pointer;
 }
 
-.movies-card__overlay:hover + .movies-card__button, .movies-card__button:hover {
+.movies-card__poster:hover .movies-card__button, .movies-card__button:hover {
   display: block;
 }
 

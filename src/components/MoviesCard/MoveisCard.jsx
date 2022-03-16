@@ -14,17 +14,16 @@ function MoviesCard({ onPostMovie, onDeleteMovie, film }) {
   const handleSave = () => onPostMovie(film);
   const handleDelete = () => onDeleteMovie(film);
 
-  const renderButton = () => (
-    location === '/movies' ?
-      (<button
+  const renderButton = () =>
+    location === '/movies' ? (
+      <button
         type="button"
         className={`movies-card__button ${isSaved && 'movies-card__button_saved'}`}
-        onClick={isSaved ? handleDelete : handleSave}/>
-      ) : (
-        <button type="button" className="movies-card__button movies-card__button_delete" onClick={handleDelete} />
-      )
-
-  );
+        onClick={isSaved ? handleDelete : handleSave}
+      />
+    ) : (
+      <button type="button" className="movies-card__button movies-card__button_delete" onClick={handleDelete} />
+    );
 
   useEffect(() => {
     setIsSaved(() => favorite && JSON.parse(favorite).some((item) => item.movieId === film.id));
@@ -39,8 +38,8 @@ function MoviesCard({ onPostMovie, onDeleteMovie, film }) {
             alt="Обложка фильма"
             src={location === '/movies' ? `${MOVIES}${film.image.url}` : film.image}
           />
+          <span className="movies-card__overlay" />
         </a>
-        <span className="movies-card__overlay" />
         {renderButton()}
       </div>
       <div className="movies-card__info">
