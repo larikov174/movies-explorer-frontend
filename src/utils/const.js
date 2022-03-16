@@ -1,5 +1,5 @@
-// const MY_DB = 'http://localhost:3001'
-const MY_DB = 'https://api.larikov.nomoredomains.work'
+const MY_DB = 'http://localhost:3001'
+// const MY_DB = 'https://api.larikov.nomoredomains.work'
 const MOVIES = 'https://api.nomoreparties.co'
 const MOVIES_DB = `${MOVIES}/beatfilm-movies`
 

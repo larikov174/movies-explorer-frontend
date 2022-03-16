@@ -22,7 +22,7 @@ function Modal({ onOpen, onClose }) {
 
   return (
     <section className={`modal ${onOpen.visible ? 'modal__visible' : ''}`}>
-      <div className="modal__container modal__slide">
+      <div className={`modal__container ${onOpen.type === 'success' ? 'modal__success' : 'modal__denied'}`}>
         {renderNotification()}
         <button type="button" className="modal__button" onClick={onClose} />
       </div>

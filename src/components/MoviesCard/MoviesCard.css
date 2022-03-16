@@ -51,7 +51,7 @@
   position: absolute;
   top: 14px;
   right: 14px;
-  z-index: 3;
+  z-index: 0;
   opacity: 1;
   border-radius: 30px;
   border: none;
