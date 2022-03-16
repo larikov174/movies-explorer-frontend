@@ -3,8 +3,9 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import { SIGN_UP_DIALOG, SIGN_IN_DIALOG, CAPTION } from '../../utils/const';
 import useFormWithValidation from '../../utils/useFormWithValidation';
+import Preloader from '../Preloader/Preloader';
 
-export default function AuthForm({ onSubmit }) {
+export default function AuthForm({ onSubmit, isLoading }) {
   const location = useLocation().pathname;
   const [isNotAvailable, setIsNotAvailable] = useState(false);
   const { values, handleChange, errors, isValid, resetForm } = useFormWithValidation();
@@ -98,7 +99,9 @@ export default function AuthForm({ onSubmit }) {
     </>
   );
 
-  return (
+  return isLoading ? (
+    <Preloader />
+  ) : (
     <form className="auth" onSubmit={handleSubmit}>
       <Link className="auth__logo" role="img" to="/" />
       {renderContent(location === '/signup' ? SIGN_UP_DIALOG : SIGN_IN_DIALOG)}

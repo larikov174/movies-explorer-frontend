@@ -57,8 +57,8 @@ export default function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Main />} />
-          <Route path="/signin" element={isLoading ? <Preloader /> : <AuthForm onSubmit={handleSignIn} />} />
-          <Route path="/signup" element={isLoading ? <Preloader /> : <AuthForm onSubmit={handleSignUp} />} />
+          <Route path="/signin" element={<AuthForm onSubmit={handleSignIn} isLoading={isLoading} />} />
+          <Route path="/signup" element={<AuthForm onSubmit={handleSignUp} isLoading={isLoading} />} />
           <Route
             path="movies"
             element={
