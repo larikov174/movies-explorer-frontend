@@ -42,6 +42,13 @@ export default function App() {
 
   useEffect(() => {
     handleOnLoad();
+
+    const escHandler = (evt) => evt.key === 'Escape' && handleModalClose();
+    document.addEventListener('keydown', escHandler);
+
+    return () => {
+      document.removeEventListener('keydown', escHandler);
+    };
   }, []);
 
   return (
