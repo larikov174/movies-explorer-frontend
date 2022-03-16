@@ -1,19 +1,25 @@
 import './Profile.css';
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import useFormWithValidation from '../../utils/useFormWithValidation';
 import { CAPTION } from '../../utils/const';
 
 function Profile({ onSignOut, onUpdate }) {
   const user = useContext(CurrentUserContext);
+  const [isNotAvailable, setIsNotAvailable] = useState(false);
   const { values, handleChange, errors, setValues, isValid, resetForm } = useFormWithValidation();
 
   const handleChangeInput = (e) => handleChange(e);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    onUpdate({ email: values.email, name: values.name });
-    resetForm();
+    setIsNotAvailable(true);
+    try {
+      await onUpdate({ email: values.email, name: values.name });
+    } finally {
+      setIsNotAvailable(false);
+      resetForm();
+    }
   };
 
   const handleSignOut = () => {
@@ -23,6 +29,7 @@ function Profile({ onSignOut, onUpdate }) {
 
   useEffect(() => {
     setValues(user);
+    return () => setIsNotAvailable(false);
   }, [user, setValues]);
 
   return (
@@ -43,6 +50,7 @@ function Profile({ onSignOut, onUpdate }) {
             pattern="^[A-Za-zА-Яа-яЁё\s-]{1,}$"
             minLength="2"
             onChange={handleChangeInput}
+            disabled={isNotAvailable}
             required
           />
         </div>
@@ -60,6 +68,7 @@ function Profile({ onSignOut, onUpdate }) {
             value={values.email || ''}
             pattern="^[a-z0-9+_.-]+@[a-z0-9.-]+\.[a-z]+$"
             onChange={handleChangeInput}
+            disabled={isNotAvailable}
             required
           />
         </div>

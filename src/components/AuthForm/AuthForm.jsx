@@ -1,20 +1,28 @@
 import './AuthForm.css';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import { SIGN_UP_DIALOG, SIGN_IN_DIALOG, CAPTION } from '../../utils/const';
 import useFormWithValidation from '../../utils/useFormWithValidation';
 
 export default function AuthForm({ onSubmit }) {
   const location = useLocation().pathname;
+  const [isNotAvailable, setIsNotAvailable] = useState(false);
   const { values, handleChange, errors, isValid, resetForm } = useFormWithValidation();
 
   const handleChangeInput = (e) => handleChange(e);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    onSubmit({ email: values.email, name: values.name, password: values.password });
-    resetForm();
+    setIsNotAvailable(true);
+    try {
+      await onSubmit({ email: values.email, name: values.name, password: values.password });
+    } finally {
+      setIsNotAvailable(false);
+      resetForm();
+    }
   };
+
+  useEffect(() => () => setIsNotAvailable(false), []);
 
   const renderNameInput = () => (
     <>
@@ -30,6 +38,7 @@ export default function AuthForm({ onSubmit }) {
           pattern="^[A-Za-zА-Яа-яЁё\s-]{1,}$"
           minLength="2"
           onChange={handleChangeInput}
+          disabled={isNotAvailable}
           required
         />
       </label>
@@ -53,6 +62,7 @@ export default function AuthForm({ onSubmit }) {
             value={values.email || ''}
             pattern="^[a-z0-9+_.-]+@[a-z0-9.-]+\.[a-z]+$"
             onChange={handleChangeInput}
+            disabled={isNotAvailable}
             required
           />
         </label>
@@ -68,6 +78,7 @@ export default function AuthForm({ onSubmit }) {
             value={values.password || ''}
             minLength="3"
             onChange={handleChangeInput}
+            disabled={isNotAvailable}
             required
           />
         </label>
