@@ -93,8 +93,6 @@
 
 @media screen and (max-width: 480px) {
   .burger__button {
-    width: 40px;
-    height: 40px;
     right: 14px;
   }
 
