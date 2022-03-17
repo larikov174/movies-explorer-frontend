@@ -96,7 +96,7 @@ export default function useAppHandlers() {
         const result = localStoragFavoriteMovies.filter((movie) =>
           shortMovieOption ? movie.duration <= MOVIE_LENGTH_LIMIT : movie.duration >= MOVIE_LENGTH_LIMIT,
         );
-        setFavoriteMovieList(() => (shortMovieOption ? result : localStoragFavoriteMovies));
+        setFavoriteMovieList(result);
       }
     }
   };
