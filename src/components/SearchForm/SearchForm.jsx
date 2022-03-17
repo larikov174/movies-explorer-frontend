@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import { CAPTION } from '../../utils/const';
 
-function SearchForm({ onSubmit, handleShortMovie }) {
+function SearchForm({ onSubmit, handleShortMovie, isChecked }) {
   const [query, setQuery] = useState();
   const location = useLocation().pathname;
   const onInputChange = (e) => setQuery(e.target.value);
@@ -42,7 +42,7 @@ function SearchForm({ onSubmit, handleShortMovie }) {
           {CAPTION.FIND}
         </button>
       </form>
-      <FilterCheckbox onClick={handleShortMovie} />
+      <FilterCheckbox onClick={handleShortMovie} isChecked={isChecked}/>
     </section>
   );
 }
