@@ -218,6 +218,7 @@ export default function useAppHandlers() {
         setUser(null);
         localStorage.clear();
         setSearchResult([])
+        setFavoriteMovieList([]);
         handleModalOpen({ type: 'success', title: 'Сессия завершена.', visible: true });
       });
   };

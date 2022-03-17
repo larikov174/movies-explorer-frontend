@@ -10,12 +10,13 @@ function SearchForm({ onSubmit, handleShortMovie }) {
   const onInputChange = (e) => setQuery(e.target.value);
   const handleSubmit = (e) => {
     e.preventDefault();
-    localStorage.setItem('query', query);
+    if (location === '/movies') localStorage.setItem('query', query);
     onSubmit(query);
   };
 
   useEffect(() => {
     if (location === '/movies') return localStorage.query && setQuery(localStorage.query);
+    onSubmit('');
     return null;
   }, []);
 
