@@ -1,9 +1,12 @@
 import './FilterCheckbox.css';
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { CAPTION } from '../../utils/const';
 
 function FilterCheckbox({ onClick }) {
   const [isActive, setIsActive] = useState(false);
+  const location = useLocation().pathname;
+
   const handleChange = (e) => {
     setIsActive(e.target.checked);
     localStorage.setItem('shortMovie', e.target.checked);
@@ -11,7 +14,8 @@ function FilterCheckbox({ onClick }) {
 
   useEffect(() => {
     if (!localStorage.shortMovie) return (localStorage.shortMovie = false);
-    return setIsActive(JSON.parse(localStorage.shortMovie));
+    if (location === '/movies') return setIsActive(JSON.parse(localStorage.shortMovie));
+    return setIsActive(false);
   }, []);
 
   return (
