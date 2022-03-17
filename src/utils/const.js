@@ -29,6 +29,7 @@ const CAPTION = {
   SIGN_IN: 'Войти',
   MOVIES: 'Фильмы',
   SAVED_MOVIES: 'Сохраненные фильмы',
+  SHORT_MOVIES: 'Короткометражки',
   PROFILE: 'Аккаунт',
   FIND: 'Найти',
   MORE: 'Ещё',

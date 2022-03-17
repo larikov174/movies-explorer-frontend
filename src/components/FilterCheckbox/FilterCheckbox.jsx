@@ -1,5 +1,6 @@
 import './FilterCheckbox.css';
 import React, { useState, useEffect } from 'react';
+import { CAPTION } from '../../utils/const';
 
 function FilterCheckbox({ onClick }) {
   const [isActive, setIsActive] = useState(false);
@@ -26,7 +27,7 @@ function FilterCheckbox({ onClick }) {
         />
         <div className="checkbox__slider checkbox__round" />
       </label>
-      <p className="checkbox__text">Короткометражки</p>
+      <p className="checkbox__text">{CAPTION.SHORT_MOVIES}</p>
     </div>
   );
 }
