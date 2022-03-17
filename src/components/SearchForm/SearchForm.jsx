@@ -20,6 +20,12 @@ function SearchForm({ onSubmit, handleShortMovie }) {
     return null;
   }, []);
 
+  useEffect(()=>{
+    if (location === '/saved-movies') {
+      setQuery('')
+    }
+  }, [handleShortMovie])
+
   return (
     <section className="search-form">
       <form className="search-form__container" onSubmit={handleSubmit}>
