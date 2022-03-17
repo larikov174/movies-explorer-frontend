@@ -3,8 +3,9 @@ import React, { useContext, useEffect, useState, useRef } from 'react';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import useFormWithValidation from '../../utils/useFormWithValidation';
 import { CAPTION } from '../../utils/const';
+import Preloader from '../Preloader/Preloader';
 
-function Profile({ onSignOut, onUpdate }) {
+export default function Profile({ onSignOut, onUpdate, isLoading }) {
   const user = useContext(CurrentUserContext);
   const nameRef = useRef(null);
   const emailRef = useRef(null);
@@ -20,7 +21,7 @@ function Profile({ onSignOut, onUpdate }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsIdle(true)
+    setIsIdle(true);
     setIsNotAvailable(true);
     try {
       await onUpdate({ email: values.email, name: values.name });
@@ -40,7 +41,7 @@ function Profile({ onSignOut, onUpdate }) {
     return () => setIsNotAvailable(false);
   }, [user, setValues]);
 
-  return (
+  const renderProfile = () => (
     <section className="profile">
       <h1 className="profile__title">Привет, {user.name}!</h1>
       <form className="profile__content" onSubmit={handleSubmit} noValidate>
@@ -92,6 +93,6 @@ function Profile({ onSignOut, onUpdate }) {
       </form>
     </section>
   );
-}
 
-export default Profile;
+  return isLoading ? <Preloader /> : renderProfile();
+}

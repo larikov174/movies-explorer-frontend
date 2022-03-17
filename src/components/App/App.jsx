@@ -11,7 +11,6 @@ import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import Profile from '../Profile/Profile';
 import PageNotFound from '../PageNotFound/PageNotFound';
-import Preloader from '../Preloader/Preloader';
 import BurgerMenu from '../BurgerMenu/BurgerMenu';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Modal from '../Modal/Modal';
@@ -57,8 +56,8 @@ export default function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Main />} />
-          <Route path="/signin" element={<AuthForm onSubmit={handleSignIn} isLoading={isLoading} />} />
-          <Route path="/signup" element={<AuthForm onSubmit={handleSignUp} isLoading={isLoading} />} />
+          <Route path="signin" element={<AuthForm onSubmit={handleSignIn} isLoading={isLoading} />} />
+          <Route path="signup" element={<AuthForm onSubmit={handleSignUp} isLoading={isLoading} />} />
           <Route
             path="movies"
             element={
@@ -91,10 +90,10 @@ export default function App() {
             }
           />
           <Route
-            path="/profile"
+            path="profile"
             element={
               <ProtectedRoute>
-                {isLoading ? <Preloader /> : <Profile onSignOut={handleSignOut} onUpdate={handleUpdateUser} />}
+                <Profile onSignOut={handleSignOut} onUpdate={handleUpdateUser} isLoading={isLoading} />
               </ProtectedRoute>
             }
           />
