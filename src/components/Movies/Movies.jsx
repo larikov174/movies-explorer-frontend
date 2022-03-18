@@ -15,7 +15,7 @@ function Movies({ onSearch, isLoading, searchResult, handleShortMovie, onPostMov
           ? searchResult.filter((movie) => movie.duration <= MOVIE_LENGTH_LIMIT)
           : searchResult,
         );
-  }, [localStorage.shortMovie]);
+  }, [localStorage.shortMovie, searchResult]);
 
   const renderData = () => {
     if (result && result.length > 0)
