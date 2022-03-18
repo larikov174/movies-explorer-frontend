@@ -16,7 +16,7 @@ function FilterCheckbox({ onClick }) {
   useEffect(() => {
     if (location === '/movies' && localStorage.shortMovie) return setIsActive(JSON.parse(localStorage.shortMovie));
     localStorage.setItem('shortMovieFavorite', isActive);
-    return null;
+    return () => localStorage.setItem('shortMovieFavorite', false);
   }, []);
 
   return (

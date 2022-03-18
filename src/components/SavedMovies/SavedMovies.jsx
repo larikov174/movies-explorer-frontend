@@ -18,14 +18,13 @@ export default function SavedMovies({
   const [initData, setInitData] = useState(favoriteMovieList);
 
   useEffect(() => {
-    if (!initData) {
-      onLoad();
-    }
+    if (localStorage.favorite.length > 0) return setInitData(favoriteMovieList);
+    return onLoad();
   }, []);
 
   useEffect(() => {
     setInitData(favoriteMovieList);
-  }, [favoriteMovieList, onSearch]);
+  }, [favoriteMovieList, onSearch, localStorage.handleShortMovie]);
 
   const renderData = () => {
     if (initData && initData.length > 0)
