@@ -25,7 +25,7 @@ export default function SavedMovies({
 
   useEffect(() => {
     setInitData(favoriteMovieList);
-  }, [favoriteMovieList]);
+  }, [favoriteMovieList, onSearch]);
 
   const renderData = () => {
     if (initData && initData.length > 0)

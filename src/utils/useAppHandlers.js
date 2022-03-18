@@ -77,11 +77,11 @@ export default function useAppHandlers() {
         (movie.nameEN && movie.nameEN.toLowerCase().includes(query.toLowerCase())) ||
         (movie.description && movie.description.toLowerCase().includes(query.toLowerCase())),
     );
-    setFavoriteMovieList(() => (shortMovieMain ? result.filter((movie) => movie.duration <= MOVIE_LENGTH_LIMIT) : result));
+    setFavoriteMovieList(() => (shortMovieSaved ? result.filter((movie) => movie.duration <= MOVIE_LENGTH_LIMIT) : result));
   };
 
   const handleShortMovie = () => {
-    if (location === '/movies') {
+    if (location === '/movies' && localStorageMovies) {
       shortMovieMain = !shortMovieMain;
       const result = localStorageMovies.filter((movie) =>
         shortMovieMain ? movie.duration <= MOVIE_LENGTH_LIMIT : localStorageMovies,
