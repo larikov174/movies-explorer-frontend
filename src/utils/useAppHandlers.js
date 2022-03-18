@@ -9,10 +9,11 @@ export default function useAppHandlers() {
   const token = useRef(null);
   const navigate = useNavigate();
   const location = useLocation().pathname;
-  const { movies, favorite, shortMovie } = localStorage;
+  const { movies, favorite, shortMovie, shortMovieFavorite } = localStorage;
   const localStorageMovies = movies ? JSON.parse(movies) : false;
   const localStoragFavoriteMovies = favorite ? JSON.parse(favorite) : false;
-  let shortMovieOption = shortMovie ? JSON.parse(shortMovie) : false;
+  let shortMovieMain = shortMovie ? JSON.parse(shortMovie) : false;
+  let shortMovieSaved = shortMovieFavorite ? JSON.parse(shortMovieFavorite) : false;
   const [user, setUser] = useState(null);
   const [favoriteMovieList, setFavoriteMovieList] = useState(localStoragFavoriteMovies);
   const [searchResult, setSearchResult] = useState(localStorageMovies);
@@ -59,7 +60,7 @@ export default function useAppHandlers() {
             (movie.description && movie.description.toLowerCase().includes(query.toLowerCase())),
         );
         localStorage.movies = JSON.stringify(result);
-        setSearchResult(() => (shortMovieOption ? result.filter((movie) => movie.duration <= MOVIE_LENGTH_LIMIT) : result));
+        setSearchResult(() => (shortMovieMain ? result.filter((movie) => movie.duration <= MOVIE_LENGTH_LIMIT) : result));
         setIsLoading(false);
       })
       .catch((error) => {
@@ -76,25 +77,26 @@ export default function useAppHandlers() {
         (movie.nameEN && movie.nameEN.toLowerCase().includes(query.toLowerCase())) ||
         (movie.description && movie.description.toLowerCase().includes(query.toLowerCase())),
     );
-    setFavoriteMovieList(() => (shortMovieOption ? result.filter((movie) => movie.duration <= MOVIE_LENGTH_LIMIT) : result));
+    setFavoriteMovieList(() => (shortMovieMain ? result.filter((movie) => movie.duration <= MOVIE_LENGTH_LIMIT) : result));
   };
 
   const handleShortMovie = () => {
-    shortMovieOption = !shortMovieOption;
 
     if (location === '/movies') {
+      shortMovieMain = !shortMovieMain;
       if (localStorageMovies.length > 0) {
         const result = localStorageMovies.filter((movie) =>
-          shortMovieOption ? movie.duration <= MOVIE_LENGTH_LIMIT : movie.duration >= MOVIE_LENGTH_LIMIT,
+          shortMovieMain ? movie.duration <= MOVIE_LENGTH_LIMIT : localStorageMovies,
         );
         setSearchResult(result);
       }
     }
 
     if (location === '/saved-movies') {
+      shortMovieSaved = !shortMovieSaved;
       if (localStoragFavoriteMovies.length > 0) {
         const result = localStoragFavoriteMovies.filter((movie) =>
-          shortMovieOption ? movie.duration <= MOVIE_LENGTH_LIMIT : movie.duration >= MOVIE_LENGTH_LIMIT,
+          shortMovieSaved ? movie.duration <= MOVIE_LENGTH_LIMIT : localStoragFavoriteMovies,
         );
         setFavoriteMovieList(result);
       }

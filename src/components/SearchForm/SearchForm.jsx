@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import { CAPTION } from '../../utils/const';
 
-function SearchForm({ onSubmit, handleShortMovie, isChecked }) {
+function SearchForm({ onSubmit, handleShortMovie }) {
   const [query, setQuery] = useState();
   const location = useLocation().pathname;
   const onInputChange = (e) => setQuery(e.target.value);
@@ -20,11 +20,11 @@ function SearchForm({ onSubmit, handleShortMovie, isChecked }) {
     return null;
   }, []);
 
-  useEffect(()=>{
+  useEffect(() => {
     if (location === '/saved-movies') {
-      setQuery('')
+      setQuery('');
     }
-  }, [handleShortMovie])
+  }, [handleShortMovie]);
 
   return (
     <section className="search-form">
@@ -42,7 +42,7 @@ function SearchForm({ onSubmit, handleShortMovie, isChecked }) {
           {CAPTION.FIND}
         </button>
       </form>
-      <FilterCheckbox onClick={handleShortMovie} isChecked={isChecked}/>
+      <FilterCheckbox onClick={handleShortMovie} />
     </section>
   );
 }

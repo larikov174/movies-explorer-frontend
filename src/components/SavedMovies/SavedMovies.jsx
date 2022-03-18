@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import './SavedMovies.css';
 import React, { useState, useEffect } from 'react';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
@@ -18,10 +17,6 @@ export default function SavedMovies({
 }) {
   const [initData, setInitData] = useState(favoriteMovieList);
 
-  const isChecked = (state) => {
-    localStorage.shortMovie = state;
-  }
-
   useEffect(() => {
     if (!initData) {
       onLoad();
@@ -40,7 +35,7 @@ export default function SavedMovies({
 
   return (
     <section className="saved-movies">
-      <SearchForm onSubmit={onSearch} handleShortMovie={handleShortMovie} isChecked={isChecked} />
+      <SearchForm onSubmit={onSearch} handleShortMovie={handleShortMovie} />
       {isLoading ? <Preloader /> : renderData()}
     </section>
   );
