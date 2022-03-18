@@ -4,13 +4,18 @@ import SearchForm from '../SearchForm/SearchForm';
 import EmptyCardList from '../EmptyCardList/EmptyCardList';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Preloader from '../Preloader/Preloader';
+import { MOVIE_LENGTH_LIMIT } from '../../utils/const';
 
 function Movies({ onSearch, isLoading, searchResult, handleShortMovie, onPostMovie, onDeleteMovie }) {
-  const [result, setResult] = useState(searchResult);
+  const [result, setResult] = useState([]);
 
   useEffect(() => {
-    setResult(searchResult);
-  }, [searchResult]);
+      setResult(() =>
+        localStorage.shortMovie === 'true'
+          ? searchResult.filter((movie) => movie.duration <= MOVIE_LENGTH_LIMIT)
+          : searchResult,
+        );
+  }, [localStorage.shortMovie]);
 
   const renderData = () => {
     if (result && result.length > 0)
