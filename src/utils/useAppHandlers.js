@@ -81,25 +81,20 @@ export default function useAppHandlers() {
   };
 
   const handleShortMovie = () => {
-
     if (location === '/movies') {
       shortMovieMain = !shortMovieMain;
-      if (localStorageMovies.length > 0) {
-        const result = localStorageMovies.filter((movie) =>
-          shortMovieMain ? movie.duration <= MOVIE_LENGTH_LIMIT : localStorageMovies,
-        );
-        setSearchResult(result);
-      }
+      const result = localStorageMovies.filter((movie) =>
+        shortMovieMain ? movie.duration <= MOVIE_LENGTH_LIMIT : localStorageMovies,
+      );
+      setSearchResult(result);
     }
 
     if (location === '/saved-movies') {
       shortMovieSaved = !shortMovieSaved;
-      if (localStoragFavoriteMovies.length > 0) {
-        const result = localStoragFavoriteMovies.filter((movie) =>
-          shortMovieSaved ? movie.duration <= MOVIE_LENGTH_LIMIT : localStoragFavoriteMovies,
-        );
-        setFavoriteMovieList(result);
-      }
+      const result = localStoragFavoriteMovies.filter((movie) =>
+        shortMovieSaved ? movie.duration <= MOVIE_LENGTH_LIMIT : localStoragFavoriteMovies,
+      );
+      setFavoriteMovieList(result);
     }
   };
 
