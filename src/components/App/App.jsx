@@ -61,40 +61,46 @@ export default function App() {
           <Route
             path="movies"
             element={
-              <ProtectedRoute>
-                <Movies
-                  onSearch={handleSearchMain}
-                  isLoading={isLoading}
-                  searchResult={searchResult}
-                  handleShortMovie={handleShortMovie}
-                  onPostMovie={handlePostFavoriteMovie}
-                  onDeleteMovie={handleDeleteMovie}
-                />
-              </ProtectedRoute>
+              user && (
+                <ProtectedRoute>
+                  <Movies
+                    onSearch={handleSearchMain}
+                    isLoading={isLoading}
+                    searchResult={searchResult}
+                    handleShortMovie={handleShortMovie}
+                    onPostMovie={handlePostFavoriteMovie}
+                    onDeleteMovie={handleDeleteMovie}
+                  />
+                </ProtectedRoute>
+              )
             }
           />
           <Route
             path="saved-movies"
             element={
-              <ProtectedRoute>
-                <SavedMovies
-                  onLoad={handleFavoriteMovieList}
-                  favoriteMovieList={favoriteMovieList}
-                  onPostMovie={handlePostFavoriteMovie}
-                  onDeleteMovie={handleDeleteFavoriteMovie}
-                  isLoading={isLoading}
-                  onSearch={handleSearchFavorite}
-                  handleShortMovie={handleShortMovie}
-                />
-              </ProtectedRoute>
+              user && (
+                <ProtectedRoute>
+                  <SavedMovies
+                    onLoad={handleFavoriteMovieList}
+                    favoriteMovieList={favoriteMovieList}
+                    onPostMovie={handlePostFavoriteMovie}
+                    onDeleteMovie={handleDeleteFavoriteMovie}
+                    isLoading={isLoading}
+                    onSearch={handleSearchFavorite}
+                    handleShortMovie={handleShortMovie}
+                  />
+                </ProtectedRoute>
+              )
             }
           />
           <Route
             path="profile"
             element={
-              <ProtectedRoute>
-                <Profile onSignOut={handleSignOut} onUpdate={handleUpdateUser} isLoading={isLoading} />
-              </ProtectedRoute>
+              user && (
+                <ProtectedRoute>
+                  <Profile onSignOut={handleSignOut} onUpdate={handleUpdateUser} isLoading={isLoading} />
+                </ProtectedRoute>
+              )
             }
           />
           <Route path="*" element={<PageNotFound />} />
