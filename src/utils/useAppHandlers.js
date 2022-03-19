@@ -9,8 +9,8 @@ export default function useAppHandlers() {
   const navigate = useNavigate();
   const location = useLocation().pathname;
   const { movies, favorite, shortMovie, shortMovieFavorite } = localStorage;
-  const localStorageMovies = movies ? JSON.parse(movies) : false;
-  const localStoragFavoriteMovies = favorite ? JSON.parse(favorite) : false;
+  const localStorageMovies = movies ? JSON.parse(movies) : [];
+  const localStoragFavoriteMovies = favorite ? JSON.parse(favorite) : [];
   let shortMovieMain = shortMovie === "true" ? JSON.parse(shortMovie) : false;
   let shortMovieSaved = shortMovieFavorite === "true" ? JSON.parse(shortMovieFavorite) : false;
   const [user, setUser] = useState(null);
