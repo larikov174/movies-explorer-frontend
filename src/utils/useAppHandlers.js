@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import useAuth from './useAuth';
 import useMainApi from './useMainApi';
@@ -6,7 +6,6 @@ import useMoviesApi from './useMoviesApi';
 import { MOVIE_LENGTH_LIMIT } from './const';
 
 export default function useAppHandlers() {
-  const token = useRef(null);
   const navigate = useNavigate();
   const location = useLocation().pathname;
   const { movies, favorite, shortMovie, shortMovieFavorite } = localStorage;
@@ -35,9 +34,8 @@ export default function useAppHandlers() {
 
   const handleOnLoad = () => {
     checkToken()
-      .then((res) => (token.current = res))
-      .then(() => {
-        if (token.current) {
+      .then((isTokenOk) => {
+        if (isTokenOk) {
           getUserInfo()
             .then((data) => setUser(data))
             .catch((error) => handleError(error));
