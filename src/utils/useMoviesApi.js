@@ -1,4 +1,4 @@
-import { moviesUrl } from "./const";
+import { MOVIES_DB } from "./const";
 
 export default function useMoviesApi() {
 
@@ -9,7 +9,7 @@ export default function useMoviesApi() {
 
   return {
     async getMovies() {
-      const res = await fetch(`${moviesUrl}`, {
+      const res = await fetch(`${MOVIES_DB}`, {
         method: 'GET',
       });
       return handleResponse(res);

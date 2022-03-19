@@ -4,36 +4,38 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import SearchForm from '../SearchForm/SearchForm';
 import EmptyCardList from '../EmptyCardList/EmptyCardList';
 import Preloader from '../Preloader/Preloader';
-import defaultImage from '../../images/default-picture.png';
+import { CAPTION } from '../../utils/const';
 
-function SavedMovies({ onCardClick }) {
-  const [initData, setInitData] = useState(null);
+export default function SavedMovies({
+  onLoad,
+  favoriteMovieList,
+  isLoading,
+  onPostMovie,
+  onDeleteMovie,
+  onSearch,
+  handleShortMovie,
+}) {
+  const [initData, setInitData] = useState(favoriteMovieList);
 
-  // TODO: удалить на следующей итерации, блок кода для демо прелоудера
   useEffect(() => {
-    const length = 3;
-    const moviesDB = Array(length).fill({
-      image: defaultImage,
-      description: 'Название фильма',
-      duration: '1ч 17м',
-    });
-    setTimeout(() => {
-      setInitData(moviesDB);
-    }, 3000);
+    if (favoriteMovieList && favoriteMovieList.length > 0) return setInitData(favoriteMovieList);
+    return onLoad();
   }, []);
 
+  useEffect(() => {
+    setInitData(favoriteMovieList);
+  }, [favoriteMovieList, onSearch, localStorage.handleShortMovie]);
+
   const renderData = () => {
-    if (initData && initData.length > 0) return <MoviesCardList initData={initData} onCardClick={onCardClick} />;
-    if (initData && initData.length === 0) return <EmptyCardList title="Сохранённых фильмов не обнаружено." />;
-    return <Preloader />;
+    if (initData && initData.length > 0)
+      return <MoviesCardList initData={initData} onPostMovie={onPostMovie} onDeleteMovie={onDeleteMovie} />;
+    return <EmptyCardList title={CAPTION.EMPTY} />;
   };
 
   return (
     <section className="saved-movies">
-      <SearchForm />
-      {renderData()}
+      <SearchForm onSubmit={onSearch} handleShortMovie={handleShortMovie} />
+      {isLoading ? <Preloader /> : renderData()}
     </section>
   );
 }
-
-export default SavedMovies;

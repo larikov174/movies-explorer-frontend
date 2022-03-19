@@ -1,49 +1,50 @@
 import './MoviesCard.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { MOVIES } from '../../utils/const';
 
-function MoviesCard({ duration, description, image, onCardClick }) {
+function MoviesCard({ onPostMovie, onDeleteMovie, film }) {
+  const { favorite } = localStorage;
   const [isSaved, setIsSaved] = useState(false);
   const location = useLocation().pathname;
-  // TODO: добавить провеку результатов сохранения фильма в базу, пока всегда успешно
-  const handleCardClick = () => {
-    if (location === '/movies'){
-      setIsSaved(true);
-      onCardClick({ type: 'success', title: 'Сохранение успешно!', visible: true });
-    }
-    return onCardClick({ type: 'success', title: 'Удалено успешно!', visible: true });
-  };
+  const minutes = film.duration % 60;
+  const hours = (film.duration - minutes) / 60;
+  const timeStamp = `${hours}ч ${minutes < 10 ? '0' : ''}${minutes}м`;
 
-  const renderCardOnMoviesPage = () => {
-    if (isSaved) {
-      return (
-        <div className="movies-card__overlay movies-card__overlay_saved" role="presentation">
-          <button type="button" className="movies-card__button movies-card__button_saved" />
-        </div>
-      );
-    }
-    return (
-      <div className="movies-card__overlay" role="presentation">
-        <button type="button" className="movies-card__button" onClick={handleCardClick} />
-      </div>
-    );
-  };
+  const handleSave = () => onPostMovie(film);
+  const handleDelete = () => onDeleteMovie(film);
 
-  const renderCardOnSavedMoviesPage = () => (
-      <div className="movies-card__overlay" role="presentation">
-        <button type="button" className="movies-card__button movies-card__button_delete" onClick={handleCardClick} />
-      </div>
+  const renderButton = () =>
+    location === '/movies' ? (
+      <button
+        type="button"
+        className={`movies-card__button ${isSaved && 'movies-card__button_saved'}`}
+        onClick={isSaved ? handleDelete : handleSave}
+      />
+    ) : (
+      <button type="button" className="movies-card__button movies-card__button_delete" onClick={handleDelete} />
     );
+
+  useEffect(() => {
+    setIsSaved(() => favorite && JSON.parse(favorite).some((item) => item.movieId === film.id));
+  }, [favorite]);
 
   return (
     <article className="movies-card">
       <div className="movies-card__poster">
-        <img className="movies-card__image" alt="Обложка фильма" src={image} />
-        {location === '/movies' ? renderCardOnMoviesPage() : renderCardOnSavedMoviesPage()}
+        <a href={location === '/movies' ? film.trailerLink : film.trailer} target="_blank" rel="noreferrer">
+          <img
+            className="movies-card__image movies-card__overlay"
+            alt="Обложка фильма"
+            src={location === '/movies' ? `${MOVIES}${film.image.url}` : film.image}
+          />
+          <span className="movies-card__overlay" />
+        </a>
+        {renderButton()}
       </div>
       <div className="movies-card__info">
-        <h2 className="movies-card__title">{description}</h2>
-        <p className="movies-card__duration">{duration}</p>
+        <h2 className="movies-card__title">{film.description}</h2>
+        <p className="movies-card__duration">{timeStamp}</p>
       </div>
     </article>
   );

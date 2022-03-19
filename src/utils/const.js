@@ -1,44 +1,57 @@
-const mainUrl = 'http://localhost:3001'
-// const baseUrl = 'https://api.larikov.nomoredomains.work'
-const moviesUrl = 'https://api.nomoreparties.co/beatfilm-movies'
+// const MY_DB = 'http://localhost:3001'
+const MY_DB = 'https://api.larikov.nomoredomains.work'
+const MOVIES = 'https://api.nomoreparties.co'
+const MOVIES_DB = `${MOVIES}/beatfilm-movies`
 
-const signUpDialog = {
-  caption: 'Рады видеть!',
-  buttonTitle: 'Зарегистрироваться',
-  question: 'Уже зарегистрированы?',
-  linkTitle: 'Войти',
-  link: '/signin',
+const SIGN_UP_DIALOG = {
+  CAPTION: 'Рады видеть!',
+  BUTTON_TITLE: 'Зарегистрироваться',
+  QUESTION: 'Уже зарегистрированы?',
+  LINK_TITLE: 'Войти',
+  LINK: '/signin',
 };
 
-const signInDialog = {
-  caption: 'Добро пожаловать!',
-  buttonTitle: 'Войти',
-  question: 'Ещё не зарегистрированы?',
-  linkTitle: 'Регистрация',
-  link: '/signup',
+const SIGN_IN_DIALOG = {
+  CAPTION: 'Добро пожаловать!',
+  BUTTON_TITLE: 'Войти',
+  QUESTION: 'Ещё не зарегистрированы?',
+  LINK_TITLE: 'Регистрация',
+  LINK: '/signup',
 };
 
-const caption = {
-  name: 'Имя',
-  email: 'E-mail',
-  password: 'Пароль',
-  edit: 'Редактировать',
-  signOut: 'Выйти из аккаунта',
-  signUp: 'Регистрация',
-  signIn: 'Войти',
-  movies: 'Фильмы',
-  savedMovies: 'Сохраненные фильмы',
-  profile: 'Аккаунт',
-  find: 'Найти',
-  empty: 'Ничего не найдено',
-  searchFail: `Во время запроса произошла ошибка.
+const CAPTION = {
+  NAME: 'Имя',
+  EMAIL: 'E-mail',
+  PASSWORD: 'Пароль',
+  EDIT: 'Редактировать',
+  SIGN_OUT: 'Выйти из аккаунта',
+  SIGN_UP: 'Регистрация',
+  SIGN_IN: 'Войти',
+  MOVIES: 'Фильмы',
+  SAVED_MOVIES: 'Сохраненные фильмы',
+  SHORT_MOVIES: 'Короткометражки',
+  PROFILE: 'Аккаунт',
+  FIND: 'Найти',
+  MORE: 'Ещё',
+  EMPTY: 'Ничего не найдено',
+  SEARCH_FAIL: `Во время запроса произошла ошибка.
   Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз`
 }
 
+const SCREEN_WIDTH = {
+  LARGE: 1280,
+  MEDIUM: 750,
+}
+
+const MOVIE_LENGTH_LIMIT = 40;
+
 export {
-  mainUrl,
-  moviesUrl,
-  signUpDialog,
-  signInDialog,
-  caption,
+  MY_DB,
+  MOVIES,
+  MOVIES_DB,
+  SIGN_UP_DIALOG,
+  SIGN_IN_DIALOG,
+  CAPTION,
+  SCREEN_WIDTH,
+  MOVIE_LENGTH_LIMIT
 }

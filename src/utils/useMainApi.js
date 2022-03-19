@@ -1,4 +1,4 @@
-import { mainUrl } from "./const";
+import { MY_DB, MOVIES } from "./const";
 
 export default function useMainApi() {
 
@@ -8,15 +8,16 @@ export default function useMainApi() {
   };
 
   return {
-    getUserInfo() {
-      return fetch(`${mainUrl}/users/me`, {
+    async getUserInfo() {
+      const res = await fetch(`${MY_DB}/users/me`, {
         method: 'GET',
         credentials: 'include',
-      }).then(handleResponse);
+      });
+      return handleResponse(res);
     },
 
-    setUserInfo({ name, email }) {
-      return fetch(`${mainUrl}/users/me`, {
+    async setUserInfo({ name, email }) {
+      const res = await fetch(`${MY_DB}/users/me`, {
         method: 'PATCH',
         credentials: 'include',
         headers: {
@@ -26,7 +27,49 @@ export default function useMainApi() {
           name,
           email
         }),
-      }).then(handleResponse);
+      });
+      return handleResponse(res);
     },
+
+    async getFavoriteMovies() {
+      const res = await fetch(`${MY_DB}/movies`, {
+        method: 'GET',
+        credentials: 'include',
+      });
+      return handleResponse(res);
+    },
+
+    async postToFavorite({
+      country, director, duration, year, description, image, trailerLink, nameRU, nameEN, id, }) {
+      const res = await fetch(`${MY_DB}/movies`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          country: country || 'остуствует',
+          director: director || 'остуствует',
+          duration: duration || 0,
+          year: year || 'остуствует',
+          description: description || 'остуствует',
+          nameRU: nameRU || 'остуствует',
+          nameEN: nameEN || 'остуствует',
+          movieId: id,
+          trailer: trailerLink || '../images/default-picture.png',
+          image: `${MOVIES}${image.url}` || '../images/default-picture.png',
+          thumbnail: `${MOVIES}${image.formats.thumbnail.url}` || '../images/default-picture.png',
+        }),
+      });
+      return handleResponse(res);
+    },
+
+    async deleteFromFavorite({ _id }) {
+      const res = await fetch(`${MY_DB}/movies/${_id}`, {
+        method: 'DELETE',
+        credentials: 'include',
+      });
+      return handleResponse(res);
+    }
   }
 }

@@ -1,16 +1,30 @@
 import './SearchForm.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
-import { caption } from '../../utils/const';
+import { CAPTION } from '../../utils/const';
 
-function SearchForm({ onSubmit }) {
+function SearchForm({ onSubmit, handleShortMovie }) {
   const [query, setQuery] = useState();
+  const location = useLocation().pathname;
   const onInputChange = (e) => setQuery(e.target.value);
   const handleSubmit = (e) => {
     e.preventDefault();
-    localStorage.setItem('query', query);
+    if (location === '/movies') localStorage.setItem('query', query);
     onSubmit(query);
   };
+
+  useEffect(() => {
+    if (location === '/movies') return localStorage.query && setQuery(localStorage.query);
+    onSubmit('');
+    return null;
+  }, []);
+
+  useEffect(() => {
+    if (location === '/saved-movies') {
+      setQuery('');
+    }
+  }, [handleShortMovie]);
 
   return (
     <section className="search-form">
@@ -25,10 +39,10 @@ function SearchForm({ onSubmit }) {
           required
         />
         <button className="search-form__button" type="submit">
-          {caption.find}
+          {CAPTION.FIND}
         </button>
       </form>
-      <FilterCheckbox />
+      <FilterCheckbox onClick={handleShortMovie} />
     </section>
   );
 }

@@ -1,68 +1,98 @@
 import './Profile.css';
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useEffect, useState, useRef } from 'react';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
-import { caption } from '../../utils/const';
+import useFormWithValidation from '../../utils/useFormWithValidation';
+import { CAPTION } from '../../utils/const';
+import Preloader from '../Preloader/Preloader';
 
-function Profile({ onSignOut, onUpdate }) {
+export default function Profile({ onSignOut, onUpdate, isLoading }) {
   const user = useContext(CurrentUserContext);
-  const [name, setName] = useState();
-  const [email, setEmail] = useState();
-  const onNameChange = (e) => setName(e.target.value);
-  const onEmailChange = (e) => setEmail(e.target.value);
-  const handleSubmit = (e) => {
+  const nameRef = useRef(null);
+  const emailRef = useRef(null);
+  const [isNotAvailable, setIsNotAvailable] = useState(false);
+  const [isIdle, setIsIdle] = useState(true);
+  const { values, handleChange, errors, setValues, isValid, resetForm } = useFormWithValidation();
+
+  const handleChangeInput = (e) => {
+    handleChange(e);
+    if (user.name === nameRef.current.value && user.email === emailRef.current.value) return setIsIdle(true);
+    return setIsIdle(false);
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    return user && onUpdate({ name, email });
+    setIsIdle(true);
+    setIsNotAvailable(true);
+    try {
+      await onUpdate({ email: values.email, name: values.name });
+    } finally {
+      setIsNotAvailable(false);
+      resetForm();
+    }
+  };
+
+  const handleSignOut = () => {
+    onSignOut();
+    resetForm();
   };
 
   useEffect(() => {
-    if (user){
-      setName(user.name);
-      setEmail(user.email);
-    }
-  }, [user]);
+    setValues(user);
+    return () => setIsNotAvailable(false);
+  }, [user, setValues]);
 
-  return (
+  const renderProfile = () => (
     <section className="profile">
-      <h1 className="profile__title">Привет, {name}!</h1>
-      <form className="profile__content" onSubmit={handleSubmit}>
+      <h1 className="profile__title">Привет, {user.name}!</h1>
+      <form className="profile__content" onSubmit={handleSubmit} noValidate>
         <div className="profile__row">
           <label htmlFor="userName" className="profile__text profile__text_subtitle">
-            {caption.name}
+            {CAPTION.NAME}
           </label>
           <input
-            onChange={onNameChange}
+            ref={nameRef}
             type="text"
+            name="name"
+            id="userName"
             className="profile__text profile__input"
             placeholder="Введите имя..."
-            id="userName"
-            value={name || 'Введите имя...'}
+            value={values.name || ''}
+            pattern="^[A-Za-zА-Яа-яЁё\s-]{1,}$"
+            minLength="2"
+            onChange={handleChangeInput}
+            disabled={isNotAvailable}
             required
           />
         </div>
+        <span className="profile__text profile__error">{errors.name}</span>
         <div className="profile__row">
           <label htmlFor="userEmail" className="profile__text profile__text_subtitle">
-            {caption.email}
+            {CAPTION.EMAIL}
           </label>
           <input
+            ref={emailRef}
             type="email"
-            name="userEmail"
+            name="email"
             id="userEmail"
             className="profile__text profile__input"
             placeholder="Введите email..."
-            value={email || 'Введите email...'}
-            onChange={onEmailChange}
+            value={values.email || ''}
+            pattern="^[a-z0-9+_.-]+@[a-z0-9.-]+\.[a-z]+$"
+            onChange={handleChangeInput}
+            disabled={isNotAvailable}
             required
           />
         </div>
-        <button type="submit" className="profile__button">
-          {caption.edit}
+        <span className="profile__text profile__error">{errors.email}</span>
+        <button type="submit" className="profile__button" disabled={!isValid || isIdle}>
+          {CAPTION.EDIT}
         </button>
-        <button className="profile__link" type="button" onClick={onSignOut}>
-          {caption.signOut}
+        <button className="profile__button profile__button_styled" type="button" onClick={handleSignOut}>
+          {CAPTION.SIGN_OUT}
         </button>
       </form>
     </section>
   );
-}
 
-export default Profile;
+  return isLoading ? <Preloader /> : renderProfile();
+}

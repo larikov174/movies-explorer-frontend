@@ -1,7 +1,9 @@
 import './Modal.css';
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 function Modal({ onOpen, onClose }) {
+  const overlayRef = useRef();
+
   const renderNotification = () => (
     <>
       <div
@@ -16,13 +18,20 @@ function Modal({ onOpen, onClose }) {
     if (onOpen.visible) {
       setTimeout(() => {
         onClose();
-      }, 1500);
+      }, 2000);
     }
   });
 
+  useEffect(() => {
+    const clickHandler = () => onClose();
+    overlayRef.current.addEventListener('click', clickHandler);
+
+    return () => overlayRef.current.removeEventListener('click', clickHandler);
+  }, []);
+
   return (
-    <section className={`modal ${onOpen.visible ? 'modal__visible' : ''}`}>
-      <div className="modal__container modal__slide">
+    <section ref={overlayRef} className={`modal ${onOpen.visible ? 'modal__visible' : ''}`}>
+      <div className={`modal__container ${onOpen.type === 'success' ? 'modal__success' : 'modal__denied'}`}>
         {renderNotification()}
         <button type="button" className="modal__button" onClick={onClose} />
       </div>
